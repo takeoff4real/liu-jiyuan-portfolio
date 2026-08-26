@@ -40,3 +40,4 @@ next-env.d.ts
 /tmp/
 /public/assets/sdg/*.optimized.gif
 /public/assets/sdg/04.webp
+/public/assets/sdg/*-deploy.gif
