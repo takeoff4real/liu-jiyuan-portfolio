@@ -41,3 +41,5 @@ next-env.d.ts
 /public/assets/sdg/*.optimized.gif
 /public/assets/sdg/04.webp
 /public/assets/sdg/*-deploy.gif
+/public/assets/sdg/06.webp
+/public/assets/masters/recording-portfolio/final-portfolio-optimized.pdf
