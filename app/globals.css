@@ -402,6 +402,8 @@
 .pixel-slide-button:hover:not(:disabled),.pixel-slide-button:focus-visible:not(:disabled){background:var(--accent);color:#fff;transform:translateY(-2px)}
 .pixel-slide-button:disabled{opacity:.25;cursor:not-allowed}
 .slide-carousel-count{min-width:58px;text-align:center;color:var(--muted);font:10px var(--mono);letter-spacing:.08em}
+.slide-carousel--idea9202-style .slide-carousel-controls{font-family:var(--mono)}
+.slide-carousel--idea9202-style .pixel-slide-button{appearance:none;border-radius:0;box-shadow:none}
 .idea9202-slide-stack,.desn9002-slide-stack,.cmpn5006-slide-stack,.idea9103-slide-stack{display:block;overflow:visible;padding:0;margin-top:4vw;scrollbar-width:none}
 .idea9202-slide-stack::-webkit-scrollbar,.desn9002-slide-stack::-webkit-scrollbar,.cmpn5006-slide-stack::-webkit-scrollbar,.idea9103-slide-stack::-webkit-scrollbar{display:none}
 @media(max-width:760px){.slide-carousel{margin-top:10vw}.slide-carousel-track{gap:12px}.slide-carousel-item{flex-basis:100%}.slide-carousel-controls{justify-content:space-between;margin-top:14px}.pixel-slide-button{width:42px;height:32px}.slide-carousel-count{order:2}.pixel-slide-button:first-child{order:1}.pixel-slide-button:last-child{order:3}}

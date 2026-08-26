@@ -11,7 +11,7 @@ export function SlideCarousel({ slides, className = '' }: { slides: Slide[]; cla
   const canGoBack = active > 0
   const canGoForward = active < maxIndex
 
-  return <div className={`slide-carousel ${className}`} aria-label="横向作品浏览">
+  return <div className={`slide-carousel slide-carousel--idea9202-style ${className}`} aria-label="横向作品浏览">
     <div className="slide-carousel-viewport">
       <div className="slide-carousel-track" style={{ transform: `translateX(calc(-${active} * (50% + 9px)))` }}>
         {slides.map((slide) => <a className="slide-carousel-item" href={slide.src} target="_blank" rel="noreferrer" key={slide.src}>
