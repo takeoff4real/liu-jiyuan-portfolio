@@ -4,16 +4,15 @@ import { useState } from 'react'
 
 type Slide = { src: string; alt: string }
 
-export function SlideCarousel({ slides, className = '' }: { slides: Slide[]; className?: string }) {
+export function SlideCarousel({ slides, className = '', visibleCount = 2 }: { slides: Slide[]; className?: string; visibleCount?: 2 | 4 }) {
   const [active, setActive] = useState(0)
-  const visibleCount = 2
   const maxIndex = Math.max(0, slides.length - visibleCount)
   const canGoBack = active > 0
   const canGoForward = active < maxIndex
 
-  return <div className={`slide-carousel slide-carousel--idea9202-style ${className}`} aria-label="横向作品浏览">
+  return <div className={`slide-carousel slide-carousel--idea9202-style ${className}`} style={{ '--slide-visible-count': visibleCount } as React.CSSProperties} aria-label="横向作品浏览">
     <div className="slide-carousel-viewport">
-      <div className="slide-carousel-track" style={{ transform: `translateX(calc(-${active} * (50% + 9px)))` }}>
+      <div className="slide-carousel-track" style={{ transform: `translateX(calc(-${active} * (var(--slide-item-width) + 18px)))` }}>
         {slides.map((slide) => <a className="slide-carousel-item" href={slide.src} target="_blank" rel="noreferrer" key={slide.src}>
           <img src={slide.src} alt={slide.alt} loading="lazy" />
         </a>)}
