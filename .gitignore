@@ -38,3 +38,5 @@ next-env.d.ts
 /work/
 /workspaces/
 /tmp/
+/public/assets/sdg/*.optimized.gif
+/public/assets/sdg/04.webp
