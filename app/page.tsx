@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import './globals.css'
-import './horizontal-wheel'
 import { MasterIdea9105 } from './master-idea9105'
 import { MasterIdea9106 } from './master-idea9106'
 import { MasterArin6904 } from './master-arin6904'
@@ -83,7 +82,7 @@ const projectDetailData: Record<string, { lead: string; images: { src: string; a
   'san-jin': { lead: '这是一组围绕三金西瓜霜产品创作的宣传海报，使用产品信息、图像和高对比色彩构成传播画面。项目展示我如何在同一产品主题下建立多种视觉表达，同时保持信息清晰和品牌识别。', images: [{ src: '/assets/san-jin/poster-02.png', alt: '三金西瓜霜红黑海报' }, { src: '/assets/san-jin/poster-01.png', alt: '三金西瓜霜珊瑚红海报' }, { src: '/assets/san-jin/poster-03.png', alt: '三金西瓜霜紫色海报' }] },
   'hand-drawing': { lead: '这是一组围绕寓言与成语故事完成的手绘插画，表现人物动作、情绪和叙事瞬间。项目展示我从零构建画面主体、情境氛围和视觉叙事的能力。', images: Array.from({ length: 10 }, (_, index) => ({ src: `/assets/hand-drawing/gallery/drawing-${String(index + 1).padStart(2, '0')}.jpg`, alt: `手绘作品 ${String(index + 1).padStart(2, '0')}` })) },
   'photography': { lead: '这是一组以城市、自然、动物和日常观察为主题的摄影作品，结合黑白影像与彩色画面记录不同空间中的光线、结构和情绪。项目展示我通过取景、光线、色彩和瞬间捕捉建立视觉叙事的能力。', images: Array.from({ length: 24 }, (_, index) => ({ src: `/assets/photography/gallery/${String(index + 1).padStart(2, '0')}.jpg`, alt: `摄影作品 ${String(index + 1).padStart(2, '0')}` })) },
-  'binding-design': { lead: '这是一项围绕奥特曼系列展开的装订与编辑设计，通过角色资料、影像与文字编排建立一条从初代到爱迪的阅读线索。项目展示我如何处理长篇信息、人物顺序和系列视觉识别，让内容在纸面上形成连续的编辑节奏。', images: ['01.jpg','08.jpg','09.jpg','10.jpg','11.jpg','12.jpg','15.jpg','16.jpg','02.jpg','03.jpg','06.jpg','07.jpg','13.jpg','14.jpg','04.jpg','05.jpg'].map((name, index) => ({ src: `/assets/binding-design/gallery/${name}`, alt: `奥特曼系列装订与编辑设计页面 ${String(index + 1).padStart(2, '0')}` })) },
+  'binding-design': { lead: '这是一项围绕奥特曼系列展开的装订与编辑设计，通过角色资料、影像与文字编排建立一条从初代到爱迪的阅读线索。项目展示我如何处理长篇信息、人物顺序和系列视觉识别，让内容在纸面上形成连续的编辑节奏。', images: ['01.jpg','09.jpg','10.jpg','11.jpg','12.jpg','15.jpg','16.jpg','02.jpg','03.jpg','06.jpg','07.jpg','13.jpg','14.jpg','04.jpg','05.jpg','08.jpg'].map((name, index) => ({ src: `/assets/binding-design/gallery/${name}`, alt: `奥特曼系列装订与编辑设计页面 ${String(index + 1).padStart(2, '0')}` })) },
   'app-design': { lead: '这是一套面向电商浏览与购物流程的 APP 页面设计，包含首页、搜索、商品、购物袋和账户管理等界面。项目展示我如何从信息架构、用户任务和页面状态出发，建立清晰且可复用的界面系统。', story: [{ kicker: '01 / STRUCTURE', title: '先梳理用户要完成的任务', body: '我将首页、搜索、分类和商品详情拆解为连续的信息路径，重点处理入口、层级和返回关系，让用户能够快速理解下一步操作。' }, { kicker: '02 / FLOW', title: '覆盖关键使用状态', body: '我围绕浏览、加入购物袋、订单管理和账户登录等场景组织页面，使界面设计不仅停留在单张视觉稿，而是回应完整的使用流程。' }, { kicker: '03 / UI SYSTEM', title: '在统一规则中保持页面差异', body: '我通过导航、卡片、文字层级和按钮状态建立可复用的界面规则，同时根据不同任务调整信息密度，体现 UI 设计与交互逻辑的结合。' }], images: Array.from({ length: 17 }, (_, index) => ({ src: `/assets/gunfetch-app/gallery/${String(index + 1).padStart(2, '0')}.jpg`, alt: `APP 页面设计练习 ${String(index + 1).padStart(2, '0')}` })) },
   'other-design': { lead: '这是由包装视觉、图像构成和版式实验组成的综合设计练习，涉及茶包装、药品视觉和主题图像等不同方向。项目展示我如何通过材质、色彩、文字和图像比例控制画面的视觉重点。', images: Array.from({ length: 7 }, (_, index) => ({ src: `/assets/other-selected/gallery/${String(index + 1).padStart(2, '0')}.jpg`, alt: `其它版式与视觉练习 ${String(index + 1).padStart(2, '0')}` })) },
 }

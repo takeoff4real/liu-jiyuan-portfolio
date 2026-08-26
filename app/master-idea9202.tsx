@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { SlideCarousel } from './slide-carousel'
 
 const submissions = [
   { number: '01', label: 'SCOPE REVIEW', title: '先理解场地，再定义体验问题', body: 'Assessment 1 以 MAP mima 的 The Cube 与 The Catenary 为场地，比较六个沉浸式光与媒体装置案例，建立从案例研究、场地条件到体验机会的范围判断。', file: '/assets/masters/idea9202/scope-review.pdf', fileLabel: '查看 Scope Review 原始提交 ↗' },
@@ -37,7 +38,7 @@ export function MasterIdea9202({ onBack }: { onBack: () => void }) {
 
     <section className="detail-story idea9202-final"><article><p className="kicker">CUBE / EXPERIENCE DIRECTIONS</p><h2>三个互动脚本，构成室内提案的体验层</h2><p><b>Celestial Explorer</b> 通过星座、行星和协作手势支持儿童学习；<b>Magic Garden</b> 让儿童的动作促使植物、昆虫和光线变化，并让母亲的呼吸与静止影响附近花朵；<b>Pixel Recognition</b> 通过无接触面部识别生成像素宠物，在单人和多人状态下产生跟随、互动与消散。</p></article></section>
 
-    <section className="idea9202-slide-section" aria-labelledby="idea9202-slides-title"><div className="section-intro"><p className="kicker">ASSESSMENT 3 / CLIENT PROPOSAL</p><h2 id="idea9202-slides-title">Client Proposal<br /><em>完整页面展示</em></h2><p className="section-description">Assessment 3 的 24 页 A2 提案按原始顺序直接呈现。点击任意页面可放大查看。</p></div><div className="idea9202-slide-stack">{clientProposalSlides.map((slide) => <a key={slide.src} href={slide.src} target="_blank" rel="noreferrer"><img src={slide.src} alt={slide.alt} loading="lazy" /></a>)}</div><a className="master-report-link is-static" href="/assets/masters/idea9202/client-proposal.pdf" target="_blank" rel="noreferrer">打开原始 PDF ↗</a></section>
+    <section className="idea9202-slide-section" aria-labelledby="idea9202-slides-title"><div className="section-intro"><p className="kicker">ASSESSMENT 3 / CLIENT PROPOSAL</p><h2 id="idea9202-slides-title">Client Proposal<br /><em>完整页面展示</em></h2><p className="section-description">Assessment 3 的 24 页 A2 提案按原始顺序直接呈现。使用两侧像素按钮切换页面，点击页面可打开大图。</p></div><SlideCarousel slides={clientProposalSlides} className="idea9202-slide-stack" /><a className="master-report-link is-static" href="/assets/masters/idea9202/client-proposal.pdf" target="_blank" rel="noreferrer">打开原始 PDF ↗</a></section>
 
     <section className="arin-submissions idea9202-submissions" aria-labelledby="idea9202-submissions-title"><div className="section-intro"><p className="kicker">SELECTED SUBMISSIONS / 03</p><h2 id="idea9202-submissions-title">课程作业与原始提交文件</h2><p className="section-description">点击每一项查看该阶段的简介与原始 PDF。A3 中提到的概念视频未作为 Canvas 附件提供，因此页面不虚构视频入口。</p></div><div className="arin-submission-layout"><nav className="arin-submission-nav" aria-label="IDEA9202 作业导航">{submissions.map((item, index) => <button key={item.number} className={active === index ? 'is-active' : ''} onClick={() => setActive(index)}><span>{item.number}</span><span>{item.label}</span></button>)}</nav><article className="arin-submission-detail"><p className="kicker">{current.label}</p><h3>{current.title}</h3><p>{current.body}</p><a className="master-report-link is-static" href={current.file} target="_blank" rel="noreferrer">{current.fileLabel}</a></article></div></section>
     <div className="detail-end"><span>END OF MASTER PROJECT 05</span><button onClick={onBack}>返回硕士作品 <span>↗</span></button></div>

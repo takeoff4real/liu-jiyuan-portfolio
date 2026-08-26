@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { SlideCarousel } from './slide-carousel'
 
 const assignments = [
   { number: '01', label: 'DIGITAL TRANSFORMATION CRITIQUE', title: '从 BlackBerry 的失败，理解数字转型为何失速', body: '研究报告以 BlackBerry 为案例，分析触屏革命、用户需求变化、竞争压力和组织惯性如何共同造成转型失败，并总结设计师与组织可以采取的策略。', file: '/assets/masters/desn9002/a1.pdf', fileLabel: '打开 A1 研究报告 PDF ↗', folder: 'a1', count: 8 },
@@ -34,7 +35,7 @@ export function MasterDesn9002({ onBack }: { onBack: () => void }) {
 
     <div className="detail-story"><article><p className="kicker">DESIGN POSITION / 01</p><h2>把数字转型看成系统重构</h2><p>这个项目让我不再把数字化理解为增加一个新功能，而是从用户、组织、技术生态、商业模式和社会影响一起判断一个企业是否真正完成转型。</p></article><article><p className="kicker">FINAL WORK / 02</p><h2>BlackBerry Horizon</h2><p>最终方案将 BlackBerry 的安全遗产转译为工业场景中的可信基础设施：让工厂数据、维护决策和远程协作在可追踪、可保护的系统中连接起来。</p></article></div>
 
-    <section className="arin-submissions desn9002-submissions" aria-labelledby="desn9002-submissions-title"><div className="section-intro"><p className="kicker">SELECTED SUBMISSIONS / 04</p><h2 id="desn9002-submissions-title">课程作业与原始提交</h2><p className="section-description">点击作业名称切换说明；下方同步展示对应的原始提交页面。</p></div><div className="arin-submission-layout"><nav className="arin-submission-nav" aria-label="DESN9002 作业导航">{assignments.map((item, index) => <button key={item.number} className={active === index ? 'is-active' : ''} onClick={() => setActive(index)}><span>{item.number}</span><span>{item.label}</span></button>)}</nav><article className="arin-submission-detail"><p className="kicker">{current.label}</p><h3>{current.title}</h3><p>{current.body}</p><a className="master-report-link is-static" href={current.file} target="_blank" rel="noreferrer">{current.fileLabel}</a></article></div><div className="desn9002-slide-stack">{slides(current.folder, current.count).map((slide) => <a key={slide.src} href={slide.src} target="_blank" rel="noreferrer"><img src={slide.src} alt={slide.alt} loading="lazy" /></a>)}</div></section>
+    <section className="arin-submissions desn9002-submissions" aria-labelledby="desn9002-submissions-title"><div className="section-intro"><p className="kicker">SELECTED SUBMISSIONS / 04</p><h2 id="desn9002-submissions-title">课程作业与原始提交</h2><p className="section-description">点击作业名称切换说明；下方同步展示对应的原始提交页面。</p></div><div className="arin-submission-layout"><nav className="arin-submission-nav" aria-label="DESN9002 作业导航">{assignments.map((item, index) => <button key={item.number} className={active === index ? 'is-active' : ''} onClick={() => setActive(index)}><span>{item.number}</span><span>{item.label}</span></button>)}</nav><article className="arin-submission-detail"><p className="kicker">{current.label}</p><h3>{current.title}</h3><p>{current.body}</p><a className="master-report-link is-static" href={current.file} target="_blank" rel="noreferrer">{current.fileLabel}</a></article></div><SlideCarousel slides={slides(current.folder, current.count)} className="desn9002-slide-stack" /></section>
 
     <div className="detail-end"><span>END OF MASTER PROJECT 06</span><button onClick={onBack}>返回硕士作品 <span>↗</span></button></div>
   </section>

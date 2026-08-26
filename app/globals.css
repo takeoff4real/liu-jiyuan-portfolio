@@ -390,3 +390,18 @@
 @media(max-width:760px){.arin-submission-layout{grid-template-columns:1fr;gap:10vw}.arin-submission-detail{padding-top:0}.arin-submission-nav button{padding:15px 0}.arin-submissions{margin-top:18vw;padding-top:14vw}}
 @media(max-width:1100px){.master-detail:has(.master-view-switch) .master-gallery:not(.gallery-grid-9){column-count:2}}
 @media(max-width:760px){.master-detail:has(.master-view-switch) .master-gallery:not(.gallery-grid-9){column-count:1;padding:10vw 0}.master-detail:has(.master-view-switch) .master-gallery:not(.gallery-grid-9) .gallery-item{margin-bottom:14px}}
+/* Button-controlled slide viewers: horizontal movement is explicit and keyboard-friendly. */
+.slide-carousel{display:block;position:relative;margin-top:4vw}
+.slide-carousel-viewport{overflow:hidden;width:100%}
+.slide-carousel-track{display:flex;gap:18px;will-change:transform;transition:transform .48s cubic-bezier(.2,.7,.2,1)}
+.slide-carousel-item{display:block;flex:0 0 calc(50% - 9px);background:var(--paper);overflow:hidden}
+.slide-carousel-item img{display:block;width:100%;height:auto;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.slide-carousel-item:hover img,.slide-carousel-item:focus-visible img{transform:scale(1.018)}
+.slide-carousel-controls{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:18px}
+.pixel-slide-button{display:grid;place-items:center;width:38px;height:30px;border:1px solid var(--ink);background:var(--paper);font:18px/1 var(--mono);transition:background .2s,color .2s,transform .2s;image-rendering:pixelated}
+.pixel-slide-button:hover:not(:disabled),.pixel-slide-button:focus-visible:not(:disabled){background:var(--accent);color:#fff;transform:translateY(-2px)}
+.pixel-slide-button:disabled{opacity:.25;cursor:not-allowed}
+.slide-carousel-count{min-width:58px;text-align:center;color:var(--muted);font:10px var(--mono);letter-spacing:.08em}
+.idea9202-slide-stack,.desn9002-slide-stack,.cmpn5006-slide-stack,.idea9103-slide-stack{display:block;overflow:visible;padding:0;margin-top:4vw;scrollbar-width:none}
+.idea9202-slide-stack::-webkit-scrollbar,.desn9002-slide-stack::-webkit-scrollbar,.cmpn5006-slide-stack::-webkit-scrollbar,.idea9103-slide-stack::-webkit-scrollbar{display:none}
+@media(max-width:760px){.slide-carousel{margin-top:10vw}.slide-carousel-track{gap:12px}.slide-carousel-item{flex-basis:100%}.slide-carousel-controls{justify-content:space-between;margin-top:14px}.pixel-slide-button{width:42px;height:32px}.slide-carousel-count{order:2}.pixel-slide-button:first-child{order:1}.pixel-slide-button:last-child{order:3}}
