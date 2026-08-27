@@ -4,7 +4,7 @@
  .project-description{font-size:12px!important;line-height:1.55;max-width:390px;color:var(--muted);margin-top:14px!important}
 .gallery-poster .gallery-item{padding:8px;background:#e1ddd5}
 .gallery-poster .gallery-item img{width:100%;height:auto;object-fit:contain}
-.gif-notice{display:inline-block;margin:24px 0 0;padding:10px 14px;border-left:3px solid var(--accent);background:#eee9df;color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.04em}
+.gif-notice{display:inline-block;margin:30px 0 0;padding:14px 18px;border-left:4px solid var(--accent);background:#eee9df;color:var(--ink);font-family:var(--display);font-size:15px;font-weight:500;line-height:1.55;letter-spacing:.04em}
 .resume-logo{margin-left:auto;border:1px solid var(--ink);padding:7px 9px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;transition:.25s}.resume-logo span{color:var(--accent);margin-left:7px}.resume-logo:hover,.resume-logo:focus-visible{background:var(--accent);border-color:var(--accent);color:#fff}.resume-logo:hover span,.resume-logo:focus-visible span{color:#fff}
 .resume-overlay{position:fixed;inset:0;z-index:20;background:rgba(23,23,23,.55);display:flex;justify-content:flex-end;overflow:auto;padding:0}.resume-panel{width:min(920px,100%);min-height:100%;background:var(--paper);padding:30px 4.2vw 42px;box-shadow:-18px 0 50px rgba(0,0,0,.18);animation:resume-in .35s ease both}.resume-panel-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em}.resume-panel-top button{font-family:var(--mono);font-size:10px}.resume-panel-top button:hover{color:var(--accent)}.resume-intro{display:grid;grid-template-columns:150px 1fr;gap:32px;align-items:center;padding:50px 0 42px;border-bottom:1px solid var(--line)}.resume-intro img{width:150px;height:180px;object-fit:cover;filter:grayscale(100%)}.resume-intro h2{font-size:clamp(38px,5vw,68px);letter-spacing:-.07em;line-height:.9;font-weight:500;margin:0 0 20px}.resume-intro p:not(.kicker){max-width:430px;color:var(--muted);line-height:1.7}.resume-contact{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px;font-family:var(--mono);font-size:10px}.resume-contact a{border-bottom:1px solid var(--accent)}.resume-body{display:grid;gap:38px;padding-top:42px}.resume-body section{border-top:1px solid var(--line);padding-top:16px}.resume-body .kicker{margin-bottom:18px}.resume-body section>p:not(.kicker){max-width:680px;line-height:1.8;color:#4f4c47}.resume-skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.resume-skill-grid div{display:grid;gap:7px}.resume-skill-grid b{font-family:var(--mono);font-size:10px;font-weight:400;color:var(--ink)}.resume-skill-grid span{color:var(--muted);font-size:13px;line-height:1.6}.resume-entry{border-top:1px solid var(--line);padding:18px 0 0;margin-top:18px}.resume-entry>div{display:flex;justify-content:space-between;gap:16px}.resume-entry b{font-size:18px;font-weight:500}.resume-entry span,.resume-entry time{font-family:var(--mono);font-size:10px;color:var(--muted)}.resume-entry p{max-width:680px;color:var(--muted);font-size:13px;line-height:1.7;margin:14px 0 0}.resume-columns{display:grid;grid-template-columns:1fr 1fr;gap:42px}.resume-columns p:last-child{line-height:2;color:var(--muted)}.resume-panel-footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);margin-top:42px;padding-top:22px;font-family:var(--mono);font-size:10px;color:var(--muted)}.resume-panel-footer a{color:var(--ink);border-bottom:1px solid var(--accent)}@keyframes resume-in{from{transform:translateX(30px);opacity:.6}to{transform:none;opacity:1}}
 @media(min-width:761px){.gallery-poster{grid-template-columns:repeat(3,1fr);gap:14px}.gallery-poster .zoom-hint{opacity:1;transform:none}}
@@ -340,6 +340,10 @@
 .master-gallery:not(.gallery-grid-9):has(img[src*="idea9106-final"]) .gallery-item,
 .detail-page:not(.master-detail):has(img[src*="binding-design"]) .gallery:not(.gallery-grid-9) .gallery-item{flex-basis:calc(50% - 7px)!important}
 
+/* IDEA9106 uses the same restrained pixel-button slide treatment as IDEA9202. */
+.master-idea9106 .idea9106-slide-stack{margin:4vw 0 5vw}
+.master-idea9106 .idea9106-gallery{display:none!important}
+
 /* Interface Design: three-column waterfall, preserving each image's native ratio. */
 .master-detail:has(.master-view-switch) .master-gallery:not(.gallery-grid-9){display:block;column-count:3;column-gap:18px;padding:4vw 0}
 .master-detail:has(.master-view-switch) .master-gallery:not(.gallery-grid-9) .gallery-item{display:block;width:100%;margin:0 0 18px;padding:0;break-inside:avoid;background:transparent}
@@ -394,7 +398,7 @@
 .slide-carousel{--slide-visible-count:2;--slide-item-width:calc((100% - (var(--slide-visible-count) - 1) * 18px) / var(--slide-visible-count));display:block;position:relative;margin-top:4vw}
 .slide-carousel-viewport{overflow:hidden;width:100%}
 .slide-carousel-track{display:flex;gap:18px;will-change:transform;transition:transform .48s cubic-bezier(.2,.7,.2,1)}
-.slide-carousel-item{display:block;flex:0 0 var(--slide-item-width);background:var(--paper);overflow:hidden}
+.slide-carousel-item{display:block;flex:0 0 var(--slide-item-width);background:var(--paper);overflow:hidden;border:0;padding:0;text-align:left}
 .slide-carousel-item img{display:block;width:100%;height:auto;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
 .slide-carousel-item:hover img,.slide-carousel-item:focus-visible img{transform:scale(1.018)}
 .slide-carousel-controls{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:18px}
@@ -407,3 +411,40 @@
 .idea9202-slide-stack,.desn9002-slide-stack,.cmpn5006-slide-stack,.idea9103-slide-stack{display:block;overflow:visible;padding:0;margin-top:4vw;scrollbar-width:none}
 .idea9202-slide-stack::-webkit-scrollbar,.desn9002-slide-stack::-webkit-scrollbar,.cmpn5006-slide-stack::-webkit-scrollbar,.idea9103-slide-stack::-webkit-scrollbar{display:none}
 @media(max-width:760px){.slide-carousel{--slide-visible-count:1;--slide-item-width:100%;margin-top:10vw}.slide-carousel-track{gap:12px}.slide-carousel-controls{justify-content:space-between;margin-top:14px}.pixel-slide-button{width:42px;height:32px}.slide-carousel-count{order:2}.pixel-slide-button:first-child{order:1}.pixel-slide-button:last-child{order:3}}
+.idea9103-slide-stack .slide-carousel-item img{height:260px;object-fit:contain;background:transparent}
+@media(max-width:760px){.idea9103-slide-stack .slide-carousel-item img{height:360px}}
+
+/* Mouse-controlled navigation for enlarged master-work images. */
+.lightbox-nav{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:46px;height:38px;border:1px solid var(--accent);background:rgba(23,23,23,.72);color:var(--paper);font:20px/1 var(--mono);transform:translateY(-50%);transition:background .2s,color .2s,transform .2s}
+.lightbox-nav:hover,.lightbox-nav:focus-visible{background:var(--accent);color:#fff;transform:translateY(-50%) scale(1.04)}
+.lightbox-nav-prev{left:3vw}.lightbox-nav-next{right:3vw}
+@media(max-width:760px){.lightbox img{max-width:82vw}.lightbox-nav{width:34px;height:32px;font-size:16px}.lightbox-nav-prev{left:3vw}.lightbox-nav-next{right:3vw}}
+
+/* Swap the two portfolio statements: identity first, clarity as the closing idea. */
+.hero h1{font-size:0}
+.hero h1 em{display:none}
+.hero h1::before,.hero h1::after{display:block;font-size:clamp(70px,11vw,180px);letter-spacing:-.08em;line-height:.86;font-weight:500}
+.about-grid h2::before,.about-grid h2::after{display:block;font-size:clamp(44px,7vw,105px);line-height:.88;letter-spacing:-.08em;font-weight:500}
+.hero h1::before{content:'把复杂的'}
+.hero h1::after{content:'信息变得清楚。';color:var(--accent)}
+.about-grid h2{font-size:0}
+.about-grid h2 em{display:none}
+.about-grid h2::before{content:'让视觉'}
+.about-grid h2::after{content:'留下证据。';color:var(--accent)}
+.about-facts::after{content:'本作品集网站为原创设计，使用 Vibe-Coding。';display:block;margin-top:8px;color:var(--muted)}
+.about-actions::after{content:'除另有注明外，本作品集的整体设计、原创插画及原创图形元素均由本人完成。部分作品为非商业学生概念项目，并非相关品牌或机构委托、赞助或认可。作品中涉及的第三方商标、品牌名称、角色形象、照片、字体、样机及其他素材，其相关权利归各自权利人所有，仅用于说明项目背景、设计过程及个人设计能力。';flex-basis:100%;max-width:680px;margin-top:4px;color:#8f8c85;font-family:var(--display);font-size:10px;line-height:1.65;letter-spacing:0}
+.about-section .about-grid>div>p{display:none}
+.degree-entry[href="#master-work"]>span:last-child{font-size:0}
+.degree-entry[href="#master-work"]>span:last-child::after{content:'交互设计与电子艺术 / 2025–2027 ↘';font-size:10px}
+.master-semester .semester-toggle b{display:block}
+.master-semester:nth-child(1) .semester-toggle b::after,.master-semester:nth-child(2) .semester-toggle b::after,.master-semester:nth-child(3) .semester-toggle b::after{display:block;margin-top:6px;color:var(--muted);font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.08em;text-transform:uppercase}
+.master-semester:nth-child(1) .semester-toggle b::after{content:'Semester 1 2025'}
+.master-semester:nth-child(2) .semester-toggle b::after{content:'Semester 2 2025'}
+.master-semester:nth-child(3) .semester-toggle b::after{content:'Semester 1 2026'}
+.master-section #master-heading{position:relative}
+.master-section #master-heading::after{content:'MASTER WORKS / THESIS RESEARCH';position:absolute;left:calc(100% + 24px);top:50%;width:150px;color:var(--muted);font:10px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;transform:translateY(-50%)}
+.is-1984-detail .detail-page .gallery:not(.gallery-grid-9){grid-template-columns:repeat(4,minmax(0,1fr));align-items:start}
+.is-1984-detail .detail-page .gallery:not(.gallery-grid-9) .gallery-wide{grid-column:auto}
+@media(max-width:760px){.master-section #master-heading::after{position:static;display:block;width:auto;margin-top:16px;transform:none}}
+@media(max-width:760px){.is-1984-detail .detail-page .gallery:not(.gallery-grid-9){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.is-1984-detail .detail-page .gallery:not(.gallery-grid-9) .gallery-item{margin-bottom:0}}
+@media(max-width:760px){.hero h1::before,.hero h1::after{font-size:18vw}.about-grid h2::before,.about-grid h2::after{font-size:16vw}}
