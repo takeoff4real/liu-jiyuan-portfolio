@@ -32,9 +32,6 @@ const masterProjects: MasterProject[] = [
   { number: '05', slug: 'idea9202', title: 'Experience Design Studio', titleEn: 'IDEA9202', type: '第二学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: 'MAP mima Mothers Club：围绕儿童探索与母亲休息，提出 Cube 与 Catenary 的沉浸式体验方案。', brief: '以 MAP mima / Multi-Arts Pavilion mima 为真实场地，经过范围研究、用户与场地分析、概念测试和客户提案，发展 GROVE 与 Whisper Grove Corner 两个最终空间方案。', required: true },
   { number: '06', slug: 'desn9002', title: 'Designing for the Digital Revolution', titleEn: 'DESN9002', type: '第二学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: 'BlackBerry Horizon：从数字转型批判出发，提出面向工业数字孪生与空间计算的安全战略。', brief: '以 BlackBerry 为案例，从转型失败的研究报告、工业元宇宙海报与课堂演示，发展到包含系统架构、实施路线和伦理考量的视觉战略提案。' },
   { number: '07', slug: 'cmpn5006', title: 'Recording Portfolio', titleEn: 'CMPN5006', type: '第二学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: 'A Day Indoors：以日常室内环境为线索，组织录音产品、声音叙事、视觉目录与制作反思。', brief: '课程以录音作品集为成果形式，关注声音记录、编辑、组织与呈现，以及作品集叙事的完整性。' },
-  { number: '08', slug: 'idea9301', title: 'Graduation Studio', titleEn: 'IDEA9301', type: '第三学期 / 待整理', year: '硕士课程 · 2025–2027', image: '', description: '', brief: '课程围绕毕业阶段的独立项目展开，将研究问题、设计方法、最终作品和展示方式整合为完整成果。', required: true },
-  { number: '09', slug: 'desn9004', title: 'Practices of Design Innovation', titleEn: 'DESN9004', type: '第三学期 / 待整理', year: '硕士课程 · 2025–2027', image: '', description: '', brief: '课程关注设计创新的实践方法，强调从问题定义、实验、协作到落地表达的过程性思考。' },
-  { number: '10', slug: 'idea9201', title: 'Experience Design Laboratory', titleEn: 'IDEA9201', type: '第三学期 / 待整理', year: '硕士课程 · 2025–2027', image: '', description: '', brief: '课程以实验室方式研究体验设计，鼓励通过原型、测试和反思探索人与环境、服务或系统之间的关系。' },
 ]
 const detailImages = [
   { src: '/assets/1984/mockup-book-clean.png', alt: '《1984》软封效果图' },
@@ -127,7 +124,7 @@ function MasterWorkSection({ onOpenMaster }: { onOpenMaster: (slug: string) => v
 function MasterWorkSectionV2({ onOpenMaster }: { onOpenMaster: (slug: string) => void }) {
   const [openSemesters, setOpenSemesters] = useState<string[]>([])
   const translations: Record<string, string> = { arin6904: '游戏与混合现实', idea9103: '创意编程', idea9105: '界面设计', idea9106: '设计思维', desn9002: '数字革命设计', cmpn5006: '录音作品集', idea9202: '体验设计工作室', desn9004: '设计创新实践', idea9201: '体验设计实验室', idea9301: '毕业设计工作室' }
-  const semesters = [{ id: 'semester-1', label: '第一学期', courses: masterProjects.slice(0, 4) }, { id: 'semester-2', label: '第二学期', courses: masterProjects.slice(4, 7) }, { id: 'semester-3', label: '第三学期', courses: masterProjects.slice(7) }]
+  const semesters = [{ id: 'semester-1', label: '第一学期', courses: masterProjects.slice(0, 4) }, { id: 'semester-2', label: '第二学期', courses: masterProjects.slice(4, 7) }]
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester'))
     if (!nodes.length) return

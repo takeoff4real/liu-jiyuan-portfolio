@@ -95,13 +95,14 @@
 .master-section .section-intro{grid-template-columns:1fr 1.2fr 1.4fr}
 .master-section .section-intro h2{grid-column:2;grid-row:1;text-align:left}
 .master-section .section-intro .section-description{grid-column:3;grid-row:1;justify-self:end;margin-right:0}
+.master-section .section-intro:after{content:'IN PROGRESS / 在读 · 尚未毕业。第三学期尚未结束，未完成课程作品暂不列入目录。';grid-column:3;grid-row:2;justify-self:end;max-width:430px;margin-top:18px;color:var(--accent);font:10px/1.55 var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .master-row{grid-template-columns:56px minmax(260px,1fr) minmax(260px,1fr) 180px}
 .master-project-copy{grid-column:2;max-width:510px}
 .master-title-block{grid-column:3;text-align:right}
 .master-title-block h3{font-size:clamp(20px,2.2vw,33px);font-weight:500;letter-spacing:-.04em;margin:0 0 7px}
 .master-title-block p{color:var(--muted);font-size:12px;margin:0}
 .master-row .project-meta{grid-column:4}
-@media(max-width:760px){.master-section .section-intro{display:block}.master-section .section-intro h2{text-align:left}.master-section .section-intro .section-description{margin:0}}
+@media(max-width:760px){.master-section .section-intro{display:block}.master-section .section-intro h2{text-align:left}.master-section .section-intro .section-description{margin:0}.master-section .section-intro:after{display:block;max-width:none;margin-top:16px}}
 @media(max-width:760px){.master-row{grid-template-columns:32px 1fr}.master-project-copy,.master-title-block,.master-row .project-meta{grid-column:2}.master-title-block{grid-row:1;text-align:left}.master-project-copy{grid-row:2}.master-row .project-meta{grid-row:3}.master-title-block h3{font-size:22px}}
 @media(max-width:760px){.work-section .project-row .project-image-wrap{opacity:1;pointer-events:auto}}
 :root{--resume-ease:cubic-bezier(.22,.75,.24,1)}
