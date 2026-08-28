@@ -20,7 +20,10 @@ const workflow = [
   ['07 / ETHICS', '数字转型也必须对人负责', '最终提案加入 human-in-the-loop 安全机制和 reskilling fund，回应自动化决策、工人转型、算法责任与数字基础设施环境影响。'],
 ]
 
-const slides = (folder: string, count: number) => Array.from({ length: count }, (_, index) => ({ src: `/assets/masters/desn9002/slides/${folder}/slide-${String(index + 1).padStart(2, '0')}.jpg`, alt: `DESN9002 ${folder} 第 ${index + 1} 页` }))
+const slides = (folder: string, count: number) => Array.from({ length: count }, (_, index) => {
+  const slideNumber = folder === 'a3' ? String(index + 1).padStart(2, '0') : String(index + 1)
+  return { src: `/assets/masters/desn9002/slides/${folder}/slide-${slideNumber}.jpg`, alt: `DESN9002 ${folder} 第 ${index + 1} 页` }
+})
 
 export function MasterDesn9002({ onBack }: { onBack: () => void }) {
   const [active, setActive] = useState(3)

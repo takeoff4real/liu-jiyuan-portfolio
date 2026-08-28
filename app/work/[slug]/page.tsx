@@ -13,7 +13,13 @@ import { MasterCmpn5006 } from '../../master-cmpn5006'
 export default function ProjectSlugPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug
-  const goHome = () => { window.location.href = '/' }
+  const goHome = () => {
+    if (document.referrer.startsWith(window.location.origin)) {
+      window.history.back()
+      return
+    }
+    window.location.href = '/#undergraduate-work'
+  }
   const isMaster = slug.startsWith('master-')
   if (!isMaster && slug === 'binding-design') return <><Header onProjects={goHome} /><main><BindingDesignDetail onBack={goHome} /></main></>
   return <><Header onProjects={goHome} /><main>{isMaster ? slug.slice('master-'.length) === 'idea9103' ? <MasterIdea9103 onBack={goHome} /> : slug.slice('master-'.length) === 'idea9105' ? <MasterIdea9105 onBack={goHome} /> : slug.slice('master-'.length) === 'idea9106' ? <MasterIdea9106 onBack={goHome} /> : slug.slice('master-'.length) === 'arin6904' ? <MasterArin6904 onBack={goHome} /> : slug.slice('master-'.length) === 'idea9202' ? <MasterIdea9202 onBack={goHome} /> : slug.slice('master-'.length) === 'desn9002' ? <MasterDesn9002 onBack={goHome} /> : slug.slice('master-'.length) === 'cmpn5006' ? <MasterCmpn5006 onBack={goHome} /> : <MasterDetail slug={slug.slice('master-'.length)} onBack={goHome} /> : slug === '1984' ? <ProjectDetail onBack={goHome} /> : <ProjectGalleryDetail slug={slug} onBack={goHome} />}</main></>
