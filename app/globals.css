@@ -262,6 +262,7 @@ button:focus-visible,
 .master-semesters-grid .semester-toggle-mark{align-self:flex-end;font-size:34px}
 .master-semesters-grid .semester-toggle:hover,.master-semesters-grid .master-semester.is-open .semester-toggle{background:var(--ink);border-color:var(--ink);color:var(--paper);padding-left:clamp(22px,3vw,44px);transform:translateY(-4px)}
 .master-semesters-grid .master-list{border-top:0;margin-top:16px}
+.master-semesters-grid .master-semester[data-semester="semester-3"] .master-list:empty::after{content:'第三学期尚未结束，未完成课程作品暂不列入目录。';display:block;margin:0;padding:0 0 6px;color:var(--muted);font:11px/1.6 var(--mono);letter-spacing:.04em}
 .master-semesters-grid .master-row{grid-template-columns:34px 1fr;padding:18px 0;gap:12px}
 .master-semesters-grid .master-row .master-project-copy,.master-semesters-grid .master-row .master-title-block,.master-semesters-grid .master-row .project-meta{grid-column:2}
 .master-semesters-grid .master-row .master-project-copy{grid-row:2}

@@ -124,7 +124,7 @@ function MasterWorkSection({ onOpenMaster }: { onOpenMaster: (slug: string) => v
 function MasterWorkSectionV2({ onOpenMaster }: { onOpenMaster: (slug: string) => void }) {
   const [openSemesters, setOpenSemesters] = useState<string[]>([])
   const translations: Record<string, string> = { arin6904: '游戏与混合现实', idea9103: '创意编程', idea9105: '界面设计', idea9106: '设计思维', desn9002: '数字革命设计', cmpn5006: '录音作品集', idea9202: '体验设计工作室', desn9004: '设计创新实践', idea9201: '体验设计实验室', idea9301: '毕业设计工作室' }
-  const semesters = [{ id: 'semester-1', label: '第一学期', courses: masterProjects.slice(0, 4) }, { id: 'semester-2', label: '第二学期', courses: masterProjects.slice(4, 7) }]
+  const semesters = [{ id: 'semester-1', label: '第一学期', courses: masterProjects.slice(0, 4) }, { id: 'semester-2', label: '第二学期', courses: masterProjects.slice(4, 7) }, { id: 'semester-3', label: '第三学期', courses: [] }]
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester'))
     if (!nodes.length) return
