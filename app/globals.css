@@ -239,6 +239,48 @@ button:focus-visible,
 @media(max-width:760px){.top-button{right:5vw;bottom:18px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.top-button{transition-duration:.01ms}}
 
+.directory-progress{
+  position:fixed;
+  right:1.8vw;
+  top:50%;
+  z-index:7;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  color:var(--muted);
+  pointer-events:none;
+  animation:directory-progress-in .55s var(--ease-enter) both;
+}
+.directory-progress-label,.directory-progress-count{
+  font:9px var(--mono);
+  letter-spacing:.1em;
+  writing-mode:vertical-rl;
+  text-transform:uppercase;
+}
+.directory-progress-label{color:var(--accent)}
+.directory-progress-track{
+  position:relative;
+  width:1px;
+  height:112px;
+  background:var(--line);
+}
+.directory-progress-track i{
+  position:absolute;
+  top:0;
+  left:0;
+  width:2px;
+  background:var(--accent);
+  transition:height .3s ease;
+}
+@keyframes directory-progress-in{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
+@media(max-width:760px){
+  .directory-progress{right:12px;gap:8px}
+  .directory-progress-track{height:88px}
+  .directory-progress-label,.directory-progress-count{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){.directory-progress{animation:none}.directory-progress-track i{transition:none}}
+
 .master-semesters{border-top:1px solid var(--line)}
 .master-semester{border-bottom:1px solid var(--line)}
 .semester-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;padding:22px 0;text-align:left;cursor:var(--pixel-cursor);transition:color .35s ease,padding .55s cubic-bezier(.22,.61,.36,1)}
@@ -467,6 +509,11 @@ button:focus-visible,
 .slide-carousel-item{display:block;flex:0 0 var(--slide-item-width);background:var(--paper);overflow:hidden;border:0;padding:0;text-align:left}
 .slide-carousel-item img{display:block;width:100%;height:auto;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
 .slide-carousel-item:hover img,.slide-carousel-item:focus-visible img{transform:scale(1.018)}
+.slide-carousel--masonry .slide-carousel-viewport{overflow:visible}
+.slide-carousel--masonry .slide-carousel-track{display:block;column-count:4;column-gap:16px;transform:none!important}
+.slide-carousel--masonry .slide-carousel-item{display:block;width:100%;margin:0 0 18px;break-inside:avoid;background:transparent}
+.slide-carousel--masonry .slide-carousel-item img{width:100%;height:auto;object-fit:contain;background:transparent}
+.slide-carousel--masonry .slide-carousel-item:hover img,.slide-carousel--masonry .slide-carousel-item:focus-visible img{transform:scale(1.012)}
 .slide-carousel-controls{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:18px}
 .pixel-slide-button{display:grid;place-items:center;width:38px;height:30px;border:1px solid var(--ink);background:var(--paper);font:18px/1 var(--mono);transition:background .2s,color .2s,transform .2s;image-rendering:pixelated}
 .pixel-slide-button:hover:not(:disabled),.pixel-slide-button:focus-visible:not(:disabled){background:var(--accent);color:#fff;transform:translateY(-2px)}
@@ -474,9 +521,12 @@ button:focus-visible,
 .slide-carousel-count{min-width:58px;text-align:center;color:var(--muted);font:10px var(--mono);letter-spacing:.08em}
 .slide-carousel--idea9202-style .slide-carousel-controls{font-family:var(--mono)}
 .slide-carousel--idea9202-style .pixel-slide-button{appearance:none;border-radius:0;box-shadow:none}
-.idea9202-slide-stack,.desn9002-slide-stack,.cmpn5006-slide-stack,.idea9103-slide-stack{display:block;overflow:visible;padding:0;margin-top:4vw;scrollbar-width:none}
-.idea9202-slide-stack::-webkit-scrollbar,.desn9002-slide-stack::-webkit-scrollbar,.cmpn5006-slide-stack::-webkit-scrollbar,.idea9103-slide-stack::-webkit-scrollbar{display:none}
+.idea9202-slide-stack,.desn9002-slide-stack,.cmpn5006-slide-stack,.idea9103-slide-stack,.idea9105-slide-stack{display:block;overflow:visible;padding:0;margin-top:4vw;scrollbar-width:none}
+.idea9202-slide-stack::-webkit-scrollbar,.desn9002-slide-stack::-webkit-scrollbar,.cmpn5006-slide-stack::-webkit-scrollbar,.idea9103-slide-stack::-webkit-scrollbar,.idea9105-slide-stack::-webkit-scrollbar{display:none}
 @media(max-width:760px){.slide-carousel{--slide-visible-count:1;--slide-item-width:100%;margin-top:10vw}.slide-carousel-track{gap:12px}.slide-carousel-controls{justify-content:space-between;margin-top:14px}.pixel-slide-button{width:42px;height:32px}.slide-carousel-count{order:2}.pixel-slide-button:first-child{order:1}.pixel-slide-button:last-child{order:3}}
+@media(max-width:1100px){.slide-carousel--masonry .slide-carousel-track{column-count:3;column-gap:14px}}
+@media(max-width:760px){.slide-carousel--masonry .slide-carousel-track{column-count:2;column-gap:12px}}
+@media(max-width:520px){.slide-carousel--masonry .slide-carousel-track{column-count:1}.slide-carousel--masonry .slide-carousel-item{margin-bottom:14px}}
 .idea9103-slide-stack .slide-carousel-item img{height:260px;object-fit:contain;background:transparent}
 @media(max-width:760px){.idea9103-slide-stack .slide-carousel-item img{height:360px}}
 

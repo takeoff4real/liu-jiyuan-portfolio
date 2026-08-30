@@ -69,7 +69,7 @@ export function MasterIdea9106({ onBack }: { onBack: () => void }) {
   }, [lightbox])
 
   return <section className="detail-page master-detail master-idea9106">
-    <div className="detail-top"><button className="back-button" onClick={onBack}>← 返回目录</button><span>MASTER PROJECT / 02</span><span>第一学期 / FINAL WORK</span></div>
+    <div className="detail-top"><button className="back-button" onClick={onBack}>← 返回目录</button><span>MASTER PROJECT / 01</span><span>第一学期 / FINAL WORK</span></div>
     <div className="detail-heading"><div><p className="kicker">IDEA9106 / DESIGN THINKING</p><h1>Make Your Choice</h1></div><p className="detail-lead">一个面向悉尼大学国际学生的可持续饮品选择互动体验。项目通过奖励机制与母语教育视频，降低理解障碍，鼓励用户使用可重复使用杯。</p></div>
     <div className="detail-facts"><span><b>课程</b>IDEA9106 Design Thinking</span><span><b>时间</b>硕士课程 · 2025–2027</span><span><b>形式</b>团队项目 / Final Presentation</span><span><b>重点</b>研究、原型、测试与迭代</span></div>
     <div className="workflow-intro"><p className="kicker">A COMPLETE DESIGN THINKING WORKFLOW</p><h2>从模糊问题，到可参与的可持续选择</h2><p>这不是单独展示最终页面，而是把 assignment 中的课程任务、研究判断、原型测试和最终成果串成一条完整的设计过程。</p></div>
@@ -77,7 +77,7 @@ export function MasterIdea9106({ onBack }: { onBack: () => void }) {
     <div className="detail-story"><article><p className="kicker">MY PARTICIPATION / 09</p><h2>在团队中把反馈转化为设计判断</h2><p>我参与了问题定义、概念讨论、原型发展与用户测试。通过团队成员的不同文化视角和反复反馈，我逐渐学会把不确定性视为探索空间，并将反馈转化为更具体的设计调整。</p></article><article><p className="kicker">REFLECTION / 10</p><h2>从理性解决问题，到反思性设计实践</h2><p>这次项目让我认识到，设计问题并不只有一个正确答案。真正重要的是理解行为背后的文化、情绪与环境因素，再通过原型和测试逐步验证方案。</p></article></div>
     <SlideCarousel slides={images} className="idea9106-slide-stack" />
     <div className="gallery master-gallery idea9106-gallery">{images.map((image, index) => <button className="gallery-item" key={image.src} onClick={() => setLightbox(index)} aria-label={`全屏查看：${image.alt}`}><PortfolioImage src={image.src} alt={image.alt} loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'auto'} /><span className="zoom-hint">放大 <b>↗</b></span></button>)}</div>
-    <div className="detail-end"><span>END OF MASTER PROJECT 02</span><button onClick={onBack}>返回硕士作品 <span>↗</span></button></div>
+    <div className="detail-end"><span>END OF MASTER PROJECT 01</span><button onClick={onBack}>返回硕士作品 <span>↗</span></button></div>
     {current && <div className="lightbox" role="dialog" aria-modal="true" aria-label="全屏作品查看" onClick={() => setLightbox(null)}><button className="close-lightbox" onClick={() => setLightbox(null)} aria-label="关闭全屏查看">×</button><button type="button" className="lightbox-nav lightbox-nav-prev" onClick={(event) => { event.stopPropagation(); setLightbox((value) => value === null ? images.length - 1 : (value - 1 + images.length) % images.length) }} aria-label="上一张">←</button><PortfolioImage src={current.src} alt={current.alt} onClick={(event) => event.stopPropagation()} /><button type="button" className="lightbox-nav lightbox-nav-next" onClick={(event) => { event.stopPropagation(); setLightbox((value) => value === null ? 0 : (value + 1) % images.length) }} aria-label="下一张">→</button><div className="lightbox-caption">{String((lightbox ?? 0) + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')} · {current.alt}<span>← → 切换　ESC 关闭</span></div></div>}
   </section>
 }
