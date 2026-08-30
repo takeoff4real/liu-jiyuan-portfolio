@@ -2,14 +2,18 @@
 
 import { useEffect, useState } from 'react'
 
-export function MasterProgress({ label }: { label: string }) {
+export function MasterProgress({ label, selector = '.master-detail' }: { label: string; selector?: string }) {
   const [visible, setVisible] = useState(false)
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     const update = () => {
-      const page = document.querySelector<HTMLElement>('.master-detail')
-      if (!page) return
+      const page = document.querySelector<HTMLElement>(selector)
+      if (!page) {
+        setVisible(false)
+        setProgress(0)
+        return
+      }
       const start = page.getBoundingClientRect().top + window.scrollY
       const end = page.getBoundingClientRect().bottom + window.scrollY
       const top = window.scrollY
@@ -20,11 +24,14 @@ export function MasterProgress({ label }: { label: string }) {
     update()
     window.addEventListener('scroll', update, { passive: true })
     window.addEventListener('resize', update)
+    const observer = new MutationObserver(update)
+    observer.observe(document.body, { childList: true, subtree: true })
     return () => {
       window.removeEventListener('scroll', update)
       window.removeEventListener('resize', update)
+      observer.disconnect()
     }
-  }, [])
+  }, [selector])
 
   if (!visible) return null
   return <aside className="directory-progress master-progress" aria-label={`${label} 浏览进度`}><span className="directory-progress-label">{label}</span><div className="directory-progress-track"><i style={{ height: `${Math.max(8, progress * 100)}%` }} /></div><span className="directory-progress-count">SCROLL</span></aside>
