@@ -32,6 +32,9 @@ const masterProjects: MasterProject[] = [
   { number: '05', slug: 'idea9202', title: 'Experience Design Studio', titleEn: 'IDEA9202', type: '第二学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: 'MAP mima Mothers Club：围绕儿童探索与母亲休息，提出 Cube 与 Catenary 的沉浸式体验方案。', brief: '以 MAP mima / Multi-Arts Pavilion mima 为真实场地，经过范围研究、用户与场地分析、概念测试和客户提案，发展 GROVE 与 Whisper Grove Corner 两个最终空间方案。', required: true },
   { number: '06', slug: 'desn9002', title: 'Designing for the Digital Revolution', titleEn: 'DESN9002', type: '第二学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: 'BlackBerry Horizon：从数字转型批判出发，提出面向工业数字孪生与空间计算的安全战略。', brief: '以 BlackBerry 为案例，从转型失败的研究报告、工业元宇宙海报与课堂演示，发展到包含系统架构、实施路线和伦理考量的视觉战略提案。' },
   { number: '07', slug: 'cmpn5006', title: 'Recording Portfolio', titleEn: 'CMPN5006', type: '第二学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: 'A Day Indoors：以日常室内环境为线索，组织录音产品、声音叙事、视觉目录与制作反思。', brief: '课程以录音作品集为成果形式，关注声音记录、编辑、组织与呈现，以及作品集叙事的完整性。' },
+  { number: '10', slug: 'idea9301', title: 'Graduation Studio', titleEn: 'IDEA9301', type: '第三学期 / COURSE WORK', year: '硕士课程 · 2025–2027', image: '', description: '', brief: '', required: true },
+  { number: '08', slug: 'desn9004', title: 'Practices of Design Innovation', titleEn: 'DESN9004', type: '第三学期 / COURSE WORK', year: '硕士课程 · 2025–2027', image: '', description: '', brief: '' },
+  { number: '09', slug: 'idea9201', title: 'Experience Design Laboratory', titleEn: 'IDEA9201', type: '第三学期 / COURSE WORK', year: '硕士课程 · 2025–2027', image: '', description: '', brief: '' },
 ]
 const detailImages = [
   { src: '/assets/1984/mockup-book-clean.png', alt: '《1984》软封效果图' },
@@ -122,26 +125,105 @@ export function Header({ onProjects }: { onProjects: () => void }) { return <><h
 export function ResumePanel({ onClose }: { onClose: () => void }) { const [closing, setClosing] = useState(false); useEffect(() => { document.body.style.overflow = 'hidden'; return () => { document.body.style.overflow = '' } }, []); const requestClose = () => { if (closing) return; setClosing(true); window.setTimeout(onClose, 420) }; return <div className={closing ? 'resume-overlay is-closing' : 'resume-overlay'} role="dialog" onClick={requestClose} aria-modal="true" aria-labelledby="resume-panel-title"><div className="resume-panel" onClick={(event) => event.stopPropagation()}><div className="resume-panel-top"><span>CURRICULUM VITAE / 2026</span><button onClick={requestClose} aria-label="关闭简历">关闭 ×</button></div><div className="resume-intro"><PortfolioImage src="/assets/resume-profile.jpg" alt="刘纪元证件照" /><div><p className="kicker">LIU JIYUAN / 刘纪元</p><h2 id="resume-panel-title">视觉 / 交互设计师</h2><p>湖北文理学院视觉传达设计本科，悉尼大学交互设计与电子艺术硕士在读。</p><div className="resume-contact"><a href="mailto:Ljy4real@foxmail.com">Ljy4real@foxmail.com</a><span>15549066877</span><span>期望城市：武汉</span></div></div></div><div className="resume-body"><section><p className="kicker">PROFILE / 个人优势</p><p>具备视觉传达与交互设计背景，熟悉 UI 设计、品牌全案与用户调研方法，能够独立完成从概念到界面的完整设计。熟练使用 AI 生图与作图工具，具备 Vibe Coding 能力及基础前端开发能力。</p><p>对新潮事物敏感，热衷探索新兴电子产品与前沿技术；在校期间参与商业品牌合作与政府数字艺术体验项目，设计作品曾获高分评级并被教授选为教学范例。</p></section><section><p className="kicker">SKILLS / 专业技能</p><div className="resume-skill-grid"><div><b>设计工具</b><span>Figma · InDesign · Illustrator · Photoshop · CorelDRAW · Sketch · AE · Procreate</span></div><div><b>交互与前端</b><span>JavaScript · HTML5 · 交互原型 · 用户流程</span></div><div><b>视觉与摄影</b><span>摄影、影像调色、Lightroom / Photoshop 后期</span></div><div><b>研究方法</b><span>AEIOU 观察法、共情图、用户旅程图、服务蓝图</span></div></div></section><section><p className="kicker">EDUCATION / 教育经历</p><article className="resume-entry"><div><b>悉尼大学</b><span>交互设计与电子艺术 · 硕士</span></div><time>2025–2027</time><p>专业课程包括设计思维、数字革命设计、创意编程、界面设计、体验设计、游戏与混合现实、音频作品制作。参与校园生态平台与 Lake Macquarie City Council MAP mima 合作项目。</p></article><article className="resume-entry"><div><b>湖北文理学院</b><span>视觉传达设计 · 本科</span></div><time>2019–2023</time><p>专业成绩优异，平均分 87；参与品牌全案、数字界面、包装、海报及联合国可持续发展目标相关项目。</p></article></section><section className="resume-columns"><div><p className="kicker">AWARDS / 荣誉奖项</p><p>大广赛三等奖<br />校内设计大赛二等奖<br />USYD ADP Innovation &amp; Design Excellence Award<br />优秀教学案例入选（USYD ADP）<br />毕业设计优秀作品奖<br />优秀毕业论文</p></div><div><p className="kicker">QUALIFICATION / 资格证书</p><p>普通话二级甲等<br />Pearson Test of English 63分<br />计算机一级</p></div></section><section><p className="kicker">INTERESTS / 兴趣爱好</p><p>关注前沿科技、VR / AR 硬件、智能穿戴设备与 AIGC；通过空间摄影记录城市建筑、室内光影与人文触点，并持续探索游戏与交互艺术的视觉表达。</p></section></div><div className="resume-panel-footer"><a href="/刘纪元-视觉_交互设计.pdf" download>下载原始简历 PDF ↓</a></div></div></div> }
 function MasterWorkSection({ onOpenMaster }: { onOpenMaster: (slug: string) => void }) { const [openSemesters, setOpenSemesters] = useState<string[]>([]); const translations: Record<string, string> = { arin6904: '游戏与混合现实', idea9103: '创意编程', idea9105: '界面设计', idea9106: '设计思维', desn9002: '数字革命设计', cmpn5006: '录音作品集', idea9202: '体验设计工作室', desn9004: '设计创新实践', idea9201: '体验设计实验室', idea9301: '毕业设计工作室' }; const semesters = [{ id: 'semester-1', label: '第一学期', courses: masterProjects.slice(0, 4) }, { id: 'semester-2', label: '第二学期', courses: masterProjects.slice(4, 7) }, { id: 'semester-3', label: '第三学期', courses: masterProjects.slice(7) }]; useEffect(() => { const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester')); if (!nodes.length) return; const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { const id = (entry.target as HTMLElement).dataset.semester; if (id) setOpenSemesters((current) => current.includes(id) ? current : [...current, id]) } }), { threshold: .35 }); nodes.forEach((node) => observer.observe(node)); return () => observer.disconnect() }, []); useEffect(() => { const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester, .master-semester .master-row')); nodes.forEach((node) => node.classList.add('scroll-reveal')); const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.target.classList.toggle('is-visible', entry.isIntersecting)), { threshold: .12, rootMargin: '-6% 0px -6% 0px' }); nodes.forEach((node) => observer.observe(node)); return () => { observer.disconnect(); nodes.forEach((node) => node.classList.remove('scroll-reveal', 'is-visible')) } }, [openSemesters.length]); return <section className="master-section" id="master-work" aria-labelledby="master-heading"><div className="section-intro"><p className="kicker">MASTER’S STUDIES / 2025–2027</p><h2 id="master-heading">硕士作品与<br /><em>论文研究。</em></h2><p className="section-description">按照学习阶段建立课程目录。每门课程将作为独立的二级目录，作品与研究材料将在后续整理后加入。</p></div><div className="master-semesters-grid">{semesters.map((semester) => { const isOpen = openSemesters.includes(semester.id); return <section className={isOpen ? 'master-semester is-open' : 'master-semester'} data-semester={semester.id} key={semester.id}><div className="semester-toggle" aria-hidden="true"><span><b>{semester.label}</b><small>{String(semester.courses.length).padStart(2, '0')} COURSES</small></span></div>{isOpen && <div className="master-list" id={`${semester.id}-courses`}>{semester.courses.map((project) => <article className={project.required ? 'master-row is-required' : 'master-row'} key={project.slug}><span className="project-number">{project.number}</span><div className="master-project-copy"><p className="project-description">课程内容待整理</p></div><div className="master-title-block"><h3><span className="project-title-link course-title"><span className="course-title-en">{project.title}</span><span className="course-title-zh">{translations[project.slug]}</span></span></h3><p>{project.titleEn}</p></div><div className="project-meta"><span>{project.required ? '必修 / CORE' : '课程目录'}</span><span>{project.year}</span></div></article>)}</div>}</section> })}</div></section> }
 function MasterWorkSectionV2({ onOpenMaster }: { onOpenMaster: (slug: string) => void }) {
-  const [openSemesters, setOpenSemesters] = useState<string[]>([])
-  const translations: Record<string, string> = { arin6904: '游戏与混合现实', idea9103: '创意编程', idea9105: '界面设计', idea9106: '设计思维', desn9002: '数字革命设计', cmpn5006: '录音作品集', idea9202: '体验设计工作室', desn9004: '设计创新实践', idea9201: '体验设计实验室', idea9301: '毕业设计工作室' }
-  const semesters = [{ id: 'semester-1', label: '第一学期', courses: masterProjects.slice(0, 4) }, { id: 'semester-2', label: '第二学期', courses: masterProjects.slice(4, 7) }, { id: 'semester-3', label: '第三学期', courses: [] }]
+  const [openSemesters, setOpenSemesters] = useState<string[]>(['semester-1', 'semester-2', 'semester-3'])
+  const translations: Record<string, string> = {
+    arin6904: '游戏与混合现实',
+    idea9103: '创意编程',
+    idea9105: '界面设计',
+    idea9106: '设计思维',
+    desn9002: '数字革命设计',
+    cmpn5006: '录音作品集',
+    idea9202: '体验设计工作室',
+    desn9004: '设计创新实践',
+    idea9201: '体验设计实验室',
+    idea9301: '毕业设计工作室',
+  }
+  const semesters = [
+    { id: 'semester-1', label: '第一学期', courses: masterProjects.slice(0, 4) },
+    { id: 'semester-2', label: '第二学期', courses: masterProjects.slice(4, 7) },
+    { id: 'semester-3', label: '第三学期', courses: masterProjects.slice(7) },
+  ]
+
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester'))
     if (!nodes.length) return
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { const id = (entry.target as HTMLElement).dataset.semester; if (id) setOpenSemesters((current) => current.includes(id) ? current : [...current, id]) } }), { threshold: .35 })
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = (entry.target as HTMLElement).dataset.semester
+        if (id) setOpenSemesters((current) => current.includes(id) ? current : [...current, id])
+      }
+    }), { threshold: .35 })
     nodes.forEach((node) => observer.observe(node))
     return () => observer.disconnect()
   }, [])
+
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester-v2, .master-semester-v2 .master-row'))
     nodes.forEach((node) => node.classList.add('scroll-reveal'))
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.target.classList.toggle('is-visible', entry.isIntersecting)), { threshold: .12, rootMargin: '-6% 0px -6% 0px' })
     nodes.forEach((node) => observer.observe(node))
-    return () => { observer.disconnect(); nodes.forEach((node) => node.classList.remove('scroll-reveal', 'is-visible')) }
+    return () => {
+      observer.disconnect()
+      nodes.forEach((node) => node.classList.remove('scroll-reveal', 'is-visible'))
+    }
   }, [openSemesters.length])
-  return <section className="master-section" id="master-work" aria-labelledby="master-heading"><div className="section-intro"><p className="kicker">MASTER’S STUDIES / 2025–2027</p><h2 id="master-heading">硕士作品与<br /><em>论文研究。</em></h2><p className="section-description">硕士阶段，我开始把用户研究置于视觉形式之前：先理解真实的人、情境与需求，再用设计回应问题。这个转变让我不只关注作品是否好看，也关注它是否清晰、可用，并真正支持用户完成目标。</p></div><div className="master-semesters-grid">{semesters.map((semester) => { const isOpen = openSemesters.includes(semester.id); return <section className={isOpen ? 'master-semester master-semester-v2 is-open' : 'master-semester master-semester-v2'} data-semester={semester.id} key={semester.id}><div className="semester-toggle" aria-hidden="true"><span><b>{semester.label}</b><small>{String(semester.courses.length).padStart(2, '0')} COURSES</small></span></div>{isOpen && <div className="master-list" id={`${semester.id}-courses`}>{semester.courses.map((project) => { const finalWork = project.slug === 'idea9105' || project.slug === 'idea9106'; return <article className={project.required ? 'master-row is-required' : 'master-row'} key={project.slug} role={finalWork ? 'link' : undefined} tabIndex={finalWork ? 0 : undefined} onClick={() => finalWork && onOpenMaster(project.slug)} onKeyDown={(event) => { if (finalWork && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); onOpenMaster(project.slug) } }}><span className="project-number">{project.number}</span><div className="master-project-copy"><p className="project-description">{project.description || '课程资料待整理。'}</p></div><div className="master-title-block"><h3><span className="project-title-link course-title"><span className="course-title-en">{project.title}</span><span className="course-title-zh">{translations[project.slug]}</span></span></h3><p>{project.titleEn}</p></div><div className="project-meta"><span>{project.required ? '必修 / CORE' : '课程目录'}</span><span>{project.year}</span></div></article> })}</div>}</section> })}</div></section>
-}
 
+  return (
+    <section className="master-section" id="master-work" aria-labelledby="master-heading">
+      <div className="section-intro">
+        <p className="kicker">MASTER’S STUDIES / 2025–2027</p>
+        <h2 id="master-heading">硕士作品与<br /><em>论文研究。</em></h2>
+        <p className="section-description">硕士阶段，我开始把用户研究置于视觉形式之前：先理解真实的人、情境与需求，再用设计回应问题。这个转变让我不只关注作品是否好看，也关注它是否清晰、可用，并真正支持用户完成目标。</p>
+      </div>
+      <div className="master-semesters-grid">
+        {semesters.map((semester) => {
+          const isOpen = openSemesters.includes(semester.id)
+          const isThirdSemester = semester.id === 'semester-3'
+          return (
+            <section className={isOpen ? 'master-semester master-semester-v2 is-open' : 'master-semester master-semester-v2'} data-semester={semester.id} key={semester.id}>
+              <div className="semester-toggle" aria-hidden="true">
+                <span><b>{semester.label}</b><small>{String(semester.courses.length).padStart(2, '0')} COURSES</small></span>
+              </div>
+              {isOpen && <div className="master-list" id={`${semester.id}-courses`}>
+                {semester.courses.map((project) => {
+                  const finalWork = !isThirdSemester && (project.slug === 'idea9105' || project.slug === 'idea9106')
+                  return (
+                    <article
+                      className={project.required ? 'master-row is-required' : 'master-row'}
+                      key={project.slug}
+                      role={finalWork ? 'link' : undefined}
+                      tabIndex={finalWork ? 0 : undefined}
+                      onClick={() => finalWork && onOpenMaster(project.slug)}
+                      onKeyDown={(event) => {
+                        if (finalWork && (event.key === 'Enter' || event.key === ' ')) {
+                          event.preventDefault()
+                          onOpenMaster(project.slug)
+                        }
+                      }}
+                    >
+                      <span className="project-number">{project.number}</span>
+                      <div className="master-project-copy">
+                        <p className="project-description">{project.description || ''}</p>
+                      </div>
+                      <div className="master-title-block">
+                        <h3><span className="project-title-link course-title"><span className="course-title-en">{project.title}</span><span className="course-title-zh">{translations[project.slug]}</span></span></h3>
+                        <p>{project.titleEn}</p>
+                      </div>
+                      <div className="project-meta">
+                        <span>{project.required ? '必修 / CORE' : '课程目录'}</span>
+                        <span>{project.year}</span>
+                      </div>
+                    </article>
+                  )
+                })}
+              </div>}
+            </section>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
 function Home({ onOpenProject, onOpenMaster }: { onOpenProject: (slug: string) => void; onOpenMaster: (slug: string) => void }) {
   useEffect(() => { const button = document.createElement('button'); button.className = 'top-button'; button.type = 'button'; button.setAttribute('aria-label', '回到顶部'); button.innerHTML = '回到顶部 <span aria-hidden="true">↑</span>'; const update = () => { const section = document.getElementById('undergraduate-work'); const threshold = section ? Math.max(360, section.offsetTop - 140) : 500; button.classList.toggle('is-visible', window.scrollY > threshold); button.tabIndex = window.scrollY > threshold ? 0 : -1; button.setAttribute('aria-hidden', String(window.scrollY <= threshold)) }; const onClick = () => window.scrollTo({ top: 0, behavior: 'smooth' }); button.addEventListener('click', onClick); document.body.appendChild(button); update(); window.addEventListener('scroll', update, { passive: true }); return () => { button.removeEventListener('click', onClick); window.removeEventListener('scroll', update); button.remove() } }, [])
   const [resumeOpen, setResumeOpen] = useState(false); const visible = projects
