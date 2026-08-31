@@ -220,7 +220,7 @@ button:focus-visible,
 
 .top-button{
   position:fixed;
-  right:4.2vw;
+   right:max(12px,1.8vw);
   bottom:28px;
   z-index:8;
   display:flex;
@@ -239,7 +239,7 @@ button:focus-visible,
 .top-button span{color:var(--accent);font-size:17px;line-height:1}
 .top-button.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
 .top-button:hover,.top-button:focus-visible{color:var(--accent);outline:none}
-@media(max-width:760px){.top-button{right:5vw;bottom:18px;font-size:9px}}
+ @media(max-width:760px){.top-button{right:max(10px,env(safe-area-inset-right));bottom:18px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.top-button{transition-duration:.01ms}}
 
 .directory-progress{
