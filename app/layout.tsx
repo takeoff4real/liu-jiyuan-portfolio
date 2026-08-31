@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: '刘纪元 / Visual Communication Portfolio',
   description: '刘纪元的视觉传达设计作品集，包含书籍装帧、海报与视觉设计。',
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
+    icon: '/liu-logo.png',
+    shortcut: '/liu-logo.png',
   },
 };
 
