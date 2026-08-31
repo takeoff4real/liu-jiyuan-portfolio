@@ -3,6 +3,7 @@
 .about-grid p{max-width:360px;margin-bottom:24px}.about-facts{display:grid;gap:8px;color:#8f8c85;font-family:var(--mono);font-size:10px;line-height:1.6;margin-bottom:28px}.about-actions{display:flex;flex-wrap:wrap;gap:24px}
 .filing-link{color:var(--muted);border-bottom:1px solid transparent;transition:color .25s,border-color .25s}.filing-link:hover,.filing-link:focus-visible{color:var(--accent);border-color:var(--accent)}
 @media(max-width:760px){.site-footer{flex-wrap:wrap;gap:8px 14px}.site-footer .filing-link{flex-basis:100%;order:3}}
+.site-footer{border-top:1px solid var(--line)}.site-footer .filing-link{color:var(--ink);border-bottom-color:var(--accent);padding-bottom:4px;letter-spacing:.06em}.site-footer .filing-link::before{content:'备案信息  ';color:var(--accent)}.site-footer .filing-link:hover,.site-footer .filing-link:focus-visible{color:var(--accent)}
  .project-description{font-size:12px!important;line-height:1.55;max-width:390px;color:var(--muted);margin-top:14px!important}
 .gallery-poster .gallery-item{padding:8px;background:#e1ddd5}
 .gallery-poster .gallery-item img{width:100%;height:auto;object-fit:contain}
