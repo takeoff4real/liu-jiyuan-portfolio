@@ -59,7 +59,7 @@
 .myco-demo iframe { width:100%; height:720px; border:1px solid #17214733; border-radius:16px; background:#fcf7ec; }
 .myco-progress { background:var(--myco-lime); }
 .myco-source { font-size:11px; opacity:.7; border-top:1px solid #17214733; padding-top:24px; }
-.myco-return { margin-top:30px; background:var(--myco-ink); color:white; border:0; padding:14px 23px; border-radius:30px; font-size:13px; cursor:pointer; }
+.myco-return { display:inline-block; margin-top:30px; background:var(--myco-ink); color:white; border:0; padding:14px 23px; border-radius:30px; font-size:13px; cursor:pointer; }
 .myco-return span { margin-left:26px; }
 @media(max-width:760px) {
  .myco-pad { padding-inline:24px; }

@@ -16,7 +16,7 @@ function Artwork({ file, caption, width=6000, height=4500 }: { file:string; capt
   return <figure className="xx-artwork"><img src={`/assets/ip-xiaoxin/gallery/${file}`} alt={caption} width={width} height={height} loading="lazy"/><figcaption>{caption}</figcaption></figure>;
 }
 
-export default function XiaoxinsiCaseStudy({ close }: { close:()=>void }) {
+export default function XiaoxinsiCaseStudy() {
   const shell=useRef<HTMLDivElement>(null);
   const [scrolled,setScrolled]=useState(false);
   const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -25,13 +25,13 @@ export default function XiaoxinsiCaseStudy({ close }: { close:()=>void }) {
     target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});
   };
   useEffect(()=>{
-    const root=shell.current;if(!root)return;const update=()=>setScrolled(root.scrollTop>280);root.addEventListener('scroll',update,{passive:true});
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}}),{root,threshold:.03});
+    const root=shell.current;if(!root)return;const update=()=>setScrolled(window.scrollY>280);update();window.addEventListener('scroll',update,{passive:true});
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}}),{threshold:.03});
     if(!reduced())root.querySelectorAll('.xx-section-copy,.xx-artwork,.xx-principles').forEach(node=>{node.classList.add('xx-reveal');observer.observe(node);});
-    return()=>{root.removeEventListener('scroll',update);observer.disconnect();};
+    return()=>{window.removeEventListener('scroll',update);observer.disconnect();};
   },[]);
-  return <div ref={shell} className="detail-shell xx-case" role="dialog" aria-modal="true" aria-label="小心思 IP 项目详情">
-    <div className="xx-case-bar"><span>刘纪元 <span aria-hidden="true">×</span> <strong>小心思 IP</strong></span><button onClick={close}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>返回作品</button></div>
+  return <div ref={shell} className="detail-shell xx-case" aria-label="小心思 IP 项目详情">
+    <div className="xx-case-bar"><span>刘纪元 <span aria-hidden="true">×</span> <strong>小心思 IP</strong></span><a href="/#project-xiaoxinsi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>返回作品</a></div>
     <article>
       <header className="xx-hero">
         <span className="xx-eyebrow">小心思 / IP &amp; BRAND IDENTITY</span>
@@ -71,9 +71,9 @@ export default function XiaoxinsiCaseStudy({ close }: { close:()=>void }) {
 
       <section className="xx-section xx-ending xx-pad" aria-labelledby="xx-ending-title">
         <div className="xx-section-copy"><span className="xx-eyebrow">05 / 项目回顾</span><h2 id="xx-ending-title">从问题定义，走向具体的视觉表达。</h2><p>这次团队毕业设计让我练习如何把抽象议题，落实为角色外观、品牌标志、画面层级与跨媒介应用。对我而言，系统化不是增加应用数量，而是让不同触点仍然回应同一个品牌核心。</p></div>
-        <button className="xx-end" onClick={close}>返回项目选集</button>
+        <a className="xx-end" href="/#project-xiaoxinsi">返回项目选集</a>
       </section>
     </article>
-    <button className={`xx-back-top${scrolled?' is-visible':''}`} type="button" aria-label="回到项目顶部" aria-hidden={!scrolled||undefined} inert={!scrolled?true:undefined} onClick={()=>shell.current?.scrollTo({top:0,behavior:reduced()?'instant':'smooth'})}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5"/></svg></button>
+    <button className={`xx-back-top${scrolled?' is-visible':''}`} type="button" aria-label="回到项目顶部" aria-hidden={!scrolled||undefined} inert={!scrolled?true:undefined} onClick={()=>window.scrollTo({top:0,behavior:reduced()?'instant':'smooth'})}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5"/></svg></button>
   </div>;
 }

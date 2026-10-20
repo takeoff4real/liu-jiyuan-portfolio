@@ -9,7 +9,6 @@ input,textarea,select { font-family:inherit; }
 .home-footer .icp-filing { color:#b7beb3; }
 .icp-filing:hover { text-decoration:underline; text-underline-offset:3px; }
 .icp-filing:focus-visible { outline:2px solid currentColor; outline-offset:4px; border-radius:2px; }
-body.detail-open { overflow:hidden; }
 body:has(.portfolio-loader:not(.is-leaving)) { overflow:hidden; }
 .portfolio-loader { position:fixed; inset:0; z-index:2000; display:grid; place-items:center; background:#0e1911; color:#e5e9d8; opacity:1; transition:opacity .3s ease; }
 .portfolio-loader.is-leaving { opacity:0; pointer-events:none; }
@@ -198,7 +197,7 @@ body:has(.cursor-ring.has-label) .cursor-dot { border:0; }
 .skill-list span { padding:9px 14px; border:1px solid rgba(17,18,15,.28); border-radius:999px; font-size:12px; }
 footer { display:flex; justify-content:space-between; padding:34px max(7vw,28px); background:var(--ink); color:var(--paper); font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
 
-.detail-shell { position:fixed; z-index:100; inset:0; overflow-y:auto; background:var(--paper); animation:detail-in .45s cubic-bezier(.2,.8,.2,1); }
+.detail-shell { position:relative; min-height:100svh; background:var(--paper); }
 @keyframes detail-in { from { opacity:0; transform:translateY(28px); } }
 .detail-back { position:fixed; z-index:3; top:28px; left:max(4vw,20px); padding:12px 18px; border:1px solid rgba(17,18,15,.16); border-radius:999px; background:rgba(244,244,239,.84); backdrop-filter:blur(14px); cursor:pointer; }
 .detail { width:min(100% - 40px,620px); margin:0 auto; padding:108px 0 100px; }
@@ -214,7 +213,7 @@ footer { display:flex; justify-content:space-between; padding:34px max(7vw,28px)
 .detail-section p { margin:0; color:#3f413b; font-size:18px; line-height:1.65; }
 .detail-gallery { display:grid; gap:14px; margin-top:78px; }
 .detail-gallery img { border-radius:20px; background:var(--soft); }
-.detail-end { width:100%; margin-top:72px; padding:18px; border:0; border-radius:999px; background:var(--ink); color:var(--paper); cursor:pointer; }
+.detail-end { display:block; width:100%; margin-top:72px; padding:18px; border:0; border-radius:999px; background:var(--ink); color:var(--paper); text-align:center; cursor:pointer; }
 
 .mima-shell { background:var(--paper); }
 .mima-case { --case-pad:max(5vw,28px); }

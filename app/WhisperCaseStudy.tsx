@@ -28,7 +28,7 @@ function CubeStoryFrame({ index, alt }: { index: number; alt: string }) {
   return <div className="whisper-story-frame"><img src="/assets/masters/mima/story/cube-family-storyboard-v1.webp" alt={alt} loading="lazy" width={2172} height={724} style={{ left: `${index * -100}%` }} /></div>;
 }
 
-export default function WhisperCaseStudy({ close }: { close: () => void }) {
+export default function WhisperCaseStudy() {
   const [prototypeOpen, setPrototypeOpen] = useState(false);
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -46,20 +46,21 @@ export default function WhisperCaseStudy({ close }: { close: () => void }) {
   useEffect(() => {
     const shell = shellRef.current;
     if (!shell) return;
-    const update = () => setScrolled(shell.scrollTop > 280);
-    shell.addEventListener('scroll', update, { passive: true });
+    const update = () => setScrolled(window.scrollY > 280);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
     const nodes = shell.querySelectorAll<HTMLElement>('.whisper-section-heading,.whisper-scene-pair,.whisper-review-pair,.whisper-mechanisms,.whisper-storyboard-heading,.whisper-storyboard-grid,.whisper-iteration,.whisper-outcomes');
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
-    }), { root: shell, threshold: .03 });
+    }), { threshold: .03 });
     if (!reduced) nodes.forEach(node => { node.classList.add('whisper-reveal'); observer.observe(node); });
-    return () => { shell.removeEventListener('scroll', update); observer.disconnect(); };
+    return () => { window.removeEventListener('scroll', update); observer.disconnect(); };
   }, []);
 
   return (
-    <div ref={shellRef} className="detail-shell mima-shell whisper-case whisper-editorial" role="dialog" aria-modal="true" aria-label="Whisper Grove Corner 项目详情">
-      <div className="whisper-case-bar"><span>刘纪元 <span aria-hidden="true">×</span> <strong>Whisper Grove Corner</strong></span><button className="detail-back" onClick={close}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>返回作品</button></div>
+    <div ref={shellRef} className="detail-shell mima-shell whisper-case whisper-editorial" aria-label="Whisper Grove Corner 项目详情">
+      <div className="whisper-case-bar"><span>刘纪元 <span aria-hidden="true">×</span> <strong>Whisper Grove Corner</strong></span><a className="detail-back" href="/#project-mima"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>返回作品</a></div>
       <article className="whisper-article">
         <header className="whisper-hero">
           <div className="whisper-hero-grid" aria-hidden="true" />
@@ -157,10 +158,10 @@ export default function WhisperCaseStudy({ close }: { close: () => void }) {
             <summary><span>查看原课程图稿与技术构想</span><small>Catenary × Cube · {originalMaterials.length}张补充图稿</small></summary>
             {archiveOpen && <div className="whisper-archive-grid">{originalMaterials.map(item => <figure key={item.image}><img src={`/assets/masters/mima/story/${item.image}`} width={item.width} height={item.height} style={{aspectRatio:`${item.width} / ${item.height}`}} alt={item.title} loading="lazy" /><figcaption><strong>{item.title}</strong><span>{item.caption}</span></figcaption></figure>)}</div>}
           </details>
-          <button className="whisper-end" onClick={close}>返回项目选集</button>
+          <a className="whisper-end" href="/#project-mima">返回项目选集</a>
         </section>
       </article>
-      <button className={`whisper-back-top${scrolled ? ' is-visible' : ''}`} type="button" aria-label="回到项目顶部" aria-hidden={!scrolled || undefined} inert={!scrolled ? true : undefined} onClick={() => shellRef.current?.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5" /></svg></button>
+      <button className={`whisper-back-top${scrolled ? ' is-visible' : ''}`} type="button" aria-label="回到项目顶部" aria-hidden={!scrolled || undefined} inert={!scrolled ? true : undefined} onClick={() => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5" /></svg></button>
     </div>
   );
 }

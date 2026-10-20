@@ -18,10 +18,10 @@ const journey = [
   { title: '再访', action: '关注限定活动或邀请朋友', support: '限定款与好友邀请', purpose: '为下一次到访提供线索' },
 ];
 
-export default function MycoCaseStudy({ close }: { close: () => void }) {
+export default function MycoCaseStudy() {
   const [demoOpen, setDemoOpen] = useState(false);
-  return <div className="detail-shell myco-case" role="dialog" aria-modal="true" aria-label="MyCo 项目详情">
-    <button className="detail-back" onClick={close}>关闭</button>
+  return <div className="detail-shell myco-case" aria-label="MyCo 项目详情">
+    <a className="detail-back" href="/#project-myco">← 返回作品</a>
     <article>
       <header className="myco-hero myco-pad">
         <div className="myco-hero-copy"><span className="myco-kicker">MYCO / BLUEGREEN</span><p className="myco-status">进行中的团队项目</p><h1>一次海港冒险，<br />一场快闪相遇。</h1><p>我们以线下快闪为主体，将游戏、场地探索与纪念品串成参与体验；再用一个简短网页，让访客先认识这里的活动。</p><a href="#myco-web" onClick={e => { e.preventDefault(); document.getElementById('myco-web')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }}>看看体验如何展开 <span aria-hidden="true">↘</span></a></div>
@@ -55,7 +55,7 @@ export default function MycoCaseStudy({ close }: { close: () => void }) {
       </section>
 
       <section className="myco-section myco-pad myco-progress" aria-labelledby="myco-progress-title"><span className="myco-kicker">05 / WORK IN PROGRESS</span><div className="myco-heading"><h2 id="myco-progress-title">已有参与体验，<br />也保留真实的进度。</h2><div><p>我们已开展用户测试，项目仍在继续。当前方案把活动流程、棋盘与配套物料，以及可试玩的网页介绍连接起来。</p><p>我们尚未将这些设计表述为已经运营的快闪店，也不把网页试玩等同于实体场景验证。活动奖励、日期、数量与执行规则仍随项目推进完善。</p></div></div>
-        <p className="myco-source">内容依据：团队 FigJam 方案、现有设计素材与网页体验。图像为项目概念视觉，非已落地现场照片。</p><button className="myco-return" onClick={close}>返回作品选集 <span aria-hidden="true">↗</span></button>
+        <p className="myco-source">内容依据：团队 FigJam 方案、现有设计素材与网页体验。图像为项目概念视觉，非已落地现场照片。</p><a className="myco-return" href="/#project-myco">返回作品选集 <span aria-hidden="true">↗</span></a>
       </section>
     </article>
   </div>;

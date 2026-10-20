@@ -103,7 +103,7 @@
 .whisper-archive-grid figcaption { display:flex; flex-direction:column; gap:10px; margin-top:16px; }
 .whisper-archive-grid strong { font-size:18px; font-weight:550; }
 .whisper-archive-grid figcaption span { color:#b2bda9; font-size:14px; line-height:1.7; }
-.whisper-end { display:block; margin:36px 0 0 auto; padding:14px 22px; border:1px solid #879a75; border-radius:99px; background:transparent; color:#f4f4ef; font-size:16px; cursor:pointer; }
+.whisper-end { display:block; width:fit-content; margin:36px 0 0 auto; padding:14px 22px; border:1px solid #879a75; border-radius:99px; background:transparent; color:#f4f4ef; font-size:16px; cursor:pointer; }
 @media (min-width:761px) and (max-width:1100px) {
   .whisper-case { --whisper-pad:7vw; }
   .whisper-section-heading,.whisper-iteration { gap:32px; }
