@@ -1,0 +1,36 @@
+/* Keep artwork and captions in normal flow; do not crop presentation mockups. */
+.xiaoxinsi-shell .xiaoxinsi-meta span { font-size:16.5px; }
+.xiaoxinsi-shell .xiaoxinsi-meta strong { font-size:25.5px; }
+.xiaoxinsi-shell .application-flow figcaption { font-size:18px; line-height:1.6; max-width:none; text-align:center; padding:10px 20px 0; text-wrap:pretty; }
+.xiaoxinsi-shell .application-flow figure { padding-bottom:10px; }
+.xiaoxinsi-shell .scene-grid { display:block; columns:2; column-gap:28px; }
+.xiaoxinsi-shell .scene-grid figure { display:inline-block; width:100%; break-inside:avoid; margin:0 0 30px; vertical-align:top; }
+.xiaoxinsi-shell .scene-grid img,
+.xiaoxinsi-shell .scene-grid .scene-wide img,
+.xiaoxinsi-shell .scene-grid figure:nth-child(2) img,
+.xiaoxinsi-shell .scene-grid figure:nth-child(3) img,
+.xiaoxinsi-shell .character-stage figure img { width:100%; height:auto; min-height:0; aspect-ratio:auto; object-fit:contain; border-radius:22px; }
+.xiaoxinsi-shell .scene-grid figcaption { position:static; padding:14px 2px 0; margin:0; line-height:1.7; }
+.xiaoxinsi-shell .character-stage figure { border-radius:22px; }
+.xiaoxinsi-shell .application-flow img { width:100%; height:auto; aspect-ratio:auto; object-fit:contain; }
+.xiaoxinsi-shell .motion-reveal { opacity:1; transform:none; filter:none; transition:none; }
+.xiaoxinsi-shell .xiaoxinsi-split h2,
+.xiaoxinsi-shell .identity-heading h2,
+.xiaoxinsi-shell .scenes-heading h2,
+.xiaoxinsi-shell .applications-heading h2,
+.xiaoxinsi-shell .xiaoxinsi-ending h2,
+.xiaoxinsi-shell .character-copy h2 { font-size:clamp(30px,3.1vw,52px); line-height:1.35; letter-spacing:-.02em; overflow-wrap:break-word; text-wrap:balance; }
+.xiaoxinsi-shell .character-copy { padding:clamp(24px,3vw,44px); border-radius:24px; min-width:0; }
+.xiaoxinsi-shell .character-copy h2 { margin:20px 0 28px; }
+.xiaoxinsi-shell .character-stage { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:4vw; }
+.xiaoxinsi-shell .xiaoxinsi-hero-copy h1 { line-height:1.06; letter-spacing:-.04em; }
+@media(max-width:760px) {
+ .xiaoxinsi-shell .scene-grid { columns:1; }
+ .xiaoxinsi-shell .character-stage { grid-template-columns:minmax(0,1fr); gap:28px; }
+ .xiaoxinsi-shell .xiaoxinsi-split h2,
+ .xiaoxinsi-shell .identity-heading h2,
+ .xiaoxinsi-shell .scenes-heading h2,
+ .xiaoxinsi-shell .applications-heading h2,
+ .xiaoxinsi-shell .xiaoxinsi-ending h2,
+ .xiaoxinsi-shell .character-copy h2 { font-size:30px; }
+}

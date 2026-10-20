@@ -1,0 +1,18 @@
+@font-face { font-family:'Doodle Han'; src:url('/fonts/handwritten/LongCang.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Latin'; src:url('/fonts/handwritten/Caveat.ttf') format('truetype'); font-weight:400 700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Japanese'; src:url('/fonts/handwritten/Yomogi.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Korean'; src:url('/fonts/handwritten/NanumPen.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Arabic'; src:url('/fonts/handwritten/ArefRuqaa.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Hindi'; src:url('/fonts/handwritten/Kalam.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Thai'; src:url('/fonts/handwritten/Sriracha.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+.name-doodle { position:relative; width:min(100%,336px); aspect-ratio:640 / 260; margin:32px auto 0; }
+.name-doodle>div>svg { display:block; width:100%; height:auto; overflow:visible; pointer-events:none; }
+.name-signature { opacity:0; visibility:hidden; filter:drop-shadow(0 0 1px color-mix(in srgb,currentColor 60.5%,transparent)) drop-shadow(0 0 5px color-mix(in srgb,currentColor 35.2%,transparent)); transition:none; }
+.name-signature.is-current { opacity:1; visibility:visible; transition:none; }
+.name-signature text { font-weight:400; }
+.name-doodle-toggle { position:absolute; right:4px; bottom:0; display:grid; place-items:center; width:40px; height:40px; padding:0; border:0; border-radius:50%; background:transparent; color:#6d7969; opacity:.5; cursor:pointer; transition:opacity .2s,background .2s; }
+.name-doodle-toggle:hover,.name-doodle-toggle:focus-visible { opacity:1; background:#ffffff80; }
+.name-doodle-toggle:focus-visible { outline:2px solid #3e756b; outline-offset:2px; }
+.name-doodle-toggle svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+@media(max-width:760px) { .name-doodle { width:min(100%,256px); margin-top:26px; } }
+@media(prefers-reduced-motion:reduce) { .name-signature,.name-signature.is-current { transition:none; } }

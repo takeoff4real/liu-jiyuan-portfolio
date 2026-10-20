@@ -1,306 +1,638 @@
-'use client'
-import { PortfolioImage } from './portfolio-image'
+'use client';
 
-import { useEffect, useState } from 'react'
-import './globals.css'
-import { MasterIdea9105 } from './master-idea9105'
-import { MasterIdea9106 } from './master-idea9106'
-import { MasterArin6904 } from './master-arin6904'
-import { MasterIdea9202 } from './master-idea9202'
-import { MasterDesn9002 } from './master-desn9002'
-import { MasterIdea9103 } from './master-idea9103'
-import { MasterCmpn5006 } from './master-cmpn5006'
-import { SlideCarousel } from './slide-carousel'
-import { MasterProgress } from './master-progress'
+import { useEffect, useRef, useState } from 'react';
+import WhisperCaseStudy from './WhisperCaseStudy';
+import XiaoxinsiCaseStudy from './XiaoxinsiCaseStudy';
+import BookEditorialCaseStudy from './BookEditorialCaseStudy';
+import MycoCaseStudy from './MycoCaseStudy';
+import AmbientBreathing from './AmbientBreathing';
+import PortfolioNavigation from './PortfolioNavigation';
+import NameDoodle from './NameDoodle';
+import IcpFiling from './IcpFiling';
+import './xiaoxinsi-layout.css';
+import './orwell-layout.css';
+import './ultraman-layout.css';
+import './portfolio-polish.css';
+import './homepage-vertical.css';
 
-type Project = { number: string; slug: string; title: string; titleEn: string; type: string; year: string; image: string; description?: string; active?: boolean }
+type Category = 'featured' | 'projects' | 'experiments';
+type Project = {
+  id: string; number: string; title: string; subtitle: string; type: string;
+  category: Exclude<Category, 'featured'>; featured?: boolean; image: string;
+  accent: 'lime' | 'cyan' | 'coral'; intro: string;
+  sections: { title: string; body: string }[]; gallery: string[];
+};
+
 const projects: Project[] = [
-  { number: '01', slug: '1984', title: '《1984》书籍装帧设计', titleEn: 'Book design / George Orwell', type: '书籍装帧', year: '本科项目 · 2019–2023', image: '/assets/1984/mockup-book-clean.png', description: '以反乌托邦文本为线索，通过封面、封套、内页与装帧结构组织压迫感与阅读秩序。', active: true },
-  { number: '02', slug: 'xiaoxin-ip', title: '小心思 IP / 公益品牌设计', titleEn: 'IP identity & applications', type: 'IP / 品牌设计', year: '本科项目 · 2019–2023', image: '/assets/ip-xiaoxin/macbook-brand.jpg', description: '以“小心思”的双关概念为核心，从孩子的视角理解世界，让成年人重新看见儿童想象力的丰富与自由。' },
-  { number: '03', slug: 'binding-design', title: '装订与编辑设计', titleEn: 'Binding & editorial studies', type: '装订 / 编辑设计', year: '本科项目 · 2019–2023', image: '/assets/thumbs/binding-design.jpg', description: '围绕纸张、页面与装订关系展开编辑实验，在连续阅读中呈现版式、节奏与实体结构。' },
-  { number: '04', slug: 'sdg-posters', title: '联合国可持续发展目标海报', titleEn: 'Poster series / SDGs', type: '海报设计', year: '本科项目 · 2019–2023', image: '/assets/sdg/gallery/06.jpg', description: '以可持续发展目标为议题，通过统一的图像语言与动态海报表达公共议题的视觉张力。' },
-  { number: '05', slug: 'san-jin', title: '三金西瓜霜海报设计', titleEn: 'Campaign posters', type: '海报设计', year: '本科项目 · 2019–2023', image: '/assets/thumbs/san-jin.png', description: '以产品视觉和高对比色彩为基础，探索传统药品信息在海报中的图像化表达与传播层级。' },
-  { number: '06', slug: 'photography', title: '摄影作品', titleEn: 'Photography studies', type: '摄影 / 影像', year: '本科项目 · 2019–2023', image: '/assets/thumbs/photography.jpg', description: '从城市、自然与日常观察出发，通过光线、结构和瞬间捕捉记录空间中的情绪与视觉关系。' },
-  { number: '07', slug: 'hand-drawing', title: '手绘作品', titleEn: 'Illustration studies', type: '插画 / 手绘', year: '本科项目 · 2019–2023', image: '/assets/thumbs/hand-drawn.jpg', description: '以寓言、成语与人物情境为练习对象，通过手绘线条、动作和构图建立画面的叙事性。' },
-  { number: '08', slug: 'other-design', title: '其它版式与视觉练习', titleEn: 'Layout & visual studies', type: '版式 / 视觉练习', year: '本科项目 · 2019–2023', image: '/assets/thumbs/other-selected.jpg', description: '将包装、图像构成与版式实验并置，通过材质、色彩与文字比例练习视觉重点的控制。' },
-]
-type MasterProject = { number: string; slug: string; title: string; titleEn: string; type: string; year: string; image: string; description: string; brief: string; required?: boolean }
-const masterProjects: MasterProject[] = [
-  { number: '01', slug: 'idea9106', title: 'Design Thinking', titleEn: 'IDEA9106', type: '第一学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '/assets/masters/idea9106-final/page-01.jpg', description: 'Make Your Choice：面向国际学生的可持续饮品选择互动体验。', brief: '课程以设计思维为框架，强调从问题理解、用户洞察和概念生成出发，通过迭代形成有依据的最终设计提案。', required: true },
-  { number: '02', slug: 'idea9105', title: 'Interface Design', titleEn: 'IDEA9105', type: '第一学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '/assets/masters/aussie-emergency/main.png', description: 'AUSSIE EMERGENCY：将灾害预警、行动指引与家庭协作整合为跨设备应急体验。', brief: '课程围绕界面设计的方法、结构与交互表达展开，要求将研究洞察转化为清晰、可用且可评估的数字界面方案。', required: true },
-  { number: '03', slug: 'arin6904', title: 'Games and Mixed Realities', titleEn: 'ARIN6904', type: '第一学期 / COURSE WORK', year: '硕士课程 · 2025–2027', image: '', description: '以玩家经验、游戏规则与混合现实为线索，从个人反思、游戏分析走向面向文化遗产保护的 VR 方案。', brief: '课程探索游戏机制与混合现实体验的结合，关注空间、参与方式和交互叙事如何共同构成体验。' },
-  { number: '04', slug: 'idea9103', title: 'Creative Coding', titleEn: 'IDEA9103', type: '第一学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: '以 Piet Mondrian 的 Broadway Boogie Woogie 为参照，将网格、色块与节奏转译为 p5.js 创意编码系统。', brief: '课程以代码作为创作媒介，探索生成、动画、规则和实时反馈在视觉与交互设计中的应用。' },
-  { number: '05', slug: 'idea9202', title: 'Experience Design Studio', titleEn: 'IDEA9202', type: '第二学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: 'MAP mima Mothers Club：围绕儿童探索与母亲休息，提出 Cube 与 Catenary 的沉浸式体验方案。', brief: '以 MAP mima / Multi-Arts Pavilion mima 为真实场地，经过范围研究、用户与场地分析、概念测试和客户提案，发展 GROVE 与 Whisper Grove Corner 两个最终空间方案。', required: true },
-  { number: '06', slug: 'desn9002', title: 'Designing for the Digital Revolution', titleEn: 'DESN9002', type: '第二学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: 'BlackBerry Horizon：从数字转型批判出发，提出面向工业数字孪生与空间计算的安全战略。', brief: '以 BlackBerry 为案例，从转型失败的研究报告、工业元宇宙海报与课堂演示，发展到包含系统架构、实施路线和伦理考量的视觉战略提案。' },
-  { number: '07', slug: 'cmpn5006', title: 'Recording Portfolio', titleEn: 'CMPN5006', type: '第二学期 / FINAL WORK', year: '硕士课程 · 2025–2027', image: '', description: 'A Day Indoors：以日常室内环境为线索，组织录音产品、声音叙事、视觉目录与制作反思。', brief: '课程以录音作品集为成果形式，关注声音记录、编辑、组织与呈现，以及作品集叙事的完整性。' },
-  { number: '10', slug: 'idea9301', title: 'Graduation Studio', titleEn: 'IDEA9301', type: '第三学期 / COURSE WORK', year: '硕士课程 · 2025–2027', image: '', description: '', brief: '', required: true },
-  { number: '08', slug: 'desn9004', title: 'Practices of Design Innovation', titleEn: 'DESN9004', type: '第三学期 / COURSE WORK', year: '硕士课程 · 2025–2027', image: '', description: '', brief: '' },
-  { number: '09', slug: 'idea9201', title: 'Experience Design Laboratory', titleEn: 'IDEA9201', type: '第三学期 / COURSE WORK', year: '硕士课程 · 2025–2027', image: '', description: '', brief: '' },
-]
-const detailImages = [
-  { src: '/assets/1984/mockup-book-clean.png', alt: '《1984》软封效果图' },
-  { src: '/assets/1984/process/page-01.jpg', alt: '《1984》项目封面与标题页' },
-  { src: '/assets/1984/process/page-02.jpg', alt: '《1984》作品背景与设计说明' },
-  { src: '/assets/1984/cover-spread.png', alt: '《1984》封面、书脊与封底' },
-  { src: '/assets/1984/process/page-04.jpg', alt: '《1984》封套正反面设计' },
-  { src: '/assets/1984/process/page-05.jpg', alt: '《1984》扉页与目录设计' },
-  { src: '/assets/1984/process/page-06.jpg', alt: '《1984》前言与版权页设计' },
-  { src: '/assets/1984/process/page-07.jpg', alt: '《1984》正文版式设计' },
-  { src: '/assets/1984/book-interior.png', alt: '《1984》正文实体效果图' },
-  { src: '/assets/1984/mockup-box.png', alt: '《1984》书籍整体效果图' },
-  { src: '/assets/1984/mockup-jacket.png', alt: '《1984》封套内页效果图' },
-  { src: '/assets/1984/process/page-10.jpg', alt: '《1984》封套内页展示效果图' },
-  { src: '/assets/1984/process/page-13.jpg', alt: '《1984》前言与目录效果图' },
-  { src: '/assets/1984/process/page-14.jpg', alt: '《1984》扉页与版权页效果图' },
-]
-const uniqueImages = <T extends { src: string }>(images: T[]) => images.filter((image, index, all) => all.findIndex((item) => item.src === image.src) === index)
-const projectDetailData: Record<string, { lead: string; images: { src: string; alt: string; thumbSrc?: string; optimizedSrc?: string }[]; story?: { kicker: string; title: string; body: string }[] }> = {
-  'xiaoxin-ip': {
-    lead: '这是一项以儿童想象力为主题的 IP / 公益品牌设计，包含品牌命名、标志、包装、宣传物料和数字端应用。项目展示我如何把抽象的公益概念转译成统一、亲和且可延展的视觉系统。',
-    story: [
-      { kicker: '01 / PROBLEM', title: '把抽象议题转成可感知的品牌', body: '我从成年人容易忽略儿童想象力这一现实切入，将“让大人重新看见孩子的世界”转化为清晰的品牌核心，训练自己从问题定义走向视觉表达。' },
-      { kicker: '02 / STRATEGY', title: '用双关概念建立识别点', body: '我把“小心思”拆解为“小孩子的心思”和“亲密的小世界”两层含义，让品牌名称同时承担记忆点、情绪和叙事入口。' },
-      { kicker: '03 / SYSTEM', title: '让概念适配不同触点', body: '我将核心概念延展到包装、海报、折页和数字界面，在不同尺寸与媒介中保持轻盈、亲近且可识别，体现从概念到应用的系统化能力。' },
+  {
+    id: 'mima', number: '01', title: 'Whisper Grove Corner', subtitle: 'Catenary × Cube',
+    type: '体验设计 · 团队项目', category: 'projects', featured: true, accent: 'lime',
+    image: '/assets/masters/mima/home-cover-composite-v2.png',
+    intro: '由户外 Catenary 光影路径与室内 Cube 沉浸空间组成的双场景体验。两套系统分别回应移动、停留、学习与共同参与，并让儿童与照护者都能找到自己的参与方式。',
+    sections: [
+      { title: '双场景体验框架', body: 'Catenary 将移动与休息组织成户外光影路径；Cube 通过沉浸屏幕、手势和多人反馈形成室内探索空间。' },
+      { title: '从概念到系统', body: '提案同时呈现两种场景的氛围、交互行为与技术结构，使完整体验能够被讨论、评估与继续推进。' },
     ],
-    images: [
-      { src: '/assets/ip-xiaoxin/gallery/07-frame.jpg', alt: '小心思主题海报装裱展示' },
-      { src: '/assets/ip-xiaoxin/gallery/02-mark.png', alt: '小心思 IP 标志' },
-      { src: '/assets/ip-xiaoxin/gallery/01-packaging.jpg', alt: '小心思包装应用' },
-      { src: '/assets/ip-xiaoxin/gallery/03-can.jpg', alt: '小心思罐装包装应用' },
-      { src: '/assets/ip-xiaoxin/gallery/04-pouch.jpg', alt: '小心思袋装包装应用' },
-      { src: '/assets/ip-xiaoxin/gallery/05-food-box.jpg', alt: '小心思食品盒包装应用' },
-      { src: '/assets/ip-xiaoxin/gallery/06-mac-studio.jpg', alt: '小心思桌面端展示' },
-      { src: '/assets/ip-xiaoxin/gallery/08-ipad.jpg', alt: '小心思平板端展示' },
-      { src: '/assets/ip-xiaoxin/gallery/09-iphone.jpg', alt: '小心思手机端展示' },
-      { src: '/assets/ip-xiaoxin/gallery/10-brochure.jpg', alt: '小心思折页应用' },
-      { src: '/assets/ip-xiaoxin/gallery/11-macbook-air.jpg', alt: '小心思笔记本端展示' },
-      { src: '/assets/ip-xiaoxin/gallery/12-macbook.jpg', alt: '小心思折页与文案展示' },
-      { src: '/assets/ip-xiaoxin/gallery/13-banner.jpg', alt: '小心思悬挂横幅应用' },
-      { src: '/assets/ip-xiaoxin/gallery/14-mug.jpg', alt: '小心思杯具应用' },
-      { src: '/assets/ip-xiaoxin/gallery/15-watch.jpg', alt: '小心思穿戴设备应用' },
-    ],
+    gallery: ['/assets/masters/mima/title.jpg', '/assets/masters/mima/iteration.jpg', '/assets/masters/mima/technical-system.jpg'],
   },
-  'sdg-posters': { lead: '这是一组围绕联合国可持续发展目标创作的主题海报，使用图像、文字和动态效果传达公共议题。项目展示我如何将不同议题组织成具有统一识别和视觉张力的海报系列。', story: [{ kicker: '01 / WORK', title: '一组以公共议题为主题的动态海报', body: '作品围绕联合国可持续发展目标展开，将海报作为静态与动态兼具的传播载体。不同主题通过图像、文字与动势建立共同识别。' }, { kicker: '02 / APPROACH', title: '用统一规则承载不同议题', body: '我在系列中控制版式、色彩和图像关系，让不同主题保持差异的同时形成整体。动态效果服务于信息强调与观看节奏，而不是额外装饰。' }, { kicker: '03 / PRESENTATION', title: '先看系列关系，再进入单张动效', body: '页面先加载轻量静态首帧，浏览者可以先比较整体视觉系统；点击单张后再加载动态版本，重点观察海报的层级、节奏和议题表达。' }], images: [6, 1, 2, 3, 4, 5, 7].map((number) => { const id = String(number).padStart(2, '0'); const originalAsset = `${id}.gif`; const optimizedAsset = number === 4 || number === 6 ? `${id}-optimized.webp` : undefined; return { src: `/assets/sdg/${originalAsset}`, optimizedSrc: optimizedAsset ? `/assets/sdg/${optimizedAsset}` : undefined, thumbSrc: `/assets/sdg/gallery/${id}.jpg`, alt: `联合国可持续发展目标海报 ${id}` } }) },
-  'san-jin': { lead: '这是一组围绕三金西瓜霜产品创作的宣传海报，使用产品信息、图像和高对比色彩构成传播画面。项目展示我如何在同一产品主题下建立多种视觉表达，同时保持信息清晰和品牌识别。', story: [{ kicker: '01 / WORK', title: '一组围绕产品主题的海报设计练习', body: '作品以三金西瓜霜为视觉对象，使用多张海报探索产品信息、图像构成和文字层级在同一主题下的不同表达。' }, { kicker: '02 / APPROACH', title: '在强烈对比中保持信息清楚', body: '我通过红黑、珊瑚红和紫色等不同色彩方向，比较画面的注意力分配，同时保留产品名称与主要信息的可读性。' }, { kicker: '03 / PRESENTATION', title: '从主视觉到系列差异', body: '页面以红黑海报作为首图，再展示其余画面，方便招聘者先看到最明确的视觉判断，再比较我对色彩、构图和传播层级的控制。' }], images: [{ src: '/assets/san-jin/poster-02.png', alt: '三金西瓜霜红黑海报' }, { src: '/assets/san-jin/poster-01.png', alt: '三金西瓜霜珊瑚红海报' }, { src: '/assets/san-jin/poster-03.png', alt: '三金西瓜霜紫色海报' }] },
-  'hand-drawing': { lead: '这是一组围绕寓言与成语故事完成的手绘插画，表现人物动作、情绪和叙事瞬间。项目展示我从零构建画面主体、情境氛围和视觉叙事的能力。', story: [{ kicker: '01 / WORK', title: '一组以寓言与成语为线索的手绘插画', body: '作品通过人物、动作和场景呈现叙事片段，是我本科阶段对线条、构图和画面叙事的视觉练习。' }, { kicker: '02 / APPROACH', title: '从故事理解走向画面组织', body: '我将文字情境拆解为人物关系、动作和视觉焦点，再用手绘线条与明暗关系组织阅读顺序。' }, { kicker: '03 / PRESENTATION', title: '观察造型、动作与叙事节奏', body: '详情页按图像序列展示完整练习，重点呈现我如何建立主体、控制画面重心，并让单幅画面承载清晰的情境。' }], images: Array.from({ length: 10 }, (_, index) => ({ src: `/assets/hand-drawing/gallery/drawing-${String(index + 1).padStart(2, '0')}.jpg`, alt: `手绘作品 ${String(index + 1).padStart(2, '0')}` })) },
-  'photography': { lead: '这是一组以城市、自然、动物和日常观察为主题的摄影作品，结合黑白影像与彩色画面记录不同空间中的光线、结构和情绪。项目展示我通过取景、光线、色彩和瞬间捕捉建立视觉叙事的能力。', story: [{ kicker: '01 / WORK', title: '一组来自日常观察的摄影作品', body: '作品记录城市、自然、动物与生活场景中的光线和结构，包含黑白与彩色影像，是本科阶段的摄影与视觉观察练习。' }, { kicker: '02 / APPROACH', title: '用取景和光线建立观看关系', body: '我通过留白、对比、几何结构和瞬间捕捉组织画面，让环境本身成为叙事的一部分，而不是只记录对象。' }, { kicker: '03 / PRESENTATION', title: '让影像之间形成观看节奏', body: '详情页采用瀑布流保留不同画幅的原始比例，招聘者可以连续比较我对空间、色彩和情绪的控制。' }], images: Array.from({ length: 24 }, (_, index) => ({ src: `/assets/photography/gallery/${String(index + 1).padStart(2, '0')}.jpg`, alt: `摄影作品 ${String(index + 1).padStart(2, '0')}` })) },
-  'binding-design': { lead: '这是一项围绕奥特曼系列展开的装订与编辑设计，通过角色资料、影像与文字编排建立一条从初代到爱迪的阅读线索。项目展示我如何处理长篇信息、人物顺序和系列视觉识别，让内容在纸面上形成连续的编辑节奏。', story: [{ kicker: '01 / WORK', title: '一套围绕奥特曼系列的装订与编辑设计', body: '作品将角色资料、图像和文字整理为连续的纸面阅读体验，按初代到爱迪的出场顺序组织内容。' }, { kicker: '02 / APPROACH', title: '把系列信息转成可阅读的秩序', body: '我通过人物顺序、版面节奏和装订关系建立内容结构，让长篇系列材料既保持识别度，也能被逐页理解。' }, { kicker: '03 / PRESENTATION', title: '观察编辑系统如何落到实体页面', body: '页面以横向 Slide 展示完整设计，重点呈现封面、页面编排、图文关系与连续翻阅中的视觉节奏。' }], images: ['01.jpg','09.jpg','10.jpg','11.jpg','12.jpg','15.jpg','16.jpg','02.jpg','03.jpg','06.jpg','07.jpg','13.jpg','14.jpg','04.jpg','05.jpg','08.jpg'].map((name, index) => ({ src: `/assets/binding-design/gallery/${name}`, alt: `奥特曼系列装订与编辑设计页面 ${String(index + 1).padStart(2, '0')}` })) },
-  'app-design': { lead: '这是一套面向电商浏览与购物流程的 APP 页面设计，包含首页、搜索、商品、购物袋和账户管理等界面。项目展示我如何从信息架构、用户任务和页面状态出发，建立清晰且可复用的界面系统。', story: [{ kicker: '01 / STRUCTURE', title: '先梳理用户要完成的任务', body: '我将首页、搜索、分类和商品详情拆解为连续的信息路径，重点处理入口、层级和返回关系，让用户能够快速理解下一步操作。' }, { kicker: '02 / FLOW', title: '覆盖关键使用状态', body: '我围绕浏览、加入购物袋、订单管理和账户登录等场景组织页面，使界面设计不仅停留在单张视觉稿，而是回应完整的使用流程。' }, { kicker: '03 / UI SYSTEM', title: '在统一规则中保持页面差异', body: '我通过导航、卡片、文字层级和按钮状态建立可复用的界面规则，同时根据不同任务调整信息密度，体现 UI 设计与交互逻辑的结合。' }], images: Array.from({ length: 17 }, (_, index) => ({ src: `/assets/gunfetch-app/gallery/${String(index + 1).padStart(2, '0')}.jpg`, alt: `APP 页面设计练习 ${String(index + 1).padStart(2, '0')}` })) },
-  'other-design': { lead: '这是由包装视觉、图像构成和版式实验组成的综合设计练习，涉及茶包装、药品视觉和主题图像等不同方向。项目展示我如何通过材质、色彩、文字和图像比例控制画面的视觉重点。', story: [{ kicker: '01 / WORK', title: '一组包装、图像构成与版式练习', body: '作品并置茶包装、药品视觉和主题图像等不同练习，记录我在本科阶段对包装呈现、图像构成和版式组织的探索。' }, { kicker: '02 / APPROACH', title: '在不同媒介中控制视觉重点', body: '我通过材质感、色彩关系、文字比例和图像位置建立主次，练习让不同主题在有限画面中保持清晰。' }, { kicker: '03 / PRESENTATION', title: '比较不同题材下的视觉判断', body: '详情页保留选定作品并按瀑布流展示，便于招聘者快速比较我在包装、图形和版式之间切换时的执行能力。' }], images: Array.from({ length: 7 }, (_, index) => ({ src: `/assets/other-selected/gallery/${String(index + 1).padStart(2, '0')}.jpg`, alt: `其它版式与视觉练习 ${String(index + 1).padStart(2, '0')}` })) },
+  {
+    id: 'myco', number: '02', title: 'MyCo', subtitle: 'Pop-up × Harbour exploration',
+    type: '交互与服务体验 · 进行中', category: 'projects', featured: true, accent: 'lime',
+    image: '/assets/myco/packaging.webp',
+    intro: '以线下快闪活动为主体，通过海港探索、集章与纪念品连接到访体验；网页版以简短试玩帮助访客理解活动。',
+    sections: [], gallery: [],
+  },
+  {
+    id: 'xiaoxinsi', number: '03', title: '小心思 IP', subtitle: 'Character & brand system',
+    type: 'IP 与品牌设计 · 团队毕业设计', category: 'projects', featured: true, accent: 'coral',
+    image: '/assets/ip-xiaoxin/covers/xiaoxinsi-composite-v2.png',
+    intro: '面向儿童与亲子，以“让大人重新看见孩子的世界”为核心，将《小王子》的角色灵感延展为品牌视觉。我负责外观设计、Logo设计和排版。',
+    sections: [
+      { title: '两个角色，一段关系', body: '小王子与小狐狸并非两张孤立插画；皇冠、爱心、拥抱和相互陪伴的动作共同建立叙事线索。' },
+      { title: '从角色到品牌触点', body: '角色语言进入包装、数字屏幕、印刷物与生活周边，并根据载体调整构图、信息密度与观看距离。' },
+    ],
+    gallery: ['/assets/ip-xiaoxin/gallery/07-frame.jpg', '/assets/ip-xiaoxin/gallery/10-brochure.jpg', '/assets/ip-xiaoxin/gallery/13-banner.jpg'],
+  },
+  {
+    id: 'ultraman', number: '04', title: 'ULTRAMAN', subtitle: '奥特曼角色图鉴',
+    type: '编辑与装帧设计 · 独立课程作业', category: 'projects', accent: 'coral', image: '/assets/binding-design/home-cover-stack-white-v1.png',
+    intro: '2022 年独立完成的课程作业。因为喜欢奥特曼，我以昭和复古风为主要设计方向，将角色影像、标题字形与资料排版组织成角色图鉴。',
+    sections: [
+      { title: '角色信息架构', body: '不同页面围绕角色形象、人物关系与背景资料建立层级，让大量图文内容保持可读，并形成连续的角色档案。' },
+      { title: '视觉系统', body: '红白主色、银色角色影像、斜切构图和重复字形贯穿全书，在统一识别中为不同角色保留各自的页面节奏。' },
+    ],
+    gallery: ['/assets/binding-design/gallery/03.jpg', '/assets/binding-design/gallery/08.jpg', '/assets/binding-design/gallery/12.jpg'],
+  },
+  {
+    id: '1984', number: '05', title: '1984', subtitle: 'George Orwell · Book redesign',
+    type: '书籍装帧 · 独立课程作业', category: 'projects', featured: true, accent: 'coral', image: '/assets/1984/home-cover-centered-v1.png',
+    intro: '围绕乔治·奥威尔《1984》的监视、逃离与审查主题，重新设计封面、书脊、封底、正文版式与实体包装，建立一套红、黑、灰与米白构成的视觉系统。',
+    sections: [
+      { title: '把监视转化为封面叙事', body: '摄像头、探照光束、奔跑人物与 EXIT 标识共同构成视觉线索，把“被观看”和“试图逃离”的关系集中到封面上。' },
+      { title: '从平面延伸到书籍对象', body: '设计继续延伸至书脊、封底、正文、封套与盒装展示，使主题语言不仅存在于单张封面，而是贯穿阅读与拿取过程。' },
+    ],
+    gallery: ['/assets/1984/cover-spread.png', '/assets/1984/book-interior.png', '/assets/1984/mockup-box.png'],
+  },
+  {
+    id: 'boogie', number: '05', title: 'Boogie Woogie Grid', subtitle: 'Time, rhythm and rules',
+    type: '创意编程 · 团队项目', category: 'experiments', accent: 'lime', image: '/assets/masters/slides/idea9103/design-document/slide-01.jpg',
+    intro: '从蒙德里安的网格节奏出发，用代码、时间与状态规则探索一套会持续变化的视觉系统。',
+    sections: [{ title: '我的分支', body: '作品集聚焦时间驱动的动画逻辑，以及视觉元素如何在规则中产生节奏。' }],
+    gallery: ['/assets/masters/slides/idea9103/design-document/slide-06.jpg', '/assets/masters/slides/idea9103/design-document/slide-10.jpg'],
+  },
+  {
+    id: 'choice', number: '06', title: 'Make Your Choice', subtitle: 'Design research',
+    type: '设计研究 · 团队项目', category: 'experiments', accent: 'cyan', image: '/assets/masters/idea9106-final/page-02.jpg',
+    intro: '从研究、洞察到概念表达，记录团队如何把开放议题逐步转化为可以讨论的设计方向。',
+    sections: [{ title: '过程价值', body: '重点不是展示每一页过程，而是说明关键判断如何改变问题定义和最终概念。' }],
+    gallery: ['/assets/masters/idea9106-final/page-08.jpg', '/assets/masters/idea9106-final/page-15.jpg'],
+  },
+  {
+    id: 'media', number: '07', title: 'Interaction Experiments', subtitle: 'Sound, image and prototype',
+    type: '交互媒介实验', category: 'experiments', accent: 'coral', image: '/assets/masters/slides/recording-final/slide-12.jpg',
+    intro: '把声音、动态图像与交互机制组合为可体验的概念原型，测试不同媒介如何共同塑造感受。',
+    sections: [{ title: '实验方法', body: '用短周期原型验证感知和反馈，再把有效的部分组织成更完整的体验。' }],
+    gallery: ['/assets/masters/slides/recording-final/slide-04.jpg', '/assets/masters/slides/recording-final/slide-09.jpg'],
+  },
+];
+
+const showcaseProjects = projects.filter((project) => project.featured || project.id === 'ultraman');
+const composedHomeIds = ['mima', 'xiaoxinsi', 'ultraman'];
+const editorialHomeProjects = showcaseProjects.filter(project => project.id === 'ultraman' || project.id === '1984');
+const editorialHomePresentation: Record<string, { description: string; image: string }> = {
+  ultraman: { description: '我以昭和复古风整理角色影像与资料，设计一本连续阅读的奥特曼角色图鉴。', image: '/assets/binding-design/stack-cutout-v1.png' },
+  '1984': { description: '我将“监视”的压迫感转化为数字、光束与图像关系，贯穿封面、书脊与装帧。', image: '/assets/1984/home-cover-centered-v1.png' },
+};
+
+const showcaseLines: Record<string, string> = {
+  mima: '让户外路径与室内沉浸空间共同回应家庭参与',
+  myco: '用一次海港冒险，打开线下快闪的参与体验',
+  xiaoxinsi: '让大人重新看见孩子的世界',
+  ultraman: '用角色图鉴组织经典特摄的视觉与叙事',
+  '1984': '把监视、审查与逃离转化为完整书籍系统',
+};
+
+const homeProjectDetails: Record<string, { tags: string[]; year: string; role: string }> = {
+  mima: { tags: ['空间交互', '家庭参与', '视觉引导'], year: '2026', role: '交互与视觉引导' },
+  myco: { tags: ['线下快闪', '海港探索', '活动引导'], year: '进行中', role: '团队项目' },
+  xiaoxinsi: { tags: ['角色设计', 'Logo', '品牌应用'], year: '2023', role: '外观 · Logo · 排版' },
+  ultraman: { tags: ['昭和复古', '角色图鉴', '编辑设计'], year: '2022', role: '独立完成' },
+  '1984': { tags: ['监视与压迫', '封面叙事', '书籍装帧'], year: '2022', role: '独立完成' },
+};
+
+function LegacyMimaCaseStudy({ close }: { close: () => void }) {
+  return (
+    <div className="detail-shell mima-shell" role="dialog" aria-modal="true" aria-label="MAP mima 项目详情">
+      <button className="detail-back" onClick={close}>关闭</button>
+      <article className="mima-story">
+        <header className="story-hero">
+          <img src="/assets/masters/mima/home-cover.png" alt="MAP mima 场地路径与导航概念图" />
+          <div className="story-hero-shade" />
+          <div className="story-hero-copy">
+            <span>EXPERIENCE DESIGN · MAP MIMA</span>
+            <h1>Catenary–<br />Grove</h1>
+            <p>一段让儿童自由探索，也让照护者安心停留的夜间光影路径。</p>
+          </div>
+        </header>
+
+        <section className="story-meta" aria-label="项目概况">
+          <div><span>项目类型</span><strong>体验设计 / 交互装置</strong></div>
+          <div><span>场地</span><strong>MAP mima · Speers Point Park</strong></div>
+          <div><span>合作方式</span><strong>团队项目</strong></div>
+          <div><span>参与环节</span><strong>研究 · 概念 · 交互 · 呈现</strong></div>
+        </section>
+
+        <section className="story-section story-opening">
+          <div className="story-label">01 / THE BRIEF</div>
+          <div className="story-split">
+            <h2>一个共享空间，<br />两种同时发生的需求。</h2>
+            <div className="story-copy">
+              <p>MAP mima 位于 Lake Macquarie 的公共文化与休闲环境中。项目要求我们思考：沉浸体验如何从室内延伸到公园，并真正服务在场的人。</p>
+              <p>我们没有把“家庭”视为一个需求完全一致的整体。儿童希望移动、触碰和得到即时反馈；照护者则需要休息、保持视线联系，同时不必持续介入。</p>
+            </div>
+          </div>
+          <div className="story-question"><span>DESIGN QUESTION</span><p>如何让儿童的自主探索与照护者的休息，在同一段体验中自然共存？</p></div>
+        </section>
+
+        <section className="story-section story-tension">
+          <div className="story-label">02 / THE TENSION</div>
+          <h2>问题不是缺少互动，<br />而是互动只照顾了其中一方。</h2>
+          <div className="tension-grid">
+            <div><b>CHILD</b><h3>自由探索</h3><p>直觉动作、即时反馈、可以独立发现的路径。</p></div>
+            <div><b>CAREGIVER</b><h3>安心停留</h3><p>可见性、休息位置，以及不过度介入的陪伴。</p></div>
+            <div className="tension-result"><b>SHARED NEED</b><h3>共同在场</h3><p>两种体验不互相打断，却能通过光的变化感知彼此。</p></div>
+          </div>
+        </section>
+
+        <section className="story-section story-iteration">
+          <div className="story-label">03 / FIRST ATTEMPT</div>
+          <div className="story-split">
+            <h2>第一版让孩子得到回应，<br />却让照护者留在体验之外。</h2>
+            <div className="story-copy"><p>早期方案以悬挂单元和触摸互动为核心。儿童可以主动触发灯光，但照护者主要停留在座椅上观看，双方之间没有真正形成可感知的联系。</p><p>与此同时，低位触摸和悬挂结构带来了安全、耐候与维护上的疑问。问题促使我们重新定义互动：它不应该依赖完成任务，而应该自然发生在移动与停留之间。</p></div>
+          </div>
+          <div className="sketch-grid">
+            <figure><img src="/assets/masters/mima/story/01-initial-concept.png" alt="Catenary–Grove 第一版概念草图" /><figcaption>第一版：儿童触发装置，照护者主要旁观</figcaption></figure>
+            <figure><img src="/assets/masters/mima/story/02-iteration-sketch.png" alt="Catenary–Grove 第二版迭代草图" /><figcaption>迭代方向：把休息区也纳入反馈关系</figcaption></figure>
+          </div>
+        </section>
+
+        <section className="story-turn">
+          <div className="story-label">04 / THE TURNING POINT</div>
+          <h2>转折不在于增加更多装置，<br />而在于让反馈跨越两个人的位置。</h2>
+          <div className="principle-grid">
+            <div><span>01</span><h3>从触摸改为接近</h3><p>降低操作门槛，也减少户外装置被拉扯和碰撞的风险。</p></div>
+            <div><span>02</span><h3>从单点改为路径</h3><p>灯条沿移动方向连续变化，让行走本身成为互动。</p></div>
+            <div><span>03</span><h3>从旁观改为连接</h3><p>座椅底部同步回应儿童区域，让照护者也能感知现场变化。</p></div>
+          </div>
+        </section>
+
+        <section className="story-section story-experience">
+          <div className="story-label">05 / THE EXPERIENCE</div>
+          <h2>同一条路径，随着参与人数产生不同强度的回应。</h2>
+          <div className="experience-grid">
+            <figure><img src="/assets/masters/mima/story/03-quiet-state.png" alt="Catenary–Grove 安静待机状态" /><figcaption><b>Quiet state</b><span>无人靠近时，以低亮度维持环境氛围。</span></figcaption></figure>
+            <figure><img src="/assets/masters/mima/story/04-mother-child.png" alt="儿童探索、照护者在座椅休息的使用场景" /><figcaption><b>One family</b><span>儿童移动触发灯光，座椅区域同步产生回应。</span></figcaption></figure>
+            <figure><img src="/assets/masters/mima/story/05-shared-activation.png" alt="多个家庭共同参与时的灯光状态" /><figcaption><b>Shared activation</b><span>多人参与时，路径形成更丰富但仍柔和的色彩节奏。</span></figcaption></figure>
+          </div>
+        </section>
+
+        <section className="story-section story-flow">
+          <div className="story-label">06 / BEHAVIOUR FLOW</div>
+          <div className="story-split">
+            <h2>体验不要求学习流程，<br />它从一次靠近开始。</h2>
+            <div className="story-copy"><p>系统覆盖无人使用、单个儿童进入、多个家庭共同参与，以及逐步回到待机状态。每个状态都延续同一套规则，避免用户寻找说明或完成固定任务。</p><p>情境序列帮助我们检查一个关键问题：当现场同时出现儿童、照护者和路过者时，反馈是否仍然容易理解。</p></div>
+          </div>
+          <div className="behaviour-steps">
+            <div><span>01</span><h3>待机</h3><p>灯条保持低亮度，路径仍然安全可见。</p></div>
+            <div><span>02</span><h3>靠近</h3><p>感应器识别移动，附近灯光逐渐抬升。</p></div>
+            <div><span>03</span><h3>同步</h3><p>儿童区域与座椅区域通过色彩变化产生联系。</p></div>
+            <div><span>04</span><h3>归位</h3><p>活动结束后，系统缓慢回到安静状态。</p></div>
+          </div>
+        </section>
+
+        <section className="story-system">
+          <div className="story-label">07 / SYSTEM</div>
+          <div className="story-split">
+            <h2>把柔和的体验语言，<br />转化为可解释的系统。</h2>
+            <div className="story-copy"><p>运动与距离感应器检测位置变化，控制器把信号转化为灯条、互动花朵与座椅灯光的不同状态。</p><p>方案进一步考虑低压供电、防水组件、圆角边缘、儿童安全高度和材料选择，使概念不只停留在氛围图中。</p></div>
+          </div>
+          <figure><img src="/assets/masters/mima/story/08-technical-system.png" alt="Catenary–Grove 技术系统、材料与安全设计" /><figcaption>装置结构、交互逻辑、系统架构、材料与安全</figcaption></figure>
+        </section>
+
+        <section className="story-reflection">
+          <div className="story-label">08 / REFLECTION</div>
+          <h2>好的公共互动，不需要所有人做同一件事，也能让他们感到彼此相连。</h2>
+          <div className="reflection-copy"><p>Catenary–Grove 最重要的变化，是从“为儿童设计一个互动装置”转向“为家庭设计一种共同在场的关系”。</p><p>目前成果仍是提案级设计。下一步需要在真实场地验证夜间可达性、照明干扰、多人同时参与、季节天气、维护成本与无障碍使用，而不是用未经测试的数据证明效果。</p></div>
+          <button onClick={close}>返回项目选集</button>
+        </section>
+      </article>
+    </div>
+  );
 }
 
-// Keep the original GIFs as the source of truth, but use the existing lightweight
-// animated WebP derivatives for the two posters that already have them.
-projectDetailData['sdg-posters'].images = projectDetailData['sdg-posters'].images.map((image) => image.optimizedSrc ? { ...image, src: image.optimizedSrc } : image)
-
-export function BindingDesignDetail({ onBack, onSwitch }: { onBack: () => void; onSwitch: (slug: string) => void }) {
-  const images = uniqueImages(projectDetailData['binding-design'].images)
-  return <section className="detail-page"><div className="detail-top"><button className="back-button" onClick={onBack}>← 返回目录</button><span>PROJECT 03 / 08</span><span>装订 / 编辑设计</span></div><div className="detail-heading"><div><p className="kicker">03 / EDITORIAL SERIES</p><h1>装订与<br /><em>编辑设计</em></h1></div><p className="detail-lead">这是一项围绕奥特曼系列展开的装订与编辑设计，通过角色资料、影像与文字编排建立一条从初代到爱迪的阅读线索。项目展示我如何处理长篇信息、人物顺序和系列视觉识别，让内容在纸面上形成连续的编辑节奏。</p></div><div className="detail-facts"><span><b>项目类型</b>装订 / 编辑设计</span><span><b>项目时间</b>本科项目 · 2019–2023</span><span><b>展示方式</b>横向 Slide · 每次 2 张</span></div><SlideCarousel slides={images} className="binding-design-slide-stack" /><div className="detail-end"><span>END OF PROJECT 03</span><button onClick={onBack}>查看全部作品 <span>↗</span></button><ProjectSwitch currentSlug="binding-design" onSwitch={onSwitch} /></div></section>
+function MimaCaseStudy({ close }: { close: () => void }) {
+  return <WhisperCaseStudy close={close} />;
 }
-function LightboxMouseControls() {
+
+
+type EditorialStory = {
+  theme: 'ultra' | 'orwell';
+  label: string;
+  title: string;
+  titleBreak: string;
+  deck: string;
+  hero: string;
+  heroPosition?: string;
+  meta: { label: string; value: string }[];
+  briefTitle: string;
+  briefBody: string[];
+  question: string;
+  feature: { image?: string; label: string; title: string; alt?: string; textOnly?: boolean };
+  principles: { number: string; title: string; body: string }[];
+  strip: { image: string; caption: string; crop: 'natural' | 'square' | 'portrait'; focus?: string }[];
+  systemTitle: string;
+  systemBody: string[];
+  systemImages: { image: string; caption: string; alt: string }[];
+  ending: string;
+  reflection: string;
+};
+
+const editorialStories: Record<'ultraman' | '1984', EditorialStory> = {
+  ultraman: {
+    theme: 'ultra',
+    label: '2022 · 独立课程作业 · ULTRAMAN',
+    title: 'ULTRA',
+    titleBreak: 'MAN',
+    deck: '因为喜欢奥特曼，我独立完成这套角色图鉴，以昭和复古风组织角色影像、标题与阅读节奏。',
+    hero: '/assets/binding-design/home-cover.png',
+    heroPosition: 'center 48%',
+    meta: [
+      { label: '项目年份', value: '2022' },
+      { label: '项目形式', value: '课程作业 · 独立完成' },
+      { label: '我的贡献', value: '全部设计' },
+      { label: '核心设计方向', value: '昭和复古风' },
+    ],
+    briefTitle: '把对奥特曼的喜爱，\n转化为昭和复古的视觉表达。',
+    briefBody: [
+      '因为喜欢奥特曼，我选择在这次课程作业中设计角色图鉴。最重要的设计决定是采用昭和复古风，让经典角色影像、红白配色和醒目的标题成为整本书的视觉线索。',
+      '我负责全部设计。在排版中，我通过角色主图、名称和背景资料建立阅读层级，再用不同的图像尺度、重复字形与斜向构图调整跨页节奏。',
+    ],
+    question: '如何在昭和复古的视觉基调下，让角色有鲜明的登场方式，也让资料保持清楚可读？',
+    feature: {
+      image: '/assets/binding-design/gallery/08.jpg',
+      label: 'THE VISUAL IDEA',
+      title: '用昭和复古，串起角色的登场。',
+      alt: 'ULTRAMAN 双角色红白编辑跨页',
+    },
+    principles: [
+      { number: '01', title: '昭和复古基调', body: '我用红白色块、经典角色影像和醒目字形组织页面，让复古方向落实到具体的视觉元素。' },
+      { number: '02', title: '标题与构图', body: '放大的英文与日文标识、重复字形和斜向切面，让静态跨页也具有角色登场的张力。' },
+      { number: '03', title: '先识别，再阅读', body: '角色名、主图与身份信息形成稳定入口，人物经历和关系资料则进入第二阅读层级。' },
+    ],
+    strip: Array.from({ length: 16 }, (_, index) => ({
+      image: `/assets/binding-design/sequence/${String(index + 1).padStart(2, '0')}.jpg`,
+      caption: `${String(index + 1).padStart(2, '0')} / 16`,
+      crop: 'natural' as const,
+    })),
+    systemTitle: '稳定的识别元素，\n让每个跨页可以自由变化。',
+    systemBody: [
+      '每个角色都从清晰的身份入口开始：角色名称、代表性影像，以及与人间体或故事背景相关的文字。读者先完成识别，再根据兴趣进入更长的资料。',
+      '在这个基础上，页面通过全幅肖像、切割边界、留白与红色信息块建立不同速度。系统负责连贯，构图负责让角色真正“登场”。',
+    ],
+    systemImages: [
+      { image: '/assets/binding-design/gallery/03.jpg', caption: '人物形态：图像先建立关系，文字补充背景', alt: 'ULTRAMAN 人物形态档案页面' },
+      { image: '/assets/binding-design/gallery/12.jpg', caption: '角色档案：大图、名称与传记形成阅读顺序', alt: 'ULTRAMAN 角色档案页面' },
+    ],
+    ending: '统一不是把每一页做成一样，\n而是让变化仍然属于同一个世界。',
+    reflection: '在这次独立完成的课程作业中，我负责全部设计，将对奥特曼的喜爱转化为具体的编辑与装帧表达。我以昭和复古风统一视觉方向，同时用图文层级和跨页变化平衡角色展示与资料阅读。',
+  },
+  '1984': {
+    theme: 'orwell',
+    label: '2022 · 独立课程作业 · BOOK REDESIGN',
+    title: '19',
+    titleBreak: '84',
+    deck: '从对《1984》的喜爱出发，我独立完成这套书籍设计，将“监控”的压迫感转化为封面、内页与包装的视觉主线。',
+    hero: '/assets/1984/home-cover.png',
+    heroPosition: 'center 43%',
+    meta: [
+      { label: '项目年份', value: '2022' },
+      { label: '项目形式', value: '课程作业 · 独立完成' },
+      { label: '我的贡献', value: '全部设计：封面 · 内页 · 包装' },
+      { label: '核心设计决定', value: '呈现“监控”的压迫感' },
+    ],
+    briefTitle: '如何让一本关于监视的小说，\n在被打开之前就让人感到被观看？',
+    briefBody: [
+      '因为喜欢《1984》，我选择在这次课程作业中重新设计这本书。我最想表达的不是某个具体情节，而是“监控”带来的压迫感：即使没有看见监视者，也仿佛始终处于视线之中。',
+      '我把摄像头、探照光束、奔跑人物与 EXIT 标识组合成同一场景：读者看见一个试图离开的人，也同时占据了监视者的位置。',
+    ],
+    question: '能否让“看”与“被看”同时发生，并让这种不适感贯穿整本书？',
+    feature: {
+      label: 'THE COVER IDEA',
+      title: '光束既是视线，也是牢笼。',
+      textOnly: true,
+    },
+    principles: [
+      { number: '01', title: '监视', body: '摄像头与眼睛成为反复出现的视线符号，让读者无法真正离开观察关系。' },
+      { number: '02', title: '逃离', body: '探照光束、奔跑剪影与 EXIT 形成连续动作，但出口始终处在控制之中。' },
+      { number: '03', title: '控制', body: '砖红、黑、灰与米白限制色彩，巨型数字与严格网格建立制度般的压迫感。' },
+    ],
+    strip: [
+      { image: '/assets/1984/cover-spread.png', caption: '封面、书脊与封底的连续叙事', crop: 'natural' },
+      { image: '/assets/1984/mockup-book-clean.png', caption: '封面成为第一层叙事', crop: 'square', focus: 'center' },
+      { image: '/assets/1984/book-interior.png', caption: '正文延续受控的阅读秩序', crop: 'natural' },
+      { image: '/assets/1984/mockup-box.png', caption: '视觉语言进入盒装与展示', crop: 'square', focus: 'center' },
+      { image: '/assets/1984/mockup-jacket.png', caption: '重复图形形成外部包装节奏', crop: 'natural' },
+      { image: '/assets/1984/process/page-14.jpg', caption: '标题页与出版信息的克制层级', crop: 'natural' },
+    ],
+    systemTitle: '一个母题，\n从封面持续进入书籍内部。',
+    systemBody: [
+      '封面、书脊与封底被当作连续的叙事表面：巨型书名负责远距离识别，摄像头和光束制造视线方向，封底则用人物与眼睛继续“被观察”的关系。',
+      '内页回到更克制的双栏网格，并保留眼睛、红色页码与章节节点作为提示。外封、盒装和展示物继续使用相同母题，使作品不是一张封面，而是一件完整书籍对象。',
+    ],
+    systemImages: [
+      { image: '/assets/1984/book-interior.png', caption: '正文系统：双栏文本、页码与眼睛符号', alt: '1984 正文双栏版式' },
+      { image: '/assets/1984/mockup-box.png', caption: '实体延展：盒装展示延续封面母题', alt: '1984 书籍盒装设计' },
+    ],
+    ending: '封面不是小说的插图，\n而是读者进入故事前遇到的第一套权力结构。',
+    reflection: '在这次独立完成的课程作业中，我负责全部设计，将自己对小说的理解落实到封面、正文和包装。我以“监控的压迫感”统一视觉表达：封面用视线与光束制造张力，内页则用较克制的版式组织阅读，让主题表达与信息清晰度同时存在。',
+  },
+};
+
+function EditorialCaseStudy({ project, close }: { project: Project; close: () => void }) {
+  return <BookEditorialCaseStudy story={editorialStories[project.id as 'ultraman' | '1984']} title={project.title} close={close} />;
+}
+
+function PortfolioMotion({ refreshKey }: { refreshKey: string }) {
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const resetCursorRef = useRef<(() => void) | null>(null);
   useEffect(() => {
-    const addControls = () => {
-      document.querySelectorAll<HTMLElement>('.lightbox').forEach((lightbox) => {
-        if (lightbox.querySelector('.lightbox-nav')) return
-        const createButton = (side: 'prev' | 'next', label: string, key: 'ArrowLeft' | 'ArrowRight') => {
-          const button = document.createElement('button')
-          button.type = 'button'
-          button.className = `lightbox-nav lightbox-nav-${side}`
-          button.setAttribute('aria-label', label)
-          button.textContent = side === 'prev' ? '←' : '→'
-          button.addEventListener('click', (event) => { event.stopPropagation(); window.dispatchEvent(new KeyboardEvent('keydown', { key })) })
-          lightbox.appendChild(button)
-        }
-        createButton('prev', '上一张', 'ArrowLeft')
-        createButton('next', '下一张', 'ArrowRight')
-      })
-    }
-    addControls()
-    const observer = new MutationObserver(addControls)
-    observer.observe(document.body, { childList: true, subtree: true })
-    return () => observer.disconnect()
-  }, [])
-  return null
-}
-export function Header({ onProjects }: { onProjects: () => void }) { return <><header className="site-header"><a className="wordmark" href="#top" aria-label="返回首页">LIU JIYUAN<span>.</span></a><nav aria-label="主导航"><a href="#undergraduate-work" onClick={onProjects}>作品 / Work</a><a href="#about">关于 / About</a></nav><a className="contact-link" href="mailto:Ljy4real@foxmail.com">联系 / Contact <span aria-hidden="true">↗</span></a></header><LightboxMouseControls /><MasterProgress label="MASTER / DETAIL" /><MasterProgress label="UNDERGRAD / DETAIL" selector=".detail-page:not(.master-detail)" /></> }
-export function ResumePanel({ onClose }: { onClose: () => void }) { const [closing, setClosing] = useState(false); useEffect(() => { document.body.style.overflow = 'hidden'; return () => { document.body.style.overflow = '' } }, []); const requestClose = () => { if (closing) return; setClosing(true); window.setTimeout(onClose, 420) }; return <div className={closing ? 'resume-overlay is-closing' : 'resume-overlay'} role="dialog" onClick={requestClose} aria-modal="true" aria-labelledby="resume-panel-title"><div className="resume-panel" onClick={(event) => event.stopPropagation()}><div className="resume-panel-top"><span>CURRICULUM VITAE / 2026</span><button onClick={requestClose} aria-label="关闭简历">关闭 ×</button></div><div className="resume-intro"><PortfolioImage src="/assets/resume-profile.jpg" alt="刘纪元证件照" /><div><p className="kicker">LIU JIYUAN / 刘纪元</p><h2 id="resume-panel-title">视觉 / 交互设计师</h2><p>湖北文理学院视觉传达设计本科，悉尼大学交互设计与电子艺术硕士在读。</p><div className="resume-contact"><a href="mailto:Ljy4real@foxmail.com">Ljy4real@foxmail.com</a><span>15549066877</span><span>期望城市：武汉</span></div></div></div><div className="resume-body"><section><p className="kicker">PROFILE / 个人优势</p><p>具备视觉传达与交互设计背景，熟悉 UI 设计、品牌全案与用户调研方法，能够独立完成从概念到界面的完整设计。熟练使用 AI 生图与作图工具，具备 Vibe Coding 能力及基础前端开发能力。</p><p>对新潮事物敏感，热衷探索新兴电子产品与前沿技术；在校期间参与商业品牌合作与政府数字艺术体验项目，设计作品曾获高分评级并被教授选为教学范例。</p></section><section><p className="kicker">SKILLS / 专业技能</p><div className="resume-skill-grid"><div><b>设计工具</b><span>Figma · InDesign · Illustrator · Photoshop · CorelDRAW · Sketch · AE · Procreate</span></div><div><b>交互与前端</b><span>JavaScript · HTML5 · 交互原型 · 用户流程</span></div><div><b>视觉与摄影</b><span>摄影、影像调色、Lightroom / Photoshop 后期</span></div><div><b>研究方法</b><span>AEIOU 观察法、共情图、用户旅程图、服务蓝图</span></div></div></section><section><p className="kicker">EDUCATION / 教育经历</p><article className="resume-entry"><div><b>悉尼大学</b><span>交互设计与电子艺术 · 硕士</span></div><time>2025–2027</time><p>专业课程包括设计思维、数字革命设计、创意编程、界面设计、体验设计、游戏与混合现实、音频作品制作。参与校园生态平台与 Lake Macquarie City Council MAP mima 合作项目。</p></article><article className="resume-entry"><div><b>湖北文理学院</b><span>视觉传达设计 · 本科</span></div><time>2019–2023</time><p>专业成绩优异，平均分 87；参与品牌全案、数字界面、包装、海报及联合国可持续发展目标相关项目。</p></article></section><section className="resume-columns"><div><p className="kicker">AWARDS / 荣誉奖项</p><p>大广赛三等奖<br />校内设计大赛二等奖<br />USYD ADP Innovation &amp; Design Excellence Award<br />优秀教学案例入选（USYD ADP）<br />毕业设计优秀作品奖<br />优秀毕业论文</p></div><div><p className="kicker">QUALIFICATION / 资格证书</p><p>普通话二级甲等<br />Pearson Test of English 63分<br />计算机一级</p></div></section><section><p className="kicker">INTERESTS / 兴趣爱好</p><p>关注前沿科技、VR / AR 硬件、智能穿戴设备与 AIGC；通过空间摄影记录城市建筑、室内光影与人文触点，并持续探索游戏与交互艺术的视觉表达。</p></section></div><div className="resume-panel-footer"><a href="/刘纪元-视觉_交互设计.pdf" download>下载原始简历 PDF ↓</a></div></div></div> }
-function MasterWorkSection({ onOpenMaster }: { onOpenMaster: (slug: string) => void }) { const [openSemesters, setOpenSemesters] = useState<string[]>([]); const translations: Record<string, string> = { arin6904: '游戏与混合现实', idea9103: '创意编程', idea9105: '界面设计', idea9106: '设计思维', desn9002: '数字革命设计', cmpn5006: '录音作品集', idea9202: '体验设计工作室', desn9004: '设计创新实践', idea9201: '体验设计实验室', idea9301: '毕业设计工作室' }; const semesters = [{ id: 'semester-1', label: '第一学期', courses: masterProjects.slice(0, 4) }, { id: 'semester-2', label: '第二学期', courses: masterProjects.slice(4, 7) }, { id: 'semester-3', label: '第三学期', courses: masterProjects.slice(7) }]; useEffect(() => { const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester')); if (!nodes.length) return; const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { const id = (entry.target as HTMLElement).dataset.semester; if (id) setOpenSemesters((current) => current.includes(id) ? current : [...current, id]) } }), { threshold: .35 }); nodes.forEach((node) => observer.observe(node)); return () => observer.disconnect() }, []); useEffect(() => { const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester, .master-semester .master-row')); nodes.forEach((node) => node.classList.add('scroll-reveal')); const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.target.classList.toggle('is-visible', entry.isIntersecting)), { threshold: .12, rootMargin: '-6% 0px -6% 0px' }); nodes.forEach((node) => observer.observe(node)); return () => { observer.disconnect(); nodes.forEach((node) => node.classList.remove('scroll-reveal', 'is-visible')) } }, [openSemesters.length]); return <section className="master-section" id="master-work" aria-labelledby="master-heading"><div className="section-intro"><p className="kicker">MASTER’S STUDIES / 2025–2027</p><h2 id="master-heading">硕士作品与<br /><em>论文研究。</em></h2><p className="section-description">按照学习阶段建立课程目录。每门课程将作为独立的二级目录，作品与研究材料将在后续整理后加入。</p></div><div className="master-semesters-grid">{semesters.map((semester) => { const isOpen = openSemesters.includes(semester.id); return <section className={isOpen ? 'master-semester is-open' : 'master-semester'} data-semester={semester.id} key={semester.id}><div className="semester-toggle" aria-hidden="true"><span><b>{semester.label}</b><small>{String(semester.courses.length).padStart(2, '0')} COURSES</small></span></div>{isOpen && <div className="master-list" id={`${semester.id}-courses`}>{semester.courses.map((project) => <article className={project.required ? 'master-row is-required' : 'master-row'} key={project.slug}><span className="project-number">{project.number}</span><div className="master-project-copy"><p className="project-description">课程内容待整理</p></div><div className="master-title-block"><h3><span className="project-title-link course-title"><span className="course-title-en">{project.title}</span><span className="course-title-zh">{translations[project.slug]}</span></span></h3><p>{project.titleEn}</p></div><div className="project-meta"><span>{project.required ? '必修 / CORE' : '课程目录'}</span><span>{project.year}</span></div></article>)}</div>}</section> })}</div></section> }
-function MasterWorkSectionV2({ onOpenMaster }: { onOpenMaster: (slug: string) => void }) {
-  const [openSemesters, setOpenSemesters] = useState<string[]>(['semester-1', 'semester-2', 'semester-3'])
-  const translations: Record<string, string> = {
-    arin6904: '游戏与混合现实',
-    idea9103: '创意编程',
-    idea9105: '界面设计',
-    idea9106: '设计思维',
-    desn9002: '数字革命设计',
-    cmpn5006: '录音作品集',
-    idea9202: '体验设计工作室',
-    desn9004: '设计创新实践',
-    idea9201: '体验设计实验室',
-    idea9301: '毕业设计工作室',
-  }
-  const semesters = [
-    { id: 'semester-1', label: '第一学期', courses: masterProjects.slice(0, 4) },
-    { id: 'semester-2', label: '第二学期', courses: masterProjects.slice(4, 7) },
-    { id: 'semester-3', label: '第三学期', courses: masterProjects.slice(7) },
-  ]
+    resetCursorRef.current?.();
+  }, [refreshKey]);
 
   useEffect(() => {
-    const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester'))
-    if (!nodes.length) return
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = (entry.target as HTMLElement).dataset.semester
-        if (id) setOpenSemesters((current) => current.includes(id) ? current : [...current, id])
+    const finePointer = window.matchMedia('(pointer: fine)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!finePointer.matches || reducedMotion.matches) return;
+
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    const label = labelRef.current;
+    if (!dot || !ring || !label) return;
+
+    document.documentElement.classList.add('custom-cursor-ready');
+    let targetX = -120;
+    let targetY = -120;
+    let ringX = -120;
+    let ringY = -120;
+    let frame = 0;
+    let pointerInside = false;
+    let suppressUntilMove = false;
+
+    const clearLabel = () => {
+      ring.classList.remove('has-label', 'is-active');
+      label.textContent = '';
+    };
+    const resetCursor = () => { suppressUntilMove = true; clearLabel(); };
+    resetCursorRef.current = resetCursor;
+
+    // Resolve the element under the pointer now, not the target of an old event.
+    const syncCursor = () => {
+      if (!pointerInside || document.hidden) return;
+      const element = document.elementFromPoint(targetX, targetY);
+      if (!element || element.closest('iframe')) {
+        dot.classList.remove('is-visible');
+        ring.classList.remove('is-visible');
+        clearLabel();
+        return;
       }
-    }), { threshold: .35 })
-    nodes.forEach((node) => observer.observe(node))
-    return () => observer.disconnect()
-  }, [])
+      dot.classList.add('is-visible');
+      ring.classList.add('is-visible');
+      const interactive = element.closest<HTMLElement>('a, button, summary, [data-cursor-label]');
+      const unavailable = interactive?.closest('[inert], [aria-hidden="true"], :disabled');
+      const cursorLabel = !suppressUntilMove && !unavailable ? interactive?.dataset.cursorLabel ?? '' : '';
+      ring.classList.toggle('is-active', Boolean(interactive && !unavailable && !suppressUntilMove));
+      ring.classList.toggle('has-label', Boolean(cursorLabel));
+      if (label.textContent !== cursorLabel) label.textContent = cursorLabel;
+    };
+
+    const updateCursor = (event: PointerEvent) => {
+      if (event.pointerType === 'touch') return;
+      if (Math.abs(event.clientX - targetX) + Math.abs(event.clientY - targetY) > .5) suppressUntilMove = false;
+      pointerInside = true;
+      targetX = event.clientX;
+      targetY = event.clientY;
+      dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
+      dot.classList.add('is-visible');
+      ring.classList.add('is-visible');
+
+      syncCursor();
+    };
+
+    const hideCursor = () => {
+      pointerInside = false;
+      dot.classList.remove('is-visible');
+      ring.classList.remove('is-visible', 'is-active', 'has-label');
+      label.textContent = '';
+    };
+    const leaveWindow = (event: PointerEvent) => { if (!event.relatedTarget) hideCursor(); };
+    const visibilityChanged = () => { if (document.hidden) hideCursor(); };
+
+    const animate = () => {
+      syncCursor();
+      ringX += (targetX - ringX) * 0.16;
+      ringY += (targetY - ringY) * 0.16;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      frame = window.requestAnimationFrame(animate);
+    };
+
+    window.addEventListener('pointermove', updateCursor, { passive: true });
+    window.addEventListener('pointerdown', resetCursor, { passive: true });
+    window.addEventListener('pointerout', leaveWindow, { passive: true });
+    window.addEventListener('blur', hideCursor);
+    document.addEventListener('visibilitychange', visibilityChanged);
+    document.documentElement.addEventListener('mouseleave', hideCursor);
+    frame = window.requestAnimationFrame(animate);
+
+    return () => {
+      document.documentElement.classList.remove('custom-cursor-ready');
+      window.removeEventListener('pointermove', updateCursor);
+      window.removeEventListener('pointerdown', resetCursor);
+      window.removeEventListener('pointerout', leaveWindow);
+      window.removeEventListener('blur', hideCursor);
+      document.removeEventListener('visibilitychange', visibilityChanged);
+      if (resetCursorRef.current === resetCursor) resetCursorRef.current = null;
+      document.documentElement.removeEventListener('mouseleave', hideCursor);
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   useEffect(() => {
-    const nodes = Array.from(document.querySelectorAll<HTMLElement>('.master-semester-v2, .master-semester-v2 .master-row'))
-    nodes.forEach((node) => node.classList.add('scroll-reveal'))
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.target.classList.toggle('is-visible', entry.isIntersecting)), { threshold: .12, rootMargin: '-6% 0px -6% 0px' })
-    nodes.forEach((node) => observer.observe(node))
-    return () => {
-      observer.disconnect()
-      nodes.forEach((node) => node.classList.remove('scroll-reveal', 'is-visible'))
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealSelector = [
+      '.hero-copy', '.hero-status', '.showcase-heading', '.home-project',
+      '.firefly-about > div', 'footer > *', '.story-hero-copy', '.story-meta > div',
+      '.mima-context > *', '.story-section > *', '.story-turn > *', '.story-experience > *',
+      '.story-system > *', '.story-reflection > *', '.xiaoxinsi-hero-copy', '.xiaoxinsi-hero-visual',
+      '.xiaoxinsi-meta > div', '.xiaoxinsi-brief > *', '.xiaoxinsi-characters > *',
+      '.xiaoxinsi-identity > *', '.xiaoxinsi-scenes > *', '.xiaoxinsi-applications > *',
+      '.xiaoxinsi-ending > *', '.editorial-hero-copy', '.editorial-meta > div',
+      '.editorial-brief > *', '.editorial-feature-copy', '.editorial-principles > *',
+      '.editorial-film > *', '.editorial-system > *', '.editorial-ending > *', '.detail > *'
+    ].join(',');
+    const nodes = Array.from(document.querySelectorAll<HTMLElement>(revealSelector));
+    nodes.forEach((node, index) => {
+      node.classList.add('motion-reveal');
+      node.style.setProperty('--reveal-order', String(index % 4));
+    });
+
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      nodes.forEach((node) => node.classList.add('is-visible'));
+      return;
     }
-  }, [openSemesters.length])
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.03, rootMargin: '0px 0px -7% 0px' });
+
+    nodes.forEach((node) => observer.observe(node));
+
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.showcase-card'));
+    const cleanups = cards.map((card) => {
+      const move = (event: PointerEvent) => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty('--tilt-x', `${(-y * 1.4).toFixed(2)}deg`);
+        card.style.setProperty('--tilt-y', `${(x * 1.8).toFixed(2)}deg`);
+        card.style.setProperty('--glow-x', `${((x + 0.5) * 100).toFixed(1)}%`);
+        card.style.setProperty('--glow-y', `${((y + 0.5) * 100).toFixed(1)}%`);
+      };
+      const reset = () => {
+        card.style.setProperty('--tilt-x', '0deg');
+        card.style.setProperty('--tilt-y', '0deg');
+      };
+      card.addEventListener('pointermove', move);
+      card.addEventListener('pointerleave', reset);
+      return () => {
+        card.removeEventListener('pointermove', move);
+        card.removeEventListener('pointerleave', reset);
+      };
+    });
+
+    return () => {
+      observer.disconnect();
+      cleanups.forEach((cleanup) => cleanup());
+    };
+  }, [refreshKey]);
 
   return (
-    <section className="master-section" id="master-work" aria-labelledby="master-heading">
-      <div className="section-intro">
-        <p className="kicker">MASTER’S STUDIES / 2025–2027</p>
-        <h2 id="master-heading">硕士作品与<br /><em>论文研究。</em></h2>
-        <p className="section-description">硕士阶段，我开始把用户研究置于视觉形式之前：先理解真实的人、情境与需求，再用设计回应问题。这个转变让我不只关注作品是否好看，也关注它是否清晰、可用，并真正支持用户完成目标。</p>
-      </div>
-      <div className="master-semesters-grid">
-        {semesters.map((semester) => {
-          const isOpen = openSemesters.includes(semester.id)
-          const isThirdSemester = semester.id === 'semester-3'
-          return (
-            <section className={isOpen ? 'master-semester master-semester-v2 is-open' : 'master-semester master-semester-v2'} data-semester={semester.id} key={semester.id}>
-              <div className="semester-toggle" aria-hidden="true">
-                <span><b>{semester.label}</b><small>{String(semester.courses.length).padStart(2, '0')} COURSES</small></span>
-              </div>
-              {isOpen && <div className="master-list" id={`${semester.id}-courses`}>
-                {semester.courses.map((project) => {
-                  const finalWork = !isThirdSemester && (project.slug === 'idea9105' || project.slug === 'idea9106')
-                  return (
-                    <article
-                      className={project.required ? 'master-row is-required' : 'master-row'}
-                      key={project.slug}
-                      role={finalWork ? 'link' : undefined}
-                      tabIndex={finalWork ? 0 : undefined}
-                      onClick={() => finalWork && onOpenMaster(project.slug)}
-                      onKeyDown={(event) => {
-                        if (finalWork && (event.key === 'Enter' || event.key === ' ')) {
-                          event.preventDefault()
-                          onOpenMaster(project.slug)
-                        }
-                      }}
-                    >
-                      <span className="project-number">{project.number}</span>
-                      <div className="master-project-copy">
-                        <p className="project-description">{project.description || ''}</p>
-                      </div>
-                      <div className="master-title-block">
-                        <h3><span className="project-title-link course-title"><span className="course-title-en">{project.title}</span><span className="course-title-zh">{translations[project.slug]}</span></span></h3>
-                        <p>{project.titleEn}</p>
-                      </div>
-                      <div className="project-meta">
-                        <span>{project.required ? '必修 / CORE' : '课程目录'}</span>
-                        <span>{project.year}</span>
-                      </div>
-                    </article>
-                  )
-                })}
-              </div>}
-            </section>
-          )
-        })}
-      </div>
-    </section>
-  )
+    <>
+      <div className="cursor-dot" ref={dotRef} aria-hidden="true" />
+      <div className="cursor-ring" ref={ringRef} aria-hidden="true"><span ref={labelRef} /></div>
+    </>
+  );
 }
-function DirectoryProgress() {
-  const [visible, setVisible] = useState(false)
-  const [progress, setProgress] = useState(0)
+
+export default function Home() {
+  const [selected, setSelected] = useState<Project | null>(null);
 
   useEffect(() => {
-    const update = () => {
-      const undergraduate = document.getElementById('undergraduate-work')
-      const master = document.getElementById('master-work')
-      if (!undergraduate || !master) return
-      const start = undergraduate.getBoundingClientRect().top + window.scrollY
-      const end = master.getBoundingClientRect().bottom + window.scrollY
-      const viewportTop = window.scrollY
-      const viewportBottom = viewportTop + window.innerHeight
-      const isInDirectory = viewportBottom > start + 120 && viewportTop < end - 120
-      const range = Math.max(1, end - start - window.innerHeight)
-      setVisible(isInDirectory)
-      setProgress(Math.min(1, Math.max(0, (viewportTop - start) / range)))
-    }
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
-    return () => {
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
-    }
-  }, [])
+    document.body.classList.toggle('detail-open', Boolean(selected));
+    if (!selected) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const dialog = document.querySelector<HTMLElement>('[role="dialog"]');
+    if (!dialog) return;
+    const focusable = () => Array.from(dialog.querySelectorAll<HTMLElement>('a[href],button:not(:disabled),input,textarea,select,summary,iframe,[tabindex]:not([tabindex="-1"])')).filter(el => el.getClientRects().length && !el.closest('[inert]'));
+    const frame = requestAnimationFrame(() => focusable()[0]?.focus({ preventScroll: true }));
+    const close = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); setSelected(null); }
+      if (event.key === 'Tab') {
+        const items = focusable();
+        const first = items[0], last = items[items.length - 1];
+        if (event.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) { event.preventDefault(); first?.focus(); }
+      }
+    };
+    const retainFocus = (event: FocusEvent) => { if (!dialog.contains(event.target as Node)) focusable()[0]?.focus({ preventScroll: true }); };
+    window.addEventListener('keydown', close);
+    document.addEventListener('focusin', retainFocus);
+    return () => { document.body.classList.remove('detail-open'); cancelAnimationFrame(frame); window.removeEventListener('keydown', close); document.removeEventListener('focusin', retainFocus); if (previousFocus?.isConnected) requestAnimationFrame(() => previousFocus.focus({ preventScroll: true })); };
+  }, [selected]);
 
-  if (!visible) return null
-  return <aside className="directory-progress" aria-label="作品目录浏览进度"><span className="directory-progress-label">INDEX</span><div className="directory-progress-track"><i style={{ height: `${Math.max(8, progress * 100)}%` }} /></div><span className="directory-progress-count">01—09</span></aside>
-}
-function Home({ onOpenProject, onOpenMaster }: { onOpenProject: (slug: string) => void; onOpenMaster: (slug: string) => void }) {
-  useEffect(() => { const button = document.createElement('button'); button.className = 'top-button'; button.type = 'button'; button.setAttribute('aria-label', '回到顶部'); button.innerHTML = '回到顶部 <span aria-hidden="true">↑</span>'; const update = () => { const section = document.getElementById('undergraduate-work'); const threshold = section ? Math.max(360, section.offsetTop - 140) : 500; button.classList.toggle('is-visible', window.scrollY > threshold); button.tabIndex = window.scrollY > threshold ? 0 : -1; button.setAttribute('aria-hidden', String(window.scrollY <= threshold)) }; const onClick = () => window.scrollTo({ top: 0, behavior: 'smooth' }); button.addEventListener('click', onClick); document.body.appendChild(button); update(); window.addEventListener('scroll', update, { passive: true }); return () => { button.removeEventListener('click', onClick); window.removeEventListener('scroll', update); button.remove() } }, [])
-  const [resumeOpen, setResumeOpen] = useState(false); const visible = projects
-  useEffect(() => { const list = document.querySelector('.master-section'); if (!list) return; const openCourse = (event: Event) => { const target = event.target as HTMLElement; const row = target.closest('.master-row'); if (!row || row.getAttribute('role') === 'link') return; const code = row.querySelector('.master-title-block > p')?.textContent?.trim(); const course = masterProjects.find((item) => item.titleEn === code); if (course) onOpenMaster(course.slug) }; list.addEventListener('click', openCourse); return () => list.removeEventListener('click', openCourse) }, [onOpenMaster])
-  useEffect(() => { const list = document.querySelector('.work-section .project-list'); if (!list) return; const openRow = (event: Event) => { const target = event.target as HTMLElement; if (target.closest('button,a')) return; const row = target.closest('.project-row'); const title = row?.querySelector('.project-title-link')?.textContent; const project = projects.find((item) => item.title === title); if (project) onOpenProject(project.slug) }; list.addEventListener('click', openRow); return () => list.removeEventListener('click', openRow) }, [onOpenProject])
-  useEffect(() => { const targets = document.querySelectorAll<HTMLElement>('.hero, .degree-entries, .work-section, .project-row, .master-section, .master-row, .about-section'); targets.forEach((target) => target.classList.add('scroll-reveal')); const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.target.classList.toggle('is-visible', entry.isIntersecting)), { threshold: 0.08, rootMargin: '-6% 0px -6% 0px' }); targets.forEach((target) => observer.observe(target)); return () => { observer.disconnect(); targets.forEach((target) => target.classList.remove('scroll-reveal', 'is-visible')) } }, [])
-  return <><DirectoryProgress /><section className="hero" id="top"><div className="hero-meta"><span>PORTFOLIO / 2026</span><span>VISUAL COMMUNICATION</span><button className="resume-logo" onClick={() => setResumeOpen(true)} aria-label="打开在线简历">CV<span>↗</span></button></div><div className="hero-main"><p className="kicker">刘纪元 / LIU JIYUAN</p><h1>让视觉<br /><em>留下证据。</em></h1><p className="hero-note">视觉 / 交互设计师，关注书籍、海报、品牌与数字体验。<br />以图像为主角，以秩序组织叙事。</p></div><a className="scroll-cue" href="#work">向下浏览 <span>↓</span></a><div className="hero-index">01 <span>/</span> 08</div></section><section className="degree-entries" aria-label="作品阶段"><a className="degree-entry degree-entry-active" href="#undergraduate-work"><span className="kicker">01 / UNDERGRADUATE</span><strong>本科作品</strong><span>视觉传达 / 2019–2023 ↘</span></a><a className="degree-entry" href="#master-work"><span className="kicker">02 / MASTER’S STUDIES</span><strong>硕士作品</strong><span>交互设计、研究与论文 ↘</span></a></section><section className="work-section" id="undergraduate-work"><div className="section-intro"><h2>作品目录<span>。</span></h2><p className="section-description">先展示能够代表我核心能力的书籍、品牌与 IP、海报和编辑设计，再延伸到摄影、手绘与视觉练习；进入详情页后，可以看到作品性质、设计判断和最终呈现。</p></div><div className="project-list">{visible.map((project) => <article className={project.active ? 'project-row project-active' : 'project-row'} key={project.slug}><span className="project-number">{project.number}</span><div className="project-image-wrap"><PortfolioImage src={project.image} alt={`${project.title}预览`} loading={project.number === '01' ? 'eager' : 'lazy'} fetchPriority={project.number === '01' ? 'high' : 'auto'} /><button className="view-project" onClick={() => onOpenProject(project.slug)} aria-label={`打开${project.title}`}>查看项目 <span>↗</span></button></div><div className="project-copy"><h3><button className="project-title-link" onClick={() => onOpenProject(project.slug)}>{project.title}</button></h3><p>{project.titleEn}</p>{project.description && <p className="project-description">{project.description}</p>}</div><div className="project-meta"><span>{project.type}</span><span>{project.year}</span></div></article>)}</div></section><MasterWorkSectionV2 onOpenMaster={onOpenMaster} /><section className="about-section" id="about"><p className="kicker">PROFILE / RESUME</p><div className="about-grid"><h2>把复杂的<br /><em>信息变得清楚。</em></h2><div><p>视觉 / 交互设计师，具备视觉传达与交互设计背景，熟悉品牌全案、UI 设计、用户研究与基础前端原型开发。</p><div className="about-facts"><span>教育经历 / EDUCATION</span><span>悉尼大学 · 交互设计与电子艺术 · 硕士 · 2025–2027</span><span>湖北文理学院 · 视觉传达设计 · 本科 · 2019–2023</span><span>Figma · Adobe · JavaScript</span></div><div className="about-actions"><a className="text-link" href="mailto:Ljy4real@foxmail.com">Ljy4real@foxmail.com <span>↗</span></a><a className="text-link" href="/刘纪元-视觉_交互设计.pdf" download>下载简历 <span>↓</span></a></div></div></div></section><footer className="site-footer"><span>LIU JIYUAN / PORTFOLIO</span><a className="filing-link" href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">鄂ICP备2026047094号</a><span>© 2026</span></footer>{resumeOpen && <ResumePanel onClose={() => setResumeOpen(false)} />}</>
-}
-export function ProjectDetail({ onBack, onSwitch }: { onBack: () => void; onSwitch: (slug: string) => void }) {
-  const images = uniqueImages(detailImages); const [lightbox, setLightbox] = useState<number | null>(null); const [gridMode, setGridMode] = useState(false); const current = lightbox === null ? null : images[lightbox]
-  useEffect(() => { if (lightbox === null) return; const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setLightbox(null); if (event.key === 'ArrowRight') setLightbox((value) => value === null ? 0 : (value + 1) % images.length); if (event.key === 'ArrowLeft') setLightbox((value) => value === null ? images.length - 1 : (value - 1 + images.length) % images.length) }; window.addEventListener('keydown', onKey); document.body.style.overflow = 'hidden'; return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = '' } }, [lightbox, images.length])
-  return <section className="detail-page"><div className="detail-top"><button className="back-button" onClick={onBack}>← 返回目录</button><span>PROJECT 01 / 08</span><span>BOOK DESIGN</span></div><div className="detail-heading"><div><p className="kicker">01 / EDITORIAL OBJECT</p><h1>《1984》<br /><em>书籍装帧设计</em></h1></div><p className="detail-lead">这是一项以乔治·奥威尔《1984》为文本基础的书籍装帧设计，包含封面、封套、内页和实体效果。项目展示我如何把文学主题转译为可阅读的书籍系统，并兼顾概念表达、信息组织与实体阅读体验。</p></div><div className="detail-facts"><span><b>项目类型</b>书籍装帧 / 编辑设计</span><span><b>项目时间</b>本科项目 · 2019–2023</span><span><b>设计内容</b>封面、封套、内页、效果图</span></div><GalleryToggle gridMode={gridMode} onToggle={() => setGridMode((value) => !value)} /><div className={gridMode ? "gallery gallery-grid-9" : "gallery"}>{images.map((image, index) => <button className={index === 0 ? 'gallery-item gallery-wide' : 'gallery-item'} key={image.src} onClick={() => setLightbox(index)} aria-label={`全屏查看：${image.alt}`}><PortfolioImage src={image.src} alt={image.alt} loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'auto'} /><span className="zoom-hint">放大 <b>↗</b></span></button>)}</div><div className="detail-end"><span>END OF PROJECT 01</span><button onClick={onBack}>查看全部作品 <span>↗</span></button><ProjectSwitch currentSlug="1984" onSwitch={onSwitch} /></div>{current && <div className="lightbox" role="dialog" aria-modal="true" aria-label="全屏作品查看" onClick={() => setLightbox(null)}><button className="close-lightbox" onClick={() => setLightbox(null)} aria-label="关闭全屏查看">×</button><PortfolioImage src={current.src} alt={current.alt} onClick={(event) => event.stopPropagation()} /><div className="lightbox-caption">{String((lightbox ?? 0) + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')} · {current.alt}<span>← → 切换　ESC 关闭</span></div></div>}</section>
-}
-function GalleryToggle({ gridMode, onToggle }: { gridMode: boolean; onToggle: () => void }) { return <button className="gallery-toggle" onClick={onToggle} aria-pressed={gridMode} aria-label={gridMode ? '切换为 1×1 大图模式' : '切换为 9×9 网格模式'}>{gridMode ? '1×1' : '9×9'}<span>{gridMode ? '大图' : '网格'}</span></button> }
-function ProjectSwitch({ currentSlug, onSwitch }: { currentSlug: string; onSwitch: (slug: string) => void }) {
-  const [atBottom, setAtBottom] = useState(false)
-  useEffect(() => { const update = () => setAtBottom(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 160); update(); window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); return () => { window.removeEventListener('scroll', update); window.removeEventListener('resize', update) } }, [])
-  const index = projects.findIndex((item) => item.slug === currentSlug); const previous = index > 0 ? projects[index - 1] : null; const nextProject = index >= 0 && index < projects.length - 1 ? projects[index + 1] : null
-  return <nav className={atBottom ? 'detail-switch detail-switch-bottom' : 'detail-switch detail-switch-floating'} aria-label="切换项目">{previous ? <button onClick={() => onSwitch(previous.slug)}>← {previous.title}</button> : <span /> }<span>{String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>{nextProject ? <button onClick={() => onSwitch(nextProject.slug)}>{nextProject.title} →</button> : <span />}</nav>
-}
-export function ProjectGalleryDetail({ slug, onBack, onSwitch }: { slug: string; onBack: () => void; onSwitch: (slug: string) => void }) {
-  const project = projects.find((item) => item.slug === slug) ?? projects[0]
-  const detail = projectDetailData[slug] ?? { lead: '这是一个以视觉组织和执行为核心的设计项目。项目展示我如何从内容理解出发，建立清晰的视觉层级并完成可交付的设计呈现。', images: [{ src: project.image, alt: `${project.title}预览` }] }
-  const images = uniqueImages(detail.images)
-  const [lightbox, setLightbox] = useState<number | null>(null); const [gridMode, setGridMode] = useState(false); const current = lightbox === null ? null : images[lightbox]
-  const useBindingSlide = slug === 'binding-design' && !gridMode
-  useEffect(() => { document.body.classList.toggle('is-1984-detail', slug === '1984'); return () => document.body.classList.remove('is-1984-detail') }, [slug])
-  useEffect(() => { if (lightbox === null) return; const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setLightbox(null); if (event.key === 'ArrowRight') setLightbox((value) => value === null ? 0 : (value + 1) % images.length); if (event.key === 'ArrowLeft') setLightbox((value) => value === null ? images.length - 1 : (value - 1 + images.length) % images.length) }; window.addEventListener('keydown', onKey); document.body.style.overflow = 'hidden'; return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = '' } }, [lightbox, images.length])
-  return <section className="detail-page"><div className="detail-top"><button className="back-button" onClick={onBack}>← 返回目录</button><span>PROJECT {project.number} / 08</span><span>{project.type}</span></div><div className="detail-heading"><div><p className="kicker">{project.number} / SELECTED PROJECT</p><h1>{project.title}</h1></div><p className="detail-lead">{detail.lead}</p></div><div className="detail-facts"><span><b>项目类型</b>{project.type}</span><span><b>项目时间</b>{project.year}</span><span><b>能力侧重</b>概念表达、信息组织与视觉执行</span></div>{slug === 'sdg-posters' && <p className="gif-notice">GIF MOTION SERIES / 本系列海报均为 GIF 动态图，可点击查看动态效果。</p>}{detail.story && <div className="detail-story">{detail.story.map((item) => <article key={item.kicker}><p className="kicker">{item.kicker}</p><h2>{item.title}</h2><p>{item.body}</p></article>)}</div>}<GalleryToggle gridMode={gridMode} onToggle={() => setGridMode((value) => !value)} /><div className={gridMode ? "gallery gallery-grid-9" : (slug === 'sdg-posters' ? 'gallery gallery-poster' : slug === 'photography' ? 'gallery gallery-photography' : slug === 'packaging-visual' ? 'gallery gallery-packaging' : 'gallery')}>{images.map((image, index) => <button className={index === 0 && slug !== 'sdg-posters' && slug !== 'photography' && slug !== 'packaging-visual' ? 'gallery-item gallery-wide' : 'gallery-item'} key={image.src} onClick={() => setLightbox(index)} aria-label={`全屏查看：${image.alt}`}><PortfolioImage src={image.thumbSrc ?? image.src} alt={image.alt} loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'auto'} /><span className="zoom-hint">放大 <b>↗</b></span></button>)}</div><div className="detail-end"><span>END OF PROJECT {project.number}</span><button onClick={onBack}>查看全部作品 <span>↗</span></button><ProjectSwitch currentSlug={slug} onSwitch={onSwitch} /></div>{current && <div className="lightbox" role="dialog" aria-modal="true" aria-label="全屏作品查看" onClick={() => setLightbox(null)}><button className="close-lightbox" onClick={() => setLightbox(null)} aria-label="关闭全屏查看">×</button><PortfolioImage src={current.src} alt={current.alt} onClick={(event) => event.stopPropagation()} /><div className="lightbox-caption">{String((lightbox ?? 0) + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')} · {current.alt}<span>← → 切换　ESC 关闭</span></div></div>}</section>
-}
-export function MasterDetail({ slug, onBack }: { slug: string; onBack: () => void }) { const project = masterProjects.find((item) => item.slug === slug) ?? masterProjects[0]; const data: Record<string, { lead: string; images: { src: string; alt: string }[]; link?: { href: string; label: string }; story?: { kicker: string; title: string; body: string }[] }> = {
-  idea9105: { lead: 'AUSSIE EMERGENCY 是一个面向澳大利亚社区的灾害准备与应急体验平台。最终方案把实时预警、地图信息、行动指引和家庭协作整合为一套跨设备界面系统。', story: [{ kicker: 'COURSE BRIEF / 01', title: '把研究转化为清晰、可评估的界面方案', body: '本课程围绕界面设计的方法、结构与交互表达展开，要求将研究洞察转化为清晰、可用且能够被测试和迭代的数字体验。' }, { kicker: 'POSTER CONCEPT / 02', title: '让紧急信息在压力下仍然可读、可行动', body: 'Poster 不是对作品的简单汇总，而是将灾害情境、研究判断与设计回应压缩成一条易于理解的视觉叙事。通过清晰的信息层级和行动导向的组织方式，海报先建立问题意识，再说明用户下一步可以如何准备与应对，最终指向 AUSSIE EMERGENCY 作为支持行动的应急体验系统。' }, { kicker: 'FINAL WORK / 03', title: '把“知道”转化为“行动”', body: '最终成果重点呈现实时灾害地图、分级警报、灾害详情、准备进度与家庭应急计划，帮助用户在紧急情境下快速理解并执行下一步。' }, { kicker: 'DESIGN FOCUS / 04', title: '以系统而非单张界面解决问题', body: '我通过页面层级、行动卡片和跨设备信息同步组织完整任务路径，展示从用户研究、线框图到高保真原型和评估迭代的界面设计能力。' }], images: ['main.png','action.png','detail.png','map.png','emergency.png','edu.png','plan1.png','login.png','Frame.png','Frame-5.png','Frame-7.png','Frame-8.png'].map((name) => ({ src: `/assets/masters/aussie-emergency/${name}`, alt: `AUSSIE EMERGENCY 最终界面 · ${name}` })) },
-  idea9106: { lead: 'Make Your Choice 是一个面向悉尼大学国际学生的可持续饮品选择互动体验。最终成果将多语言信息、校园设施地图、奖励机制和社区互动结合起来，鼓励用户在日常饮品消费中做出更可持续的选择。', story: [{ kicker: 'COURSE BRIEF / 01', title: '以设计思维推进从问题到方案的迭代', body: '本课程以设计思维为框架，强调问题理解、用户洞察、概念生成和测试迭代，并将这些过程组织为有依据的最终设计提案。' }, { kicker: 'FINAL WORK / 02', title: '让环保信息变成可参与的选择', body: '最终展示围绕“了解问题—探索校园设施—做出选择—获得反馈”的体验路径展开，重点呈现互动学习、地图导航和激励机制。' }, { kicker: 'ITERATION / 03', title: '根据测试反馈调整体验', body: '用户测试后，我重新处理了 NEXT 按钮位置、校园地图信息、设施标识和激励范围，使操作路径更加清晰，也让不同语言背景的学生更容易进入体验。' }], images: Array.from({ length: 17 }, (_, index) => ({ src: `/assets/masters/idea9106-final/page-${String(index + 1).padStart(2, '0')}.jpg`, alt: `Make Your Choice 最终展示页面 ${String(index + 1).padStart(2, '0')}` })) },
-  'mima-catenary': { lead: '这是一项围绕公共空间、光环境与共同体验展开的空间交互设计项目。作品以场地观察、概念推演、故事板与技术系统为线索，呈现从共同研究到空间方案的设计过程。', images: ['cover.jpg','title.jpg','catenary-concept.jpg','reference.jpg','storyboard-2.jpg','storyboard-3.jpg','technical-system.jpg','iteration.jpg','melody-1.jpg','melody-2.jpg','melody-3.jpg'].map((name) => ({ src: `/assets/masters/mima/${name}`, alt: `Catenary / Grove · ${name}` })) }, 'aussie-emergency': { lead: '这是一项面向澳大利亚灾害情境的应急服务设计。项目从问题研究与用户洞察出发，经过启发式评估和界面迭代，建立实时灾害地图、灾害详情、行动卡片、应急教育与家庭计划等关键路径。', link: { href: '/assets/masters/aussie-emergency/research-report.pdf', label: '查看研究与评估报告 PDF ↗' }, images: ['main.png','action.png','detail.png','map.png','emergency.png','edu.png','plan1.png','login.png','Frame.png','Frame-5.png','Frame-7.png','Frame-8.png'].map((name) => ({ src: `/assets/masters/aussie-emergency/${name}`, alt: `AussiEmergency · ${name}` })) }, 'generative-city': { lead: '这是一个以生成式网格为基础的创意编程实验。项目受到 Piet Mondrian《Broadway Boogie Woogie》和经典街机机制启发，在随机生成的城市道路中加入 Pac-Man 与 Ghost agents，并以时间驱动动画保持运动的一致性。', link: { href: '/assets/masters/coding/index.html', label: '打开可交互编程实验 ↗' }, images: [{ src: '/assets/masters/mima/title.jpg', alt: '生成式城市实验预览' }] } }; const detail = data[slug] ?? data['idea9105']; const [lightbox, setLightbox] = useState<number | null>(null); const current = lightbox === null ? null : detail.images[lightbox]; useEffect(() => { if (lightbox === null) return; const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setLightbox(null); if (event.key === 'ArrowRight') setLightbox((value) => value === null ? 0 : (value + 1) % detail.images.length); if (event.key === 'ArrowLeft') setLightbox((value) => value === null ? detail.images.length - 1 : (value - 1 + detail.images.length) % detail.images.length) }; window.addEventListener('keydown', onKey); document.body.style.overflow = 'hidden'; return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = '' } }, [lightbox, detail.images.length]); return <section className="detail-page master-detail"><div className="detail-top"><button className="back-button" onClick={onBack}>← 返回目录</button><span>MASTER PROJECT / {project.number}</span><span>{project.type}</span></div><div className="detail-heading"><div><p className="kicker">MASTER’S STUDIES / {project.number}</p><h1>{project.title}</h1></div><p className="detail-lead">{detail.lead}</p></div><div className="detail-facts"><span><b>项目类型</b>{project.type}</span><span><b>项目时间</b>{project.year}</span><span><b>展示重点</b>最终成果、交互路径与迭代</span></div>{detail.story && <div className="detail-story">{detail.story.map((item) => <article key={item.kicker}><p className="kicker">{item.kicker}</p><h2>{item.title}</h2><p>{item.body}</p></article>)}</div>}{detail.link && <a className="master-report-link" href={detail.link.href} target={detail.link.href.endsWith('.pdf') ? undefined : '_blank'} rel="noreferrer">{detail.link.label}</a>}<div className="gallery master-gallery">{detail.images.map((image, index) => <button className={index === 0 ? 'gallery-item gallery-wide' : 'gallery-item'} key={image.src} onClick={() => setLightbox(index)} aria-label={`全屏查看：${image.alt}`}><PortfolioImage src={image.src} alt={image.alt} loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'auto'} /><span className="zoom-hint">放大 <b>↗</b></span></button>)}</div><div className="detail-end"><span>END OF MASTER PROJECT {project.number}</span><button onClick={onBack}>返回硕士作品 <span>↗</span></button></div>{current && <div className="lightbox" role="dialog" aria-modal="true" aria-label="全屏作品查看" onClick={() => setLightbox(null)}><button className="close-lightbox" onClick={() => setLightbox(null)} aria-label="关闭全屏查看">×</button><PortfolioImage src={current.src} alt={current.alt} onClick={(event) => event.stopPropagation()} /><div className="lightbox-caption">{String((lightbox ?? 0) + 1).padStart(2, '0')} / {String(detail.images.length).padStart(2, '0')} · {current.alt}<span>← → 切换　ESC 关闭</span></div></div>}</section> }
-export default function Page() {
-  const initialPath = typeof window !== 'undefined' ? window.location.pathname : '/'
-  const initialMasterSlug = initialPath.startsWith('/work/master-') ? initialPath.slice('/work/master-'.length) : null
-  const initialSlug = initialPath.startsWith('/work/') && !initialMasterSlug ? initialPath.split('/')[2] : null
-  const initialRoute = initialPath === '/cv' ? 'resume' : initialMasterSlug ? 'master' : initialSlug ? 'detail' : 'home'
-  const [route, setRoute] = useState(initialRoute)
-  const [routeSlug, setRouteSlug] = useState(initialSlug ?? initialMasterSlug ?? '1984')
-  const rememberDirectoryPosition = () => { try { sessionStorage.setItem('portfolio-directory-scroll', String(window.scrollY)) } catch {} }
-  const openMaster = (slug: string) => { if (route === 'home') rememberDirectoryPosition(); window.history.pushState({}, '', `/work/master-${slug}`); setRouteSlug(slug); setRoute('master'); window.scrollTo(0, 0) }
-  const openDetail = (slug: string) => { if (route === 'home') rememberDirectoryPosition(); window.history.pushState({}, '', `/work/${slug}`); setRouteSlug(slug); setRoute('detail'); window.scrollTo(0, 0) }
-  const goHome = () => { let saved = 0; try { saved = Number(sessionStorage.getItem('portfolio-directory-scroll') ?? 0) } catch {} window.history.pushState({}, '', '/'); setRoute('home'); window.requestAnimationFrame(() => window.requestAnimationFrame(() => window.scrollTo({ top: saved, behavior: 'auto' }))) }
-  const navToProjects = () => { if (route === 'detail' || route === 'master' || route === 'resume') goHome() }
-  useEffect(() => { const syncPath = () => { const path = window.location.pathname; const masterSlug = path.startsWith('/work/master-') ? path.slice('/work/master-'.length) : null; const slug = path.startsWith('/work/') && !masterSlug ? path.split('/')[2] : null; setRouteSlug(slug ?? masterSlug ?? '1984'); setRoute(path === '/cv' ? 'resume' : masterSlug ? 'master' : slug ? 'detail' : 'home') }; syncPath(); window.addEventListener('popstate', syncPath); return () => window.removeEventListener('popstate', syncPath) }, [])
-  return <>{route !== 'resume' && <Header onProjects={navToProjects} />}<main>{route === 'resume' ? <ResumePanel onClose={goHome} /> : route === 'master' ? (routeSlug === 'idea9103' ? <MasterIdea9103 onBack={goHome} /> : routeSlug === 'idea9105' ? <MasterIdea9105 onBack={goHome} /> : routeSlug === 'idea9106' ? <MasterIdea9106 onBack={goHome} /> : routeSlug === 'arin6904' ? <MasterArin6904 onBack={goHome} /> : routeSlug === 'idea9202' ? <MasterIdea9202 onBack={goHome} /> : routeSlug === 'desn9002' ? <MasterDesn9002 onBack={goHome} /> : routeSlug === 'cmpn5006' ? <MasterCmpn5006 onBack={goHome} /> : <MasterDetail slug={routeSlug} onBack={goHome} />) : route === 'detail' ? (routeSlug === '1984' ? <ProjectDetail onBack={goHome} onSwitch={openDetail} /> : routeSlug === 'binding-design' ? <BindingDesignDetail onBack={goHome} onSwitch={openDetail} /> : <ProjectGalleryDetail slug={routeSlug} onBack={goHome} onSwitch={openDetail} />) : <Home onOpenProject={openDetail} onOpenMaster={openMaster} />}</main></>
+  return (
+    <main>
+      <PortfolioNavigation detailOpen={Boolean(selected)} />
+      <div className="portfolio-home vertical-home" inert={selected ? true : undefined} aria-hidden={selected ? true : undefined}>
+
+      <section className="firefly-hero" id="top">
+        <div className="hero-light-field" aria-hidden="true"><div className="hero-light hero-light-red" /><div className="hero-light hero-light-blue" /><div className="hero-light hero-light-green" /></div>
+        <div className="hero-orbit orbit-one" aria-hidden="true" />
+        <div className="hero-orbit orbit-two" aria-hidden="true" />
+        <div className="hero-copy">
+          <p className="hero-overline">刘纪元 / 视觉与交互设计</p>
+          <h1>把复杂信息，转化为清晰体验。<br /><em>用视觉与交互，连接人与设计。</em></h1>
+          <div className="hero-bottom">
+            <p className="home-introduction">视觉传达设计背景，现于悉尼大学学习交互设计与电子艺术。<br />正在寻找交互与体验设计相关机会。</p>
+            <a href="#work">查看项目</a>
+          </div>
+          <NameDoodle />
+        </div>
+        <div className="hero-status"><i /> AVAILABLE FOR OPPORTUNITIES</div>
+      </section>
+
+      <section className="showcase" id="work" aria-label="项目选集">
+        <AmbientBreathing variant="work" randomized />
+        <div className="home-project-list">
+          {showcaseProjects.filter(project => project.id !== 'ultraman' && project.id !== '1984').map(project => <button key={project.id} id={`project-${project.id}`} className={`home-project home-project-${project.id}${composedHomeIds.includes(project.id) ? ' home-project-composed' : ''}`} aria-label={`查看 ${project.title} 项目`} onClick={() => setSelected(project)}>
+            <span className="home-project-image"><img src={project.image} alt={project.id === 'mima' ? 'Whisper Grove Corner：地图串联 Catenary 户外光影路径与 Cube 室内共享花园的概念封面' : project.id === 'xiaoxinsi' ? '小心思 IP：小王子与小狐狸角色、Logo、包装与折页主视觉' : project.id === 'ultraman' ? 'ULTRAMAN：白色背景上的闭合书册堆叠与红白封面' : `${project.title} 项目封面`} /></span>
+            {!composedHomeIds.includes(project.id) && <span className="home-project-copy"><span className="home-project-type">{project.type}</span><span className="home-project-title">{project.title}</span><span className="home-project-description">{showcaseLines[project.id]}</span><span className="home-project-tags">{homeProjectDetails[project.id].tags.map(tag => <span key={tag}>{tag}</span>)}</span><span className="home-project-meta"><span>{homeProjectDetails[project.id].year}<span className="home-project-role">{homeProjectDetails[project.id].role}</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg></span></span>}
+          </button>)}
+        </div>
+        <section className="other-projects" id="other-projects" aria-labelledby="other-projects-title">
+          <div className="other-projects-heading"><span>视觉与编辑设计</span><h2 id="other-projects-title">Other Projects</h2></div>
+          <div className="other-projects-grid">{editorialHomeProjects.map(project => <button key={project.id} id={`project-${project.id}`} className={`home-project other-project other-project-${project.id}`} aria-label={`查看 ${project.title} 项目`} onClick={() => setSelected(project)}>
+            <span className="other-project-copy"><span className="other-project-title">{project.title}</span><span className="other-project-description">{editorialHomePresentation[project.id].description}</span><span className="other-project-tags">{homeProjectDetails[project.id].tags.map(tag => <span key={tag}>{tag}</span>)}</span></span>
+            <span className="other-project-art"><span className={project.id === '1984' ? 'other-book-crop' : 'other-stack-frame'}><img src={editorialHomePresentation[project.id].image} alt={project.id === 'ultraman' ? 'ULTRAMAN 红白封面的闭合书册堆叠' : '1984 闭合书册，封面以光束、摄像头与奔跑人物表现监视与逃离'} /></span></span>
+          </button>)}</div>
+        </section>
+      </section>
+
+      <section className="firefly-about" id="about">
+        <AmbientBreathing variant="about" randomized />
+        <div><span className="section-tag">ABOUT / 关于</span><h2>视觉是入口，<br />理解才是目的。</h2></div>
+        <div className="about-text"><p>我拥有视觉传达设计背景，目前在悉尼大学学习交互与电子艺术。我关注信息如何被理解、体验如何被记住，以及视觉系统如何跨媒介保持一致。</p><div className="skill-list"><span>视觉系统</span><span>UI/UX</span><span>编辑设计</span><span>互动体验</span></div><a className="resume-link" href="/about#resume">查看完整简历</a></div>
+      </section>
+
+      <section className="portfolio-contact" id="contact"><AmbientBreathing variant="contact" randomized /><div><span>CONTACT / 联系</span><h2>聊聊设计，<br />或下一个合作机会。</h2></div><a href="mailto:Ljy4real@foxmail.com">Ljy4real@foxmail.com <span aria-hidden="true">↗</span></a></section>
+
+      <footer className="home-footer"><AmbientBreathing variant="contact" randomized /><p>刘纪元 · Visual &amp; Interaction Design<a className="font-license-credit" href="/fonts/OPPOSans-License.txt">本网站使用 OPPO Sans 字体 · 字体许可</a><IcpFiling /></p><a href="#top">回到顶部</a></footer>
+      </div>
+
+      {selected?.id === 'mima' && <MimaCaseStudy close={() => setSelected(null)} />}
+      {selected?.id === 'myco' && <MycoCaseStudy close={() => setSelected(null)} />}
+      {selected?.id === 'xiaoxinsi' && <XiaoxinsiCaseStudy close={() => setSelected(null)} />}
+      {selected && (selected.id === 'ultraman' || selected.id === '1984') && <EditorialCaseStudy project={selected} close={() => setSelected(null)} />}
+      {selected && selected.id !== 'myco' && selected.id !== 'mima' && selected.id !== 'xiaoxinsi' && selected.id !== 'ultraman' && selected.id !== '1984' && (
+        <div className="detail-shell" role="dialog" aria-modal="true" aria-label={`${selected.title} 项目详情`}>
+          <button className="detail-back" onClick={() => setSelected(null)}>关闭</button>
+          <article className={`detail accent-${selected.accent}`}>
+            <div className="detail-meta"><span>{selected.number} · {selected.type}</span><span>精选案例</span></div>
+            <figure className="detail-cover"><img src={selected.image} alt={`${selected.title} 项目封面`} /></figure>
+            <p className="detail-kicker">{selected.subtitle}</p><h1>{selected.title}</h1><p className="detail-intro">{selected.intro}</p>
+            {selected.sections.map((section) => <section className="detail-section" key={section.title}><h2>{section.title}</h2><p>{section.body}</p></section>)}
+            <div className="detail-gallery">{selected.gallery.map((image, index) => <img key={image} src={image} alt={`${selected.title} 项目画面 ${index + 1}`} />)}</div>
+            <button className="detail-end" onClick={() => setSelected(null)}>返回作品索引</button>
+          </article>
+        </div>
+      )}
+      <PortfolioMotion refreshKey={selected?.id ?? 'home'} />
+    </main>
+  );
 }

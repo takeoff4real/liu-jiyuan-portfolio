@@ -1,0 +1,121 @@
+.about-resume-page { position:relative; isolation:isolate; background:var(--paper); color:#18212b; min-height:100svh; }
+.resume-ambient { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+.resume-ambient i { position:absolute; display:block; width:clamp(270px,32vw,510px); aspect-ratio:1; border-radius:50%; filter:blur(80px); opacity:0; animation:resume-color-breath 17s ease-in-out infinite; will-change:opacity,transform; }
+.resume-ambient.is-paused i { animation-play-state:paused; }
+@keyframes resume-color-breath { 0%,100% { opacity:0; transform:translate3d(0,24px,0) scale(.78); } 45%,55% { opacity:.34; transform:translate3d(14px,-15px,0) scale(1.12); } }
+@media(prefers-reduced-motion:reduce) { .resume-ambient i { animation:none; opacity:.08; will-change:auto; } }
+.about-resume-content { width:min(100% - 48px,915px); margin:0 auto; }
+.resume-skip { position:fixed; top:8px; left:24px; z-index:100; padding:10px 18px; background:#fff; border-radius:999px; transform:translateY(-180%); }
+.resume-skip:focus { transform:none; }
+.about-intro { display:grid; grid-template-columns:380px 1fr; align-items:center; gap:85px; padding:210px 0 95px; scroll-margin-top:90px; }
+.about-photo-gallery { width:100%; min-width:0; position:relative; }
+.about-photo-space { width:100%; aspect-ratio:3 / 4; border-radius:28px; overflow:hidden; position:relative; background:#e6e8e4; touch-action:pan-y; }
+.about-photo-slide { position:absolute; inset:0; opacity:0; transition:opacity .45s ease; pointer-events:none; }
+.about-photo-slide.is-active { opacity:1; }
+.about-photo-slide img { width:100%; height:100%; display:block; object-fit:cover; }
+.about-photo-controls { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:14px; }
+.about-photo-controls button { display:grid; place-items:center; width:44px; height:44px; border:0; border-radius:50%; color:#536457; background:transparent; cursor:pointer; transition:background .2s; padding:0; }
+.about-photo-controls>button:hover { background:#e0e6da; }
+.about-photo-controls svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.about-photo-dots { display:flex; align-items:center; }
+.about-photo-dots button { width:30px; }
+.about-photo-dots span { width:6px; height:6px; border-radius:50%; background:#bdc5b9; transition:background .25s,transform .25s; }
+.about-photo-dots [aria-current=true] span { background:#4c6c54; transform:scale(1.35); }
+.about-photo-gallery:focus-visible,.about-photo-controls button:focus-visible { outline:2px solid #3e756b; outline-offset:3px; }
+.about-photo-status { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.resume-eyebrow { display:block; font-size:11px; letter-spacing:.12em; color:#798177; line-height:1.6; }
+.about-intro-copy h1 { font-size:28px; line-height:1.35; letter-spacing:-.045em; margin:17px 0 24px; font-weight:600; }
+.about-intro-copy p { font-size:15px; line-height:1.95; margin:0 0 18px; color:#58615c; text-wrap:pretty; }
+.about-intro-links { display:flex; flex-wrap:wrap; gap:25px; margin-top:28px; }
+.about-intro-links a { font-size:13px; color:#3e756b; padding-bottom:5px; border-bottom:1px solid #3e756b33; }
+.about-intro-links a span { margin-left:8px; }
+.resume-document { padding:28px 0 60px; scroll-margin-top:80px; }
+.resume-document-header { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:72px; }
+.resume-document-header h2 { font-size:32px; line-height:1.2; letter-spacing:-.04em; margin:12px 0 0; font-weight:600; }
+.resume-download { display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border:1px solid #c9cfca; border-radius:999px; font-size:12px; line-height:1.4; background:#ffffff80; transition:background .25s,border-color .25s; }
+.resume-download:hover { background:#e7eddf; border-color:#8f9e82; }
+.resume-download svg { width:16px; height:16px; }
+.resume-row { display:grid; grid-template-columns:252px 1fr; gap:24px; padding:0 0 64px; margin-bottom:8px; }
+.resume-row-label { margin:0; font-size:12px; line-height:1.6; font-weight:400; color:#879086; }
+.resume-row-label>span { display:block; font-size:14px; font-weight:600; color:#4c574f; margin-bottom:6px; }
+.resume-entry+.resume-entry { margin-top:40px; }
+.resume-entry:has(.resume-school-brand),.resume-entry:has(.resume-experience-brand) { position:relative; }
+.resume-school-brand,.resume-experience-brand { position:absolute; left:-112px; top:0; display:flex; align-items:center; justify-content:center; width:60px; height:60px; margin:0; overflow:hidden; border-radius:10px; background:#ffffff80; border:1px solid #dde1da80; }
+.resume-school-brand img { display:block; height:48px; width:48px; max-width:none; object-fit:contain; }
+.resume-school-brand:has(img[src$="sydney.svg"]) img { position:absolute; width:163px; height:56px; left:3px; top:2px; object-fit:fill; }
+.resume-experience-brand img { position:absolute; left:50%; top:50%; max-width:none; height:auto; transform:translate(-50%,-50%); mix-blend-mode:darken; }
+.resume-brand-yuggi img { width:80px; }
+.resume-brand-deo img { width:112px; }
+.resume-entry p.resume-product-line { margin-top:8px; font-size:13px; color:#466b55; }
+.resume-academic-highlights { display:flex; flex-wrap:wrap; list-style:none; gap:8px 20px; padding:0; margin:16px 0 0; }
+.resume-academic-highlights li { display:flex; align-items:baseline; gap:8px; font-size:13px; line-height:1.8; color:#466b55; }
+.resume-academic-highlights li::before { content:''; flex:0 0 4px; width:4px; height:4px; border-radius:50%; background:#7b957a; align-self:center; }
+.resume-entry-top { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px 20px; }
+.resume-entry-top h4 { margin:0; font-size:16px; line-height:1.6; font-weight:600; }
+.resume-entry-top>span { color:#8b918c; font-size:12px; line-height:1.6; font-variant-numeric:tabular-nums; }
+.resume-entry p { margin:12px 0 0; font-size:14px; color:#69716b; line-height:1.9; text-wrap:pretty; }
+.resume-entry p.resume-entry-role { margin-top:7px; color:#3f4d45; }
+.resume-study-note { margin-top:18px; padding:0 15px; background:#e9efdf99; border-radius:10px; }
+.resume-study-note summary { display:flex; align-items:center; justify-content:space-between; gap:20px; cursor:pointer; padding:13px 0; font-size:12px; list-style:none; }
+.resume-study-note summary::-webkit-details-marker { display:none; }
+.resume-study-note summary span { font-size:17px; transition:rotate .25s; }
+.resume-study-note[open] summary span { rotate:45deg; }
+.resume-study-note p { padding-bottom:16px; margin:0; font-size:13px; }
+.resume-capabilities { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.resume-capabilities h4 { margin:0 0 12px; color:#43534a; font-size:14px; font-weight:550; }
+.resume-capabilities ul,.resume-tool-list { list-style:none; padding:0; margin:0; }
+.resume-capabilities li { font-size:14px; line-height:2; color:#69716b; }
+.resume-tool-list { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px 16px; }
+.resume-tool-list li { display:flex; flex-direction:column; align-items:center; gap:12px; padding:8px 0; font-size:12px; line-height:1.5; color:#58615c; text-align:center; }
+.resume-tool-list img { display:block; width:40px; height:40px; object-fit:contain; }
+.resume-tool-list li:nth-child(6) img,.resume-tool-list li:nth-child(7) img { border-radius:9px; }
+.resume-ai-note { color:#798177; font-size:12px; line-height:1.9; margin:20px 0 0; }
+.resume-language { margin:0 0 17px; font-size:14px; line-height:1.8; }
+.resume-language span { display:block; color:#879086; font-size:12px; }
+.resume-contact { position:relative; isolation:isolate; overflow:hidden; padding:75px 24px 65px; text-align:center; background:linear-gradient(180deg,var(--paper),#e9eee6); }
+.resume-contact .ambient-breathing { mask-image:linear-gradient(transparent,#000 35%,#000 70%,transparent); }
+.resume-contact h2 { margin:18px 0 28px; font-size:clamp(23px,3vw,32px); font-weight:550; line-height:1.4; letter-spacing:-.035em; }
+.resume-contact>a { font-size:16px; color:#3e756b; border-bottom:1px solid #3e756b40; padding-bottom:5px; }
+.resume-footer { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:30px max(24px,calc((100% - 915px)/2)) 140px; background:#e9eee6; color:#7c857b; font-size:11px; line-height:1.6; }
+.about-resume-page a:focus-visible,.about-resume-page summary:focus-visible { outline:2px solid #3e756b; outline-offset:5px; border-radius:8px; }
+.resume-reveal { opacity:0; transform:translateY(15px); transition:opacity .65s ease,transform .65s cubic-bezier(.22,.61,.36,1); }
+.resume-reveal.is-visible { opacity:1; transform:none; }
+@media(max-width:900px) {
+ .about-intro { grid-template-columns:40% 1fr; gap:45px; }
+ .resume-row { grid-template-columns:200px 1fr; gap:20px; }
+ .resume-school-brand,.resume-experience-brand { left:-88px; }
+}
+@media(max-width:600px) {
+ .about-resume-content { width:calc(100% - 44px); }
+ .about-intro { grid-template-columns:1fr; gap:32px; padding:125px 0 58px; }
+ .about-photo-gallery { width:min(100%,310px); margin:auto; }
+ .about-photo-space { border-radius:22px; }
+ .about-intro-copy h1 { font-size:26px; margin:14px 0 20px; }
+ .about-intro-copy p { font-size:14px; line-height:1.9; }
+ .about-intro-links { margin-top:23px; }
+ .resume-document { padding-top:18px; scroll-margin-top:30px; }
+ .resume-document-header { margin-bottom:43px; gap:15px; align-items:flex-end; }
+ .resume-document-header h2 { font-size:29px; }
+ .resume-document-header .resume-eyebrow { font-size:9px; letter-spacing:.06em; }
+ .resume-download { font-size:11px; gap:7px; padding:10px 12px; white-space:nowrap; }
+ .resume-row { grid-template-columns:1fr; gap:24px; padding-bottom:40px; margin-bottom:20px; }
+ .resume-row-label { padding-bottom:12px; border-bottom:1px solid #d8ddd4; }
+ .resume-row-label>span { display:inline; margin-right:12px; }
+ .resume-entry+.resume-entry { margin-top:30px; }
+ .resume-entry:has(.resume-school-brand),.resume-entry:has(.resume-experience-brand) { margin-left:64px; }
+ .resume-school-brand,.resume-experience-brand { width:48px; height:48px; left:-64px; border-radius:8px; }
+ .resume-school-brand img { width:40px; height:40px; }
+ .resume-school-brand:has(img[src$="sydney.svg"]) img { width:140px; height:48px; left:1px; top:0; }
+ .resume-brand-yuggi img { width:64px; }
+ .resume-brand-deo img { width:90px; }
+ .resume-capabilities { gap:16px; }
+ .resume-capabilities li { font-size:13px; }
+ .resume-entry-top h4 { font-size:15px; }
+ .resume-entry p { font-size:13px; }
+ .resume-tool-list { gap:20px 8px; }
+ .resume-tool-list li { font-size:11px; padding:5px 0; gap:10px; }
+ .resume-tool-list img { width:36px; height:36px; }
+ .resume-contact { padding-top:55px; }
+ .resume-footer { flex-direction:column; align-items:flex-start; gap:15px; padding-bottom:125px; }
+}
+@media(prefers-reduced-motion:reduce) { .resume-reveal { opacity:1; transform:none; transition:none; } .about-photo-slide,.about-photo-dots span { transition:none; } }

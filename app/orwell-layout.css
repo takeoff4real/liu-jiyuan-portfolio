@@ -1,0 +1,63 @@
+/* Portfolio palette, not a colour sampled from the book artwork. */
+.orwell-shell .orwell-design-summary { padding:32px var(--editorial-pad); }
+.orwell-design-intro { display:grid; grid-template-columns:1fr 1.2fr; gap:40px; align-items:start; margin:18px 0; }
+.orwell-design-intro h2 { margin:0; font-size:28px; line-height:1.4; letter-spacing:-.02em; }
+.orwell-design-intro p { margin:0; font-size:15px; line-height:1.8; }
+.orwell-design-points { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
+.orwell-design-points p { margin:0; padding-top:14px; border-top:1px solid #17214722; font-size:14px; line-height:1.8; }
+.orwell-design-points strong { display:block; margin-bottom:6px; font-size:17px; }
+.orwell-shell .editorial-film { padding-top:32px; }
+.orwell-shell .editorial-film-heading { padding-bottom:22px; }
+.editorial-shell.orwell-shell { --case-paper:#e4ecfc; --case-ink:#172147; --case-accent:#d9ef78; --case-dark:#172147; --case-soft:#f3f6fd; background:var(--case-paper); color:var(--case-ink); }
+.orwell-shell .editorial-story { background:var(--case-paper); }
+.orwell-shell .detail-back { background:#f3f6fdf2; color:var(--case-ink); border-color:#17214733; backdrop-filter:none; }
+.orwell-shell .editorial-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:5vw; min-height:0; padding:110px var(--editorial-pad) 44px; background:var(--case-paper); color:var(--case-ink); }
+.orwell-shell .editorial-hero>img { position:static; grid-column:2; grid-row:1; width:100%; height:auto; max-height:340px; object-fit:contain; padding:0; border-radius:18px; filter:none; }
+.orwell-shell .editorial-hero-shade { display:none; }
+.orwell-shell .editorial-hero-copy { grid-column:1; grid-row:1; position:static; width:100%; padding:0; color:var(--case-ink); }
+.orwell-shell .editorial-hero-copy>span { color:#4d5d80; line-height:1.7; }
+.orwell-shell .editorial-hero-copy h1 { font-size:clamp(72px,8vw,128px); line-height:1.05; letter-spacing:-.055em; margin:22px 0; white-space:nowrap; color:var(--case-ink); }
+.orwell-shell .editorial-hero-copy p { font-size:16px; line-height:1.85; max-width:32em; color:var(--case-ink); }
+.orwell-shell .editorial-meta { background:var(--case-paper); color:var(--case-ink); border-block:1px solid #17214722; }
+.orwell-shell .editorial-meta>div { min-height:110px; border-color:#17214722; }
+.orwell-shell .editorial-meta span { color:#526180; }
+.orwell-shell .editorial-meta strong { color:var(--case-ink); font-size:16px; line-height:1.6; }
+.orwell-shell .editorial-brief,.orwell-shell .editorial-system,.orwell-shell .editorial-principles,.orwell-shell .editorial-ending { padding-block:80px; background:var(--case-paper); color:var(--case-ink); }
+.orwell-shell .editorial-label,.orwell-shell .editorial-ending .editorial-label { color:#526180; }
+.orwell-shell .editorial-split h2,.orwell-shell .editorial-principles>h2,.orwell-shell .editorial-ending h2 { font-size:clamp(28px,3vw,46px); line-height:1.4; letter-spacing:-.02em; }
+.orwell-shell .editorial-copy { color:var(--case-ink); font-size:16px; line-height:1.85; }
+.orwell-shell .editorial-question { background:var(--case-soft); border:0; padding:28px; border-radius:18px; margin-top:38px; }
+.orwell-shell .editorial-question span { color:#526180; }
+.orwell-shell .editorial-question p { color:var(--case-ink); font-size:24px; line-height:1.6; }
+.orwell-shell .editorial-feature.is-text-only { min-height:0; background:var(--case-paper); color:var(--case-ink); }
+.orwell-shell .editorial-feature.is-text-only .editorial-feature-copy { position:static; padding-block:30px; border-block:1px solid #17214722; }
+.orwell-shell .editorial-feature-copy>span { color:#526180; }
+.orwell-shell .editorial-feature.is-text-only .editorial-feature-copy h2 { font-size:clamp(28px,3vw,44px); line-height:1.4; max-width:none; color:var(--case-ink); }
+.orwell-shell .editorial-principle-grid { gap:24px; margin-top:32px; }
+.orwell-shell .editorial-principle-grid>div:nth-child(n) { min-height:0; background:transparent; color:var(--case-ink); border-radius:0; border-top:1px solid #17214744; padding:22px 0; }
+.orwell-shell .editorial-principle-grid>div>span { font-size:20px; color:#526180; }
+.orwell-shell .editorial-principle-grid h3 { margin:20px 0 12px; font-size:25px; }
+.orwell-shell .editorial-principle-grid p { font-size:15px; line-height:1.85; opacity:1; }
+.orwell-shell .editorial-film { background:var(--case-soft); color:var(--case-ink); padding-block:65px; }
+.orwell-shell .editorial-film-heading>span,.orwell-shell .editorial-film-heading p { color:#526180; }
+.orwell-shell .editorial-film-track img,.orwell-shell .editorial-film-track .crop-square img,.orwell-shell .editorial-system-images img { height:auto; aspect-ratio:auto; object-fit:contain; border-radius:16px; background:transparent; }
+.orwell-shell .editorial-film-track figcaption,.orwell-shell .editorial-system-images figcaption { color:#526180; line-height:1.7; font-size:14px; }
+.orwell-shell .editorial-system-images { margin-top:40px; align-items:start; }
+.orwell-shell .editorial-ending { min-height:0; border-top:1px solid #17214722; }
+.orwell-shell .editorial-ending>p { margin-top:30px; color:var(--case-ink); font-size:16px; line-height:1.85; }
+.orwell-shell .editorial-ending button { background:var(--case-accent); color:var(--case-ink); margin-top:30px; }
+.orwell-shell .motion-reveal { opacity:1; transform:none; filter:none; transition:none; }
+@media(max-width:760px) {
+ .orwell-design-intro { grid-template-columns:1fr; gap:14px; }
+ .orwell-design-intro h2 { font-size:25px; }
+ .orwell-design-points { grid-template-columns:1fr; gap:12px; }
+ .orwell-design-points strong { display:inline; margin-right:12px; }
+ .orwell-shell .editorial-hero { grid-template-columns:minmax(0,1fr); gap:28px; padding-top:100px; padding-bottom:30px; }
+ .orwell-shell .editorial-hero-copy { grid-column:1; grid-row:1; }
+ .orwell-shell .editorial-hero>img { grid-column:1; grid-row:2; max-height:300px; }
+ .orwell-shell .editorial-hero-copy h1 { font-size:76px; }
+ .orwell-shell .editorial-meta>div { padding:20px 12px; }
+ .orwell-shell .editorial-brief,.orwell-shell .editorial-system,.orwell-shell .editorial-principles,.orwell-shell .editorial-ending { padding-block:56px; }
+ .orwell-shell .editorial-question { padding:20px; }
+ .orwell-shell .editorial-question p { font-size:21px; }
+}
