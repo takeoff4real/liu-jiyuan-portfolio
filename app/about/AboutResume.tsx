@@ -46,9 +46,9 @@ export default function AboutResume() {
         <div className="about-intro-copy resume-reveal">
           <span className="resume-eyebrow">ABOUT ME / 关于我</span>
           <h1 id="about-page-title">你好，我是刘纪元。</h1>
-          <p>我从视觉传达设计出发，目前在悉尼大学学习交互设计与电子艺术，希望让视觉表达与用户体验之间的联系更紧密。</p>
-          <p>本科阶段的品牌、信息与编辑设计训练，让我学会组织内容、建立视觉层级。电商设计实习中，我进一步接触商品页面、产品图像与实际制作流程。</p>
-          <p>现在，我更关注人如何理解信息、开始参与，并从互动中获得清晰的反馈。我正在寻找交互与体验设计相关机会。</p>
+          <p>我来自武汉，现在在悉尼大学学习交互设计与电子艺术，本科读的是视觉传达设计。设计是我的专业，电子和数码产品则是我总想多研究一点的兴趣。</p>
+          <p>不做设计的时候，我会自己煮杯咖啡、打打游戏，或者拿起相机拍照。喜欢琢磨屏幕里的东西，也喜欢看看屏幕之外的日常。</p>
+          <p>我正在认真寻找一份工作，希望把对设计的兴趣和这些年的积累带进团队，一起把想法做成能被人用到的东西。如果你喜欢这里的作品，欢迎和我聊聊，也许我们能一起做点有意思的事。</p>
           <div className="about-intro-links"><a href="#resume">查看简历 <span aria-hidden="true">↓</span></a><a href="mailto:Ljy4real@foxmail.com">联系我 <span aria-hidden="true">↗</span></a></div>
         </div>
       </section>
