@@ -48,6 +48,7 @@ export default function AboutResume() {
           <h1 id="about-page-title">你好，我是刘纪元。</h1>
           <p>我来自武汉，现在在悉尼大学学习交互设计与电子艺术，本科读的是视觉传达设计。设计是我的专业，电子和数码产品则是我总想多研究一点的兴趣。</p>
           <p>不做设计的时候，我会自己煮杯咖啡、打打游戏，或者拿起相机拍照。喜欢琢磨屏幕里的东西，也喜欢看看屏幕之外的日常。</p>
+          <p>实习时，我也把爱好带进了工作：为与己 YUGGI 护肤品品牌做页面和主图设计，协助布光、调试设备和拍摄。护肤品并不是我熟悉的领域，但设计、摄影和琢磨设备都是我喜欢的事，做起来也更有投入感。</p>
           <p>我正在认真寻找一份工作，希望把对设计的兴趣和这些年的积累带进团队，一起把想法做成能被人用到的东西。如果你喜欢这里的作品，欢迎和我聊聊，也许我们能一起做点有意思的事。</p>
           <div className="about-intro-links"><a href="#resume">查看简历 <span aria-hidden="true">↓</span></a><a href="mailto:Ljy4real@foxmail.com">联系我 <span aria-hidden="true">↗</span></a></div>
         </div>
