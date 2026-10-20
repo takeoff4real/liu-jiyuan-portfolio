@@ -68,7 +68,7 @@ export default function AboutResume() {
           <h3 className="resume-row-label" id="experience-title"><span>Experience</span>实习与品牌实践</h3>
           <div className="resume-row-content">
             <article className="resume-entry"><div className="resume-experience-brand resume-brand-deo"><PortfolioImage src="/assets/experience/deo-coffee.jpg" alt="的欧咖啡品牌 Logo" loading="lazy" /></div><div className="resume-entry-top"><h4>UI 与品牌设计师</h4><span>2024.08 — 2025.02</span></div><p className="resume-entry-role">的欧咖啡 · 自主品牌</p><p>负责品牌视觉与 UI 设计。</p></article>
-            <article className="resume-entry"><div className="resume-experience-brand resume-brand-yuggi"><PortfolioImage src="/assets/experience/yuggi.jpg" alt="与己 YUGGI 产品线品牌 Logo" loading="lazy" /></div><div className="resume-entry-top"><h4>平面设计师 / 摄影助理</h4><span>2023.07 — 2024.01</span></div><p className="resume-entry-role">盈馨堂（武汉）生物科技有限公司</p><p className="resume-product-line">参与产品线：与己 YUGGI</p><p>完成商品详情页、主图与界面视觉设计，整理需求和反馈，调整页面信息层级与视觉呈现。</p><p>协助摄影师进行布光、设备调试与产品拍摄，支持图像素材制作及后续页面应用。</p></article>
+            <article className="resume-entry"><div className="resume-experience-brand resume-brand-yuggi"><PortfolioImage src="/assets/experience/yuggi.jpg" alt="与己 YUGGI 护肤品品牌 Logo" loading="lazy" /></div><div className="resume-entry-top"><h4>平面设计师 / 摄影助理</h4><span>2023.07 — 2024.01</span></div><p className="resume-entry-role">盈馨堂（武汉）生物科技有限公司</p><p className="resume-product-line">参与品牌：与己 YUGGI · 护肤品品牌</p><p>完成商品详情页、主图与界面视觉设计，整理需求和反馈，调整页面信息层级与视觉呈现。</p><p>协助摄影师进行布光、设备调试与产品拍摄，支持图像素材制作及后续页面应用。</p></article>
           </div>
         </section>
 
