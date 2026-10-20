@@ -1,5 +1,7 @@
 'use client';
 
+import PortfolioImage from './PortfolioImage';
+
 import type { Project } from './projects';
 import { editorialStories } from './editorial-stories';
 import WhisperCaseStudy from './WhisperCaseStudy';
@@ -21,10 +23,10 @@ export default function ProjectPage({ project }: { project: Project }) {
       <a className="detail-back" href="/#work">← 返回作品</a>
       <article className={`detail accent-${project.accent}`}>
         <div className="detail-meta"><span>{project.number} · {project.type}</span><span>项目详情</span></div>
-        <figure className="detail-cover"><img src={project.image} alt={`${project.title} 项目封面`} /></figure>
+        <figure className="detail-cover"><PortfolioImage src={project.image} alt={`${project.title} 项目封面`} /></figure>
         <p className="detail-kicker">{project.subtitle}</p><h1>{project.title}</h1><p className="detail-intro">{project.intro}</p>
         {project.sections.map(section => <section className="detail-section" key={section.title}><h2>{section.title}</h2><p>{section.body}</p></section>)}
-        <div className="detail-gallery">{project.gallery.map((image, index) => <img key={image} src={image} alt={`${project.title} 项目画面 ${index + 1}`} />)}</div>
+        <div className="detail-gallery">{project.gallery.map((image, index) => <PortfolioImage key={image} src={image} alt={`${project.title} 项目画面 ${index + 1}`} />)}</div>
         <a className="detail-end" href="/#work">返回作品索引</a>
       </article>
     </div>;

@@ -1,5 +1,4 @@
-@font-face { font-family:'OPPO Sans'; src:url('/fonts/OPPOSans-4.0.ttf') format('truetype'); font-style:normal; font-weight:100 700; font-display:swap; }
-:root { --ink:#11120f; --paper:#f4f4ef; --soft:#e8e9e3; --lime:#d9ff68; --cyan:#72dfe8; --coral:#ff7e68; --muted:#686b63; --radius:28px; --font-sans:'OPPO Sans','PingFang SC','Microsoft YaHei',Arial,sans-serif; }
+:root { --ink:#11120f; --paper:#f4f4ef; --soft:#e8e9e3; --lime:#d9ff68; --cyan:#72dfe8; --coral:#ff7e68; --muted:#686b63; --radius:28px; --font-sans:'PingFang SC','Microsoft YaHei','Segoe UI',Arial,sans-serif; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-sans); -webkit-font-smoothing:antialiased; }
@@ -9,15 +8,6 @@ input,textarea,select { font-family:inherit; }
 .home-footer .icp-filing { color:#b7beb3; }
 .icp-filing:hover { text-decoration:underline; text-underline-offset:3px; }
 .icp-filing:focus-visible { outline:2px solid currentColor; outline-offset:4px; border-radius:2px; }
-body:has(.portfolio-loader:not(.is-leaving)) { overflow:hidden; }
-.portfolio-loader { position:fixed; inset:0; z-index:2000; display:grid; place-items:center; background:#0e1911; color:#e5e9d8; opacity:1; transition:opacity .3s ease; }
-.portfolio-loader.is-leaving { opacity:0; pointer-events:none; }
-.portfolio-loader-inner { width:116px; text-align:center; }
-.portfolio-loader-name { display:block; font-size:10px; font-weight:500; letter-spacing:.24em; white-space:nowrap; }
-.portfolio-loader-track { height:1px; margin-top:20px; background:#d9ff6826; overflow:hidden; }
-.portfolio-loader-track>span { display:block; width:100%; height:100%; background:#d9ff68; transform-origin:left; transition:transform .25s ease-out; }
-.portfolio-loader-value { display:block; margin-top:12px; font-size:9px; letter-spacing:.1em; font-variant-numeric:tabular-nums; color:#b7c495; }
-@media(prefers-reduced-motion:reduce) { .portfolio-loader,.portfolio-loader-track>span { transition:none; } }
 a { color:inherit; text-decoration:none; }
 button { color:inherit; font:inherit; }
 img { display:block; width:100%; }

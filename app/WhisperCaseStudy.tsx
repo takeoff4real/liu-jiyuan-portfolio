@@ -1,5 +1,7 @@
 'use client';
 
+import PortfolioImage from './PortfolioImage';
+
 import { useEffect, useRef, useState } from 'react';
 import CubePrototype from './CubePrototype';
 import { WhisperSpatialPlan, WhisperDualJourney } from './WhisperSpatial';
@@ -25,7 +27,7 @@ const cubeScenes = [
 ];
 
 function CubeStoryFrame({ index, alt }: { index: number; alt: string }) {
-  return <div className="whisper-story-frame"><img src="/assets/masters/mima/story/cube-family-storyboard-v1.webp" alt={alt} loading="lazy" width={2172} height={724} style={{ left: `${index * -100}%` }} /></div>;
+  return <div className="whisper-story-frame"><PortfolioImage src="/assets/masters/mima/story/cube-family-storyboard-v1.webp" alt={alt} loading="lazy" width={2172} height={724} style={{ left: `${index * -100}%` }} /></div>;
 }
 
 export default function WhisperCaseStudy() {
@@ -86,15 +88,15 @@ export default function WhisperCaseStudy() {
           <WhisperAudience />
           <div className="whisper-section-heading"><h2 id="whisper-context-title">孩子可以互动，<br />母亲可以休息，也看得见孩子。</h2><p>我们的目标不是让数字装置代替看护，而是在同一场地里，让孩子主动探索与母亲休息、照看能够同时发生。</p></div>
           <div className="whisper-scene-pair">
-            <figure><img src="/assets/masters/mima/story/04-mother-child.png" width={527} height={449} alt="原提案中儿童探索与照护者停留的户外概念情境" loading="lazy" /><figcaption><strong>Catenary / 户外</strong><span>通过移动触发光线支持孩子探索，并将休息点与可观察的活动区域联系起来。</span><small>原课程概念图 · 非实景部署</small></figcaption></figure>
-            <figure><img src="/assets/masters/mima/home-cover.png" width={1337} height={1176} alt="MAP mima 场地路径概念地图，连接户外 Catenary 与室内 Cube" loading="lazy" /><figcaption><strong>从户外路径到室内花园</strong><span>Catenary 承接户外探索，Cube 提供室内体验。两个场景回应同一个目标，但保留各自的互动方式。</span><small>场地路径概念图 · 非测绘图</small></figcaption></figure>
+            <figure><PortfolioImage src="/assets/masters/mima/story/04-mother-child.png" width={527} height={449} alt="原提案中儿童探索与照护者停留的户外概念情境" loading="lazy" /><figcaption><strong>Catenary / 户外</strong><span>通过移动触发光线支持孩子探索，并将休息点与可观察的活动区域联系起来。</span><small>原课程概念图 · 非实景部署</small></figcaption></figure>
+            <figure><PortfolioImage src="/assets/masters/mima/home-cover.png" width={1337} height={1176} alt="MAP mima 场地路径概念地图，连接户外 Catenary 与室内 Cube" loading="lazy" /><figcaption><strong>从户外路径到室内花园</strong><span>Catenary 承接户外探索，Cube 提供室内体验。两个场景回应同一个目标，但保留各自的互动方式。</span><small>场地路径概念图 · 非测绘图</small></figcaption></figure>
           </div>
         </section>
 
         <section className="whisper-section whisper-outdoor whisper-pad" aria-labelledby="whisper-outdoor-title">
           <span className="whisper-eyebrow">CATENARY / 团队课程方案</span>
           <div className="whisper-section-heading"><h2 id="whisper-outdoor-title">先发现光，再发现自己的影响。</h2><p>课程阶段的户外方案通过不同高度的悬挂灯光，让儿童从观察走向靠近与触发，再逐步发现多人共同参与时的变化。母亲可以在附近停留、观察，不必跟随每一次操作。</p></div>
-          <figure className="whisper-outdoor-story"><div className="whisper-outdoor-strip" tabIndex={0} role="region" aria-label="连续六格户外故事板，可横向滚动"><img src="/assets/masters/mima/story/catenary-handdrawn-sequence.png" width={3300} height={600} alt="Figma 原手绘六格故事板：发现灯光、靠近触发、灯光回应、更多家庭加入、多人共同触发、形成整体灯光效果" loading="lazy" /></div><figcaption>团队课程图稿 · Living Canopy 户外概念故事板；与下方 Cube 迭代分开呈现。<span className="whisper-swipe-hint">左右滑动查看完整过程 →</span></figcaption></figure>
+          <figure className="whisper-outdoor-story"><div className="whisper-outdoor-strip" tabIndex={0} role="region" aria-label="连续六格户外故事板，可横向滚动"><PortfolioImage src="/assets/masters/mima/story/catenary-handdrawn-sequence.png" width={3300} height={600} alt="Figma 原手绘六格故事板：发现灯光、靠近触发、灯光回应、更多家庭加入、多人共同触发、形成整体灯光效果" loading="lazy" /></div><figcaption>团队课程图稿 · Living Canopy 户外概念故事板；与下方 Cube 迭代分开呈现。<span className="whisper-swipe-hint">左右滑动查看完整过程 →</span></figcaption></figure>
           <ol className="whisper-outdoor-steps"><li><span>01 / 发现</span><p>安静的光线提示这里可以探索。</p></li><li><span>02 / 触发</span><p>靠近或触摸后，看见局部回应。</p></li><li><span>03 / 连接</span><p>更多人加入，局部光线形成共同变化。</p></li></ol>
           <WhisperFigmaDetails />
         </section>
@@ -156,7 +158,7 @@ export default function WhisperCaseStudy() {
         <section className="whisper-archive whisper-pad" aria-label="补充图稿">
           <details className="whisper-disclosure whisper-archive-disclosure" onToggle={event => setArchiveOpen(event.currentTarget.open)}>
             <summary><span>查看原课程图稿与技术构想</span><small>Catenary × Cube · {originalMaterials.length}张补充图稿</small></summary>
-            {archiveOpen && <div className="whisper-archive-grid">{originalMaterials.map(item => <figure key={item.image}><img src={`/assets/masters/mima/story/${item.image}`} width={item.width} height={item.height} style={{aspectRatio:`${item.width} / ${item.height}`}} alt={item.title} loading="lazy" /><figcaption><strong>{item.title}</strong><span>{item.caption}</span></figcaption></figure>)}</div>}
+            {archiveOpen && <div className="whisper-archive-grid">{originalMaterials.map(item => <figure key={item.image}><PortfolioImage src={`/assets/masters/mima/story/${item.image}`} width={item.width} height={item.height} style={{aspectRatio:`${item.width} / ${item.height}`}} alt={item.title} loading="lazy" /><figcaption><strong>{item.title}</strong><span>{item.caption}</span></figcaption></figure>)}</div>}
           </details>
           <a className="whisper-end" href="/#project-mima">返回项目选集</a>
         </section>

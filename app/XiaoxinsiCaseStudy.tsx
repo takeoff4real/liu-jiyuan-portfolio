@@ -1,5 +1,7 @@
 'use client';
 
+import PortfolioImage from './PortfolioImage';
+
 import { useEffect, useRef, useState } from 'react';
 import './xiaoxinsi-editorial.css';
 
@@ -13,7 +15,7 @@ const applications = [
 ];
 
 function Artwork({ file, caption, width=6000, height=4500 }: { file:string; caption:string; width?:number; height?:number }) {
-  return <figure className="xx-artwork"><img src={`/assets/ip-xiaoxin/gallery/${file}`} alt={caption} width={width} height={height} loading="lazy"/><figcaption>{caption}</figcaption></figure>;
+  return <figure className="xx-artwork"><PortfolioImage src={`/assets/ip-xiaoxin/gallery/${file}`} alt={caption} width={width} height={height} loading="lazy"/><figcaption>{caption}</figcaption></figure>;
 }
 
 export default function XiaoxinsiCaseStudy() {
@@ -38,7 +40,7 @@ export default function XiaoxinsiCaseStudy() {
         <h1>让大人重新看见<br/>孩子的世界。</h1>
         <p>以儿童的想象力为起点，把亲近与陪伴转化为品牌视觉。</p>
         <nav className="xx-hero-links" aria-label="项目章节"><a href="#xx-concept" onClick={e=>jump(e,'xx-concept')}>品牌概念 <span aria-hidden="true">↓</span></a><a href="#xx-identity" onClick={e=>jump(e,'xx-identity')}>角色与标志 <span aria-hidden="true">↓</span></a><a href="#xx-applications" onClick={e=>jump(e,'xx-applications')}>跨媒介应用 <span aria-hidden="true">↓</span></a></nav>
-        <figure className="xx-hero-art"><img src="/assets/ip-xiaoxin/covers/xiaoxinsi-main-2026-10-07.png" width={1448} height={1086} alt="小心思主视觉：浅蓝背景上的小王子与小狐狸角色展板" fetchPriority="high"/></figure>
+        <figure className="xx-hero-art"><PortfolioImage src="/assets/ip-xiaoxin/covers/xiaoxinsi-main-2026-10-07.png" width={1448} height={1086} alt="小心思主视觉：浅蓝背景上的小王子与小狐狸角色展板" fetchPriority="high"/></figure>
       </header>
 
       <section className="xx-overview xx-pad" aria-label="项目概况">
@@ -54,7 +56,7 @@ export default function XiaoxinsiCaseStudy() {
       <section className="xx-section xx-pad" id="xx-identity" aria-labelledby="xx-identity-title">
         <div className="xx-section-copy"><span className="xx-eyebrow">02 / 角色与标志</span><h2 id="xx-identity-title">让角色成为识别与叙事的入口。</h2><p>角色灵感来自《小王子》。皇冠、深灰卷发与绿色披肩构成小王子的外观特征；橙色轮廓与大尾巴则让小狐狸保持清晰识别。</p></div>
         <Artwork file="07-frame.jpg" caption="团队毕业设计 / 小王子与小狐狸的角色设定与表情"/>
-        <div className="xx-logo-row"><figure className="xx-artwork xx-logo"><img src="/assets/ip-xiaoxin/mark.png" width={1366} height={768} alt="小心思品牌标志：带皇冠的蜗牛与狐狸组合" loading="lazy"/><figcaption>品牌标志 / 我的 Logo 设计</figcaption></figure><div className="xx-section-copy"><h3>从角色，延展到视觉语言。</h3><p>我负责 Logo 设计与画面排版，将角色特征转化为可用于不同尺寸的品牌识别。圆润轮廓、双角色情境和暖色锚点，贯穿标志与应用。</p></div></div>
+        <div className="xx-logo-row"><figure className="xx-artwork xx-logo"><PortfolioImage src="/assets/ip-xiaoxin/mark.png" width={1366} height={768} alt="小心思品牌标志：带皇冠的蜗牛与狐狸组合" loading="lazy"/><figcaption>品牌标志 / 我的 Logo 设计</figcaption></figure><div className="xx-section-copy"><h3>从角色，延展到视觉语言。</h3><p>我负责 Logo 设计与画面排版，将角色特征转化为可用于不同尺寸的品牌识别。圆润轮廓、双角色情境和暖色锚点，贯穿标志与应用。</p></div></div>
         <ol className="xx-principles"><li><span>01</span><h3>圆润轮廓</h3><p>角色、爱心与标志共享柔软曲线，保持亲和感。</p></li><li><span>02</span><h3>双角色情境</h3><p>单个角色负责识别，双角色并置时讲述陪伴与回应。</p></li><li><span>03</span><h3>暖色锚点</h3><p>橙、珊瑚红与黄色建立记忆点，绿色和深灰平衡画面。</p></li></ol>
       </section>
 

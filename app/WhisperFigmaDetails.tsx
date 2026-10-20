@@ -1,3 +1,4 @@
+import PortfolioImage from './PortfolioImage';
 const precedents = [
   { source: 'teamLab', principle: '环境随人的参与变化', response: '把花朵、流动等自然意象转化为响应式光线，让参与者看见自己的行动带来的变化。' },
   { source: 'WATERLICHT / Daan Roosegaarde', principle: '用光塑造空间，而非只作装饰', response: '借鉴光线对氛围与空间感的塑造，将湖水、树冠的意象延伸为头顶的悬挂光环境。' },
@@ -12,8 +13,8 @@ export default function WhisperFigmaDetails() {
     <div className="whisper-section-heading whisper-detail-heading"><h3>把整体光环境拆成可回应的单元。</h3><p>课程方案以不同长度的悬挂灯串组成互动区域。灯球内的发光单元与感应构想，让靠近、移动和多人参与对应不同范围的光线变化。</p></div>
     <div className="whisper-device-layout">
       <div className="whisper-device-images">
-        <figure><div className="whisper-device-crop whisper-node-crop" data-node-id="507:201"><img src="/assets/masters/mima/story/living-canopy-node-source.png" alt="Figma 中的灯球结构参考图，呈现悬挂连接、内部构件与花形灯体" loading="lazy" /></div><figcaption>灯球结构参考</figcaption></figure>
-        <figure><div className="whisper-device-crop whisper-drape-crop" data-node-id="507:210"><img src="/assets/masters/mima/story/living-canopy-drape-source.png" alt="Figma 中的灯串单元细节图，多条嵌入微型 LED 的灯线由顶部悬挂" loading="lazy" /></div><figcaption>悬挂灯串单元</figcaption></figure>
+        <figure><div className="whisper-device-crop whisper-node-crop" data-node-id="507:201"><PortfolioImage src="/assets/masters/mima/story/living-canopy-node-source.png" alt="Figma 中的灯球结构参考图，呈现悬挂连接、内部构件与花形灯体" loading="lazy" /></div><figcaption>灯球结构参考</figcaption></figure>
+        <figure><div className="whisper-device-crop whisper-drape-crop" data-node-id="507:210"><PortfolioImage src="/assets/masters/mima/story/living-canopy-drape-source.png" alt="Figma 中的灯串单元细节图，多条嵌入微型 LED 的灯线由顶部悬挂" loading="lazy" /></div><figcaption>悬挂灯串单元</figcaption></figure>
       </div>
       <dl className="whisper-device-notes"><div><dt>触达</dt><dd>以不同悬挂高度，让成人和儿童在不同位置接近互动节点。</dd></div><div><dt>感应</dt><dd>方案提出在灯球中设置运动与距离感应，以局部灯光回应人的靠近和移动。</dd></div><div><dt>反馈</dt><dd>从单个节点的亮度、花形光效与拖尾，扩展到多人加入后的灯串共同变化。</dd></div></dl>
     </div>

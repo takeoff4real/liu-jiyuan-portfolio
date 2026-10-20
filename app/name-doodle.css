@@ -1,10 +1,9 @@
-@font-face { font-family:'Doodle Han'; src:url('/fonts/handwritten/LongCang.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-@font-face { font-family:'Doodle Latin'; src:url('/fonts/handwritten/Caveat.ttf') format('truetype'); font-weight:400 700; font-style:normal; font-display:swap; }
-@font-face { font-family:'Doodle Japanese'; src:url('/fonts/handwritten/Yomogi.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-@font-face { font-family:'Doodle Korean'; src:url('/fonts/handwritten/NanumPen.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-@font-face { font-family:'Doodle Arabic'; src:url('/fonts/handwritten/ArefRuqaa.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-@font-face { font-family:'Doodle Hindi'; src:url('/fonts/handwritten/Kalam.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-@font-face { font-family:'Doodle Thai'; src:url('/fonts/handwritten/Sriracha.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Latin'; src:url('/fonts/web-v1/Caveat-signature.woff2') format('woff2'); font-weight:400 700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Japanese'; src:url('/fonts/web-v1/Yomogi-signature.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Korean'; src:url('/fonts/web-v1/NanumPen-signature.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Arabic'; src:url('/fonts/web-v1/ArefRuqaa-signature.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Hindi'; src:url('/fonts/web-v1/Kalam-signature.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Doodle Thai'; src:url('/fonts/web-v1/Sriracha-signature.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
 .name-doodle { position:relative; width:min(100%,336px); aspect-ratio:640 / 260; margin:32px auto 0; }
 .name-doodle>div>svg { display:block; width:100%; height:auto; overflow:visible; pointer-events:none; }
 .name-signature { opacity:0; visibility:hidden; filter:drop-shadow(0 0 1px color-mix(in srgb,currentColor 60.5%,transparent)) drop-shadow(0 0 5px color-mix(in srgb,currentColor 35.2%,transparent)); transition:none; }

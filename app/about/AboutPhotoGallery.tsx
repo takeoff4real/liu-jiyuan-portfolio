@@ -1,5 +1,7 @@
 'use client';
 
+import PortfolioImage from '../PortfolioImage';
+
 import { useRef, useState } from 'react';
 
 const photos = [
@@ -31,7 +33,7 @@ export default function AboutPhotoGallery() {
       touchStart.current = null;
     }} onTouchCancel={() => { touchStart.current = null; }}>
       {photos.map((photo, index) => <div key={photo.src} className={`about-photo-slide${index === active ? ' is-active' : ''}`} aria-hidden={index !== active}>
-        <img src={photo.src} alt={photo.alt} style={{ objectPosition: photo.position, objectFit: 'fit' in photo ? photo.fit : 'cover' }} draggable={false} decoding="async" />
+        <PortfolioImage src={photo.src} alt={photo.alt} style={{ objectPosition: photo.position, objectFit: 'fit' in photo ? photo.fit : 'cover' }} draggable={false} decoding="async" />
       </div>)}
     </div>
     <div className="about-photo-controls">

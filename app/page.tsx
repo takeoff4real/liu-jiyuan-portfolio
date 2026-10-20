@@ -1,3 +1,4 @@
+import PortfolioImage from './PortfolioImage';
 import { projects, projectHref } from './projects';
 import PortfolioMotion from './PortfolioMotion';
 import AmbientBreathing from './AmbientBreathing';
@@ -56,16 +57,16 @@ export default function Home() {
       <section className="showcase" id="work" aria-label="项目选集">
         <AmbientBreathing variant="work" randomized />
         <div className="home-project-list">
-          {showcaseProjects.filter(project => project.id !== 'ultraman' && project.id !== '1984').map(project => <a key={project.id} id={`project-${project.id}`} className={`home-project home-project-${project.id}${composedHomeIds.includes(project.id) ? ' home-project-composed' : ''}`} aria-label={`查看 ${project.title} 项目`} href={projectHref(project)} data-cursor-label="VIEW">
-            <span className="home-project-image"><img src={project.image} alt={project.id === 'mima' ? 'Whisper Grove Corner：地图串联 Catenary 户外光影路径与 Cube 室内共享花园的概念封面' : project.id === 'xiaoxinsi' ? '小心思 IP：小王子与小狐狸角色、Logo、包装与折页主视觉' : project.id === 'ultraman' ? 'ULTRAMAN：白色背景上的闭合书册堆叠与红白封面' : `${project.title} 项目封面`} /></span>
+          {showcaseProjects.filter(project => project.id !== 'ultraman' && project.id !== '1984').map(project => <a key={project.id} id={`project-${project.id}`} className={`home-project home-project-${project.id}${composedHomeIds.includes(project.id) ? ' home-project-composed' : ''}`} aria-label={`查看 ${project.title} 项目`} href={projectHref(project)}>
+            <span className="home-project-image"><PortfolioImage src={project.image} alt={project.id === 'mima' ? 'Whisper Grove Corner：地图串联 Catenary 户外光影路径与 Cube 室内共享花园的概念封面' : project.id === 'xiaoxinsi' ? '小心思 IP：小王子与小狐狸角色、Logo、包装与折页主视觉' : project.id === 'ultraman' ? 'ULTRAMAN：白色背景上的闭合书册堆叠与红白封面' : `${project.title} 项目封面`} /></span>
             {!composedHomeIds.includes(project.id) && <span className="home-project-copy"><span className="home-project-type">{project.type}</span><span className="home-project-title">{project.title}</span><span className="home-project-description">{showcaseLines[project.id]}</span><span className="home-project-tags">{homeProjectDetails[project.id].tags.map(tag => <span key={tag}>{tag}</span>)}</span><span className="home-project-meta"><span>{homeProjectDetails[project.id].year}<span className="home-project-role">{homeProjectDetails[project.id].role}</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg></span></span>}
           </a>)}
         </div>
         <section className="other-projects" id="other-projects" aria-labelledby="other-projects-title">
           <div className="other-projects-heading"><span>视觉与编辑设计</span><h2 id="other-projects-title">Other Projects</h2></div>
-          <div className="other-projects-grid">{editorialHomeProjects.map(project => <a key={project.id} id={`project-${project.id}`} className={`home-project other-project other-project-${project.id}`} aria-label={`查看 ${project.title} 项目`} href={projectHref(project)} data-cursor-label="VIEW">
+          <div className="other-projects-grid">{editorialHomeProjects.map(project => <a key={project.id} id={`project-${project.id}`} className={`home-project other-project other-project-${project.id}`} aria-label={`查看 ${project.title} 项目`} href={projectHref(project)}>
             <span className="other-project-copy"><span className="other-project-title">{project.title}</span><span className="other-project-description">{editorialHomePresentation[project.id].description}</span><span className="other-project-tags">{homeProjectDetails[project.id].tags.map(tag => <span key={tag}>{tag}</span>)}</span></span>
-            <span className="other-project-art"><span className={project.id === '1984' ? 'other-book-crop' : 'other-stack-frame'}><img src={editorialHomePresentation[project.id].image} alt={project.id === 'ultraman' ? 'ULTRAMAN 红白封面的闭合书册堆叠' : '1984 闭合书册，封面以光束、摄像头与奔跑人物表现监视与逃离'} /></span></span>
+            <span className="other-project-art"><span className={project.id === '1984' ? 'other-book-crop' : 'other-stack-frame'}><PortfolioImage src={editorialHomePresentation[project.id].image} alt={project.id === 'ultraman' ? 'ULTRAMAN 红白封面的闭合书册堆叠' : '1984 闭合书册，封面以光束、摄像头与奔跑人物表现监视与逃离'} /></span></span>
           </a>)}</div>
         </section>
       </section>
@@ -78,7 +79,7 @@ export default function Home() {
 
       <section className="portfolio-contact" id="contact"><AmbientBreathing variant="contact" randomized /><div><span>CONTACT / 联系</span><h2>聊聊设计，<br />或下一个合作机会。</h2></div><a href="mailto:Ljy4real@foxmail.com">Ljy4real@foxmail.com <span aria-hidden="true">↗</span></a></section>
 
-      <footer className="home-footer"><AmbientBreathing variant="contact" randomized /><p>刘纪元 · Visual &amp; Interaction Design<a className="font-license-credit" href="/fonts/OPPOSans-License.txt">本网站使用 OPPO Sans 字体 · 字体许可</a><IcpFiling /></p><a href="#top">回到顶部</a></footer>
+      <footer className="home-footer"><AmbientBreathing variant="contact" randomized /><p>刘纪元 · Visual &amp; Interaction Design<IcpFiling /></p><a href="#top">回到顶部</a></footer>
       </div>
 
       <PortfolioMotion refreshKey="home" />

@@ -27,7 +27,7 @@ export default function NameDoodle() {
 
   useEffect(() => {
     let mounted = true;
-    Promise.all(signatures.map(item => {
+    Promise.allSettled(signatures.map(item => {
       if (item.image) {
         const image = new Image(); image.src = item.image;
         return image.decode();

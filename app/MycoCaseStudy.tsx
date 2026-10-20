@@ -1,5 +1,7 @@
 'use client';
 
+import PortfolioImage from './PortfolioImage';
+
 import { useState } from 'react';
 import './myco-case.css';
 
@@ -25,7 +27,7 @@ export default function MycoCaseStudy() {
     <article>
       <header className="myco-hero myco-pad">
         <div className="myco-hero-copy"><span className="myco-kicker">MYCO / BLUEGREEN</span><p className="myco-status">进行中的团队项目</p><h1>一次海港冒险，<br />一场快闪相遇。</h1><p>我们以线下快闪为主体，将游戏、场地探索与纪念品串成参与体验；再用一个简短网页，让访客先认识这里的活动。</p><a href="#myco-web" onClick={e => { e.preventDefault(); document.getElementById('myco-web')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }}>看看体验如何展开 <span aria-hidden="true">↘</span></a></div>
-        <figure><img src="/assets/myco/board.webp" alt="MyCo 海港探索棋盘概念，鸭嘴兽角色与红色快闪集装箱连接不同活动站点" fetchPriority="high" /><figcaption>海港探索视觉与棋盘概念 · 非现场活动照片</figcaption></figure>
+        <figure><PortfolioImage src="/assets/myco/board.webp" alt="MyCo 海港探索棋盘概念，鸭嘴兽角色与红色快闪集装箱连接不同活动站点" fetchPriority="high" /><figcaption>海港探索视觉与棋盘概念 · 非现场活动照片</figcaption></figure>
       </header>
 
       <section className="myco-summary myco-pad" aria-label="项目概况"><dl><div><dt>场地</dt><dd>Sub Base Platypus · 悉尼</dd></div><div><dt>项目方向</dt><dd>线下快闪 × 活动体验</dd></div><div><dt>数字触点</dt><dd>活动介绍与简短试玩</dd></div><div><dt>当前阶段</dt><dd>持续设计中 · 已开展用户测试</dd></div></dl></section>
@@ -44,12 +46,12 @@ export default function MycoCaseStudy() {
       <section className="myco-section myco-pad myco-activities" aria-labelledby="myco-activities-title">
         <span className="myco-kicker">03 / THE ON-SITE EXPERIENCE</span><div className="myco-heading"><h2 id="myco-activities-title">把活动变成<br />看得懂的行动。</h2><p>现场掷骰游戏提供轻松的参与入口；景区探索集章让访客走向不同点位。两者相互补充，但各有自己的步骤与实体物料。</p></div>
         <div className="myco-activity-grid">{activities.map(activity => <article key={activity.number}><span>{activity.number}</span><h3>{activity.title}</h3><p>{activity.body}</p><small>{activity.touchpoint}</small></article>)}</div>
-        <div className="myco-image-pair"><figure><img src="/assets/myco/packaging.webp" alt="MyCo 包装概念，以鸭嘴兽、红色集装箱和海港等高线统一视觉语言" loading="lazy" /><figcaption>包装与视觉延展 · 概念效果图</figcaption></figure><figure><img src="/assets/myco/stickers.webp" alt="MyCo 鸭嘴兽角色与活动图形贴纸设计" loading="lazy" /><figcaption>角色与活动图形 · 作为跨触点识别线索</figcaption></figure></div>
+        <div className="myco-image-pair"><figure><PortfolioImage src="/assets/myco/packaging.webp" alt="MyCo 包装概念，以鸭嘴兽、红色集装箱和海港等高线统一视觉语言" loading="lazy" /><figcaption>包装与视觉延展 · 概念效果图</figcaption></figure><figure><PortfolioImage src="/assets/myco/stickers.webp" alt="MyCo 鸭嘴兽角色与活动图形贴纸设计" loading="lazy" /><figcaption>角色与活动图形 · 作为跨触点识别线索</figcaption></figure></div>
       </section>
 
       <section className="myco-section myco-pad myco-web" id="myco-web" aria-labelledby="myco-web-title">
         <span className="myco-kicker">04 / A PLAYABLE INTRODUCTION</span><div className="myco-heading"><h2 id="myco-web-title">先玩一小段，<br />再认识这场快闪。</h2><div><p>比起一次读完全部活动说明，我们用鸭嘴兽角色、掷骰移动和站点反馈，把介绍拆成可以逐步发现的小片段。</p><p>它的用途是帮助用户简要理解快闪店的流程和活动，而不是复刻现场规则。网页中的收藏、奖励与回忆属于演示体验，不等于线下权益。</p></div></div>
-        <figure className="myco-web-preview"><img src="/assets/myco/web-preview.webp" alt="MyCo 网页介绍体验，左侧为海港棋盘，右侧为掷骰提示和故事收藏" loading="lazy" /><figcaption>可操作的网页介绍体验 · 与现场实体活动分开呈现</figcaption></figure>
+        <figure className="myco-web-preview"><PortfolioImage src="/assets/myco/web-preview.webp" alt="MyCo 网页介绍体验，左侧为海港棋盘，右侧为掷骰提示和故事收藏" loading="lazy" /><figcaption>可操作的网页介绍体验 · 与现场实体活动分开呈现</figcaption></figure>
         <div className="myco-web-decisions"><div><h3>角色带路</h3><p>用同一鸭嘴兽角色连接棋盘、站点与提示。</p></div><div><h3>逐步发现</h3><p>通过移动和打开站点，分次接触活动信息。</p></div><div><h3>反馈可见</h3><p>用即时反馈与旅行册记录本次网页探索。</p></div></div>
         <details className="myco-demo" onToggle={event => setDemoOpen(event.currentTarget.open)}><summary>体验海港探索网页 <span aria-hidden="true">↗</span></summary>{demoOpen && <div className="myco-demo-body"><p>这是活动介绍演示。游玩记录仅保存在当前浏览器；不进行真实预约、交易或兑奖。</p><a href="/assets/myco/harbour-introduction.html" target="_blank" rel="noreferrer">在新标签页打开 ↗</a><iframe title="MyCo 海港探索活动介绍体验" src="/assets/myco/harbour-introduction.html" sandbox="allow-scripts allow-same-origin" /></div>}</details>
       </section>
