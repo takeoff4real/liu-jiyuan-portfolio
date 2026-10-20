@@ -9,6 +9,7 @@ import MycoCaseStudy from './MycoCaseStudy';
 import XiaoxinsiCaseStudy from './XiaoxinsiCaseStudy';
 import BookEditorialCaseStudy from './BookEditorialCaseStudy';
 import PortfolioMotion from './PortfolioMotion';
+import PortfolioNavigation from './PortfolioNavigation';
 import './portfolio-polish.css';
 
 export default function ProjectPage({ project }: { project: Project }) {
@@ -32,6 +33,7 @@ export default function ProjectPage({ project }: { project: Project }) {
     </div>;
   }
   return <main className="project-page" data-project={project.slug}>
+    <PortfolioNavigation detailOpen={false} page="project" />
     {content}
     <PortfolioMotion refreshKey={project.slug} />
   </main>;
