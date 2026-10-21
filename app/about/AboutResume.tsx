@@ -55,7 +55,7 @@ export default function AboutResume() {
       </section>
 
       <section className="resume-document" id="resume" aria-labelledby="resume-title">
-        <header className="resume-document-header resume-reveal"><div><span className="resume-eyebrow">BACKGROUND / 我的经历</span><h2 id="resume-title">Resume</h2></div><a className="resume-download" href="/刘纪元-个人简历.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4" /></svg>下载 PDF 简历</a></header>
+        <header className="resume-document-header resume-reveal"><div><span className="resume-eyebrow">BACKGROUND / 我的经历</span><h2 id="resume-title">Resume</h2></div><a className="resume-download" href="/刘纪元-个人简历-网站风格版.pdf" download="刘纪元-个人简历.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4" /></svg>下载 PDF 简历</a></header>
 
         <section className="resume-row resume-reveal" aria-labelledby="education-title">
           <h3 className="resume-row-label" id="education-title"><span>Education</span>教育经历</h3>
