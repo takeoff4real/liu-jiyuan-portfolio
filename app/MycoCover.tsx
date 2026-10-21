@@ -5,7 +5,7 @@ export default function MycoCover({ priority = false }: { priority?: boolean }) 
   return <span className="myco-cover">
     <PortfolioImage
       className="myco-cover-art"
-      src="/assets/myco/cover-source-20261021.png"
+      src="/assets/myco/cover-anatomy-v2-20261021.png"
       alt="MyCo 快闪场景概念：红黄集装箱、鸭嘴兽角色、帆布袋与海港地图钥匙扣"
       fetchPriority={priority ? 'high' : undefined}
     />
