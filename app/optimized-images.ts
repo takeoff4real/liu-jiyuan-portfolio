@@ -1,6 +1,12 @@
 // Generated web derivatives; source artwork remains unchanged in public/assets.
 type ImageVariant = { width: number; height: number; src: string; srcSet: string };
 export const optimizedImages: Record<string, ImageVariant> = {
+  "/assets/myco/cover-source-20261021.png": {
+    "width": 1536,
+    "height": 1024,
+    "src": "/assets/web-v1/myco-cover-20261021-1536.webp",
+    "srcSet": "/assets/web-v1/myco-cover-20261021-480.webp 480w, /assets/web-v1/myco-cover-20261021-960.webp 960w, /assets/web-v1/myco-cover-20261021-1536.webp 1536w"
+  },
   "/assets/1984/book-interior.png": {
     "width": 1053,
     "height": 745,

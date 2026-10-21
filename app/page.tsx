@@ -5,11 +5,12 @@ import AmbientBreathing from './AmbientBreathing';
 import PortfolioNavigation from './PortfolioNavigation';
 import NameDoodle from './NameDoodle';
 import IcpFiling from './IcpFiling';
+import MycoCover from './MycoCover';
 import './portfolio-polish.css';
 import './homepage-vertical.css';
 
 const showcaseProjects = projects.filter((project) => project.featured || project.id === 'ultraman');
-const composedHomeIds = ['mima', 'xiaoxinsi', 'ultraman'];
+const composedHomeIds = ['mima', 'myco', 'xiaoxinsi', 'ultraman'];
 const editorialHomeProjects = showcaseProjects.filter(project => project.id === 'ultraman' || project.id === '1984');
 const editorialHomePresentation: Record<string, { description: string; image: string }> = {
   ultraman: { description: '我以昭和复古风整理角色影像与资料，设计一本连续阅读的奥特曼角色图鉴。', image: '/assets/binding-design/stack-cutout-v1.png' },
@@ -58,7 +59,7 @@ export default function Home() {
         <AmbientBreathing variant="work" randomized />
         <div className="home-project-list">
           {showcaseProjects.filter(project => project.id !== 'ultraman' && project.id !== '1984').map(project => <a key={project.id} id={`project-${project.id}`} className={`home-project home-project-${project.id}${composedHomeIds.includes(project.id) ? ' home-project-composed' : ''}`} aria-label={`查看 ${project.title} 项目`} href={projectHref(project)}>
-            <span className="home-project-image"><PortfolioImage src={project.image} alt={project.id === 'mima' ? 'Whisper Grove Corner：地图串联 Catenary 户外光影路径与 Cube 室内共享花园的概念封面' : project.id === 'xiaoxinsi' ? '小心思 IP：小王子与小狐狸角色、Logo、包装与折页主视觉' : project.id === 'ultraman' ? 'ULTRAMAN：白色背景上的闭合书册堆叠与红白封面' : `${project.title} 项目封面`} /></span>
+            <span className="home-project-image">{project.id === 'myco' ? <MycoCover /> : <PortfolioImage src={project.image} alt={project.id === 'mima' ? 'Whisper Grove Corner：地图串联 Catenary 户外光影路径与 Cube 室内共享花园的概念封面' : project.id === 'xiaoxinsi' ? '小心思 IP：小王子与小狐狸角色、Logo、包装与折页主视觉' : project.id === 'ultraman' ? 'ULTRAMAN：白色背景上的闭合书册堆叠与红白封面' : `${project.title} 项目封面`} />}</span>
             {!composedHomeIds.includes(project.id) && <span className="home-project-copy"><span className="home-project-type">{project.type}</span><span className="home-project-title">{project.title}</span><span className="home-project-description">{showcaseLines[project.id]}</span><span className="home-project-tags">{homeProjectDetails[project.id].tags.map(tag => <span key={tag}>{tag}</span>)}</span><span className="home-project-meta"><span>{homeProjectDetails[project.id].year}<span className="home-project-role">{homeProjectDetails[project.id].role}</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg></span></span>}
           </a>)}
         </div>

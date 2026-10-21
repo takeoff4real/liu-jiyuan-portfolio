@@ -1,6 +1,7 @@
 'use client';
 
 import PortfolioImage from './PortfolioImage';
+import MycoCover from './MycoCover';
 
 import { useState } from 'react';
 import './myco-case.css';
@@ -27,7 +28,7 @@ export default function MycoCaseStudy() {
     <article>
       <header className="myco-hero myco-pad">
         <div className="myco-hero-copy"><span className="myco-kicker">MYCO / BLUEGREEN</span><p className="myco-status">进行中的团队项目</p><h1>一次海港冒险，<br />一场快闪相遇。</h1><p>我们以线下快闪为主体，将游戏、场地探索与纪念品串成参与体验；再用一个简短网页，让访客先认识这里的活动。</p><a href="#myco-web" onClick={e => { e.preventDefault(); document.getElementById('myco-web')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }}>看看体验如何展开 <span aria-hidden="true">↘</span></a></div>
-        <figure><PortfolioImage src="/assets/myco/board.webp" alt="MyCo 海港探索棋盘概念，鸭嘴兽角色与红色快闪集装箱连接不同活动站点" fetchPriority="high" /><figcaption>海港探索视觉与棋盘概念 · 非现场活动照片</figcaption></figure>
+        <figure><MycoCover priority /><figcaption>MyCo 快闪场景与纪念品概念 · 非现场活动照片</figcaption></figure>
       </header>
 
       <section className="myco-summary myco-pad" aria-label="项目概况"><dl><div><dt>场地</dt><dd>Sub Base Platypus · 悉尼</dd></div><div><dt>项目方向</dt><dd>线下快闪 × 活动体验</dd></div><div><dt>数字触点</dt><dd>活动介绍与简短试玩</dd></div><div><dt>当前阶段</dt><dd>持续设计中 · 已开展用户测试</dd></div></dl></section>

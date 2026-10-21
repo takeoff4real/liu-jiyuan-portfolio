@@ -1,0 +1,12 @@
+.myco-cover { position:relative; display:block; width:100%; aspect-ratio:3 / 2; overflow:hidden; container-type:inline-size; background:#fff; color:#172147; text-align:left; }
+.myco-cover .myco-cover-art { display:block; width:100%; height:100%; max-width:none; max-height:none; object-fit:contain; border-radius:0; }
+.myco-cover-copy { position:absolute; left:6.5%; top:23%; width:33%; display:flex; flex-direction:column; align-items:flex-start; pointer-events:none; }
+.myco-cover-kicker { display:block; font-size:clamp(6px,.95cqw,12px); font-weight:600; line-height:1.6; letter-spacing:.12em; color:#526560; }
+.myco-cover-title { display:block; margin-top:clamp(10px,1.8cqw,25px); font-size:clamp(30px,8.8cqw,116px); font-weight:750; line-height:1.05; letter-spacing:-.065em; }
+.myco-cover-subtitle { display:block; margin-top:clamp(8px,2cqw,28px); font-size:clamp(11px,2.25cqw,30px); font-weight:550; line-height:1.55; letter-spacing:-.015em; }
+.myco-cover-note { display:block; margin-top:clamp(10px,2.7cqw,36px); font-size:clamp(9px,1.1cqw,14px); line-height:1.7; letter-spacing:.025em; color:#526560; }
+@media(max-width:480px) {
+  .myco-cover-copy { top:22%; }
+  .myco-cover-kicker,.myco-cover-note { display:none; }
+  .myco-cover-title { margin-top:0; }
+}

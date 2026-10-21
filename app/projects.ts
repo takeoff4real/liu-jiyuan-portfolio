@@ -21,7 +21,7 @@ export const projects: Project[] = [
   {
     id: 'myco', slug: 'myco', number: '02', title: 'MyCo', subtitle: 'Pop-up × Harbour exploration',
     type: '交互与服务体验 · 进行中', category: 'projects', featured: true, accent: 'lime',
-    image: '/assets/myco/packaging.webp',
+    image: '/assets/myco/cover-source-20261021.png',
     intro: '以线下快闪活动为主体，通过海港探索、集章与纪念品连接到访体验；网页版以简短试玩帮助访客理解活动。',
     sections: [], gallery: [],
   },
